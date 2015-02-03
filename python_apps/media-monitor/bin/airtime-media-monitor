@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec python -m media_monitor > /var/log/airtime/media-monitor/py-interpreter.log 2>&1

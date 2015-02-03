@@ -1290,7 +1290,7 @@ SQL;
                             "starts"                  => $rows[$i-1]['starts'],
                             "ends"                    => $rows[$i-1]['ends'],
                             "record"                  => $rows[$i-1]['record'],
-                            "image_path"             => $rows[$i-1]['image_path'],
+                            "image_path"              => $rows[$i-1]['image_path'],
                             "type"                   => "show");
                 }
     
@@ -1348,7 +1348,6 @@ SQL;
                     "starts"                  => $rows[$previousShowIndex]['starts'],
                     "ends"                    => $rows[$previousShowIndex]['ends'],
                     "record"                  => $rows[$previousShowIndex]['record'],
-                    "image_path"              => $rows[$previousShowIndex]['image_path'],
                     "type"                    => "show");
         }
     

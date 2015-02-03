@@ -22,7 +22,6 @@ class SystemstatusController extends Zend_Controller_Action
         $partitions = Application_Model_Systemstatus::GetDiskInfo();
 
         $this->view->status = new StdClass;
-        $this->view->status->services = $services;
         $this->view->status->partitions = $partitions;
     }
 }

@@ -1,5 +1,6 @@
 .*
 *.pyc
+<<<<<<< HEAD
 vendor/*
 composer.phar
 *~$
@@ -8,6 +9,15 @@ composer.phar
 **/build/*
 **/dist/*
 *~
+=======
+*.*~
+vendor/*
+composer.phar
+*log.*
+**/*.egg-info/*
+**/build/*
+**/dist/*
+>>>>>>> 2.5.x-installer
 /airtime_mvc/tests/test_results.xml
 /tests/results.html
 /tests/*.jar

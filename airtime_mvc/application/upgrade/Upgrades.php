@@ -1,21 +1,88 @@
 <?php
 
+class UpgradeManager
+{
+    /** Used to determine if the database schema needs an upgrade in order for this version of the Airtime codebase to work correctly.
+     * @return array A list of schema versions that this version of the codebase supports.
+     */
+    public static function getSupportedSchemaVersions()
+    {
+        //What versions of the schema does the code support today:
+        return array('2.5.2');
+    }
+
+    public static function checkIfUpgradeIsNeeded()
+    {
+        $schemaVersion = Application_Model_Preference::GetSchemaVersion();
+        $supportedSchemaVersions = self::getSupportedSchemaVersions();
+        $upgradeNeeded = !in_array($schemaVersion, $supportedSchemaVersions);
+        if ($upgradeNeeded) {
+            self::doUpgrade();
+        }
+    }
+
+    public static function doUpgrade()
+    {
+        $upgradeManager = new UpgradeManager();
+        $upgraders = array();
+        // Is there a way to get the classes reflectively so this isn't hard-coded?
+        array_push($upgraders, new AirtimeUpgrader252());
+        array_push($upgraders, new AirtimeUpgrader253());
+        array_push($upgraders, new AirtimeUpgrader254());
+        array_push($upgraders, new AirtimeUpgrader255());
+        array_push($upgraders, new AirtimeUpgrader259());
+        return $upgradeManager->runUpgrades(array(new AirtimeUpgrader252()), (__DIR__ . "/controllers"));
+    }
+
+    /**
+     * Run a given set of upgrades
+     * 
+     * @param array $upgraders the upgrades to perform
+     * @param string $dir the directory containing the upgrade sql
+     * @return boolean whether or not an upgrade was performed
+     */
+    public function runUpgrades($upgraders, $dir) {
+        $upgradePerformed = false;
+        
+        for($i = 0; $i < count($upgraders); $i++) {
+            $upgrader = $upgraders[$i];
+            if ($upgrader->checkIfUpgradeSupported()) {
+                // pass the given directory to the upgrades, since __DIR__ returns parent dir of file, not executor
+                $upgrader->upgrade($dir); // This will throw an exception if the upgrade fails.
+                $upgradePerformed = true;
+                $i = 0; // Start over, in case the upgrade handlers are not in ascending order.
+            }
+        }
+        
+        return $upgradePerformed;
+    }
+
+}
+
 abstract class AirtimeUpgrader
 {
-    /** Versions that this upgrader class can upgrade from (an array of version strings). */
-    abstract protected function getSupportedVersions();
-    /** The version that this upgrader class will upgrade to. (returns a version string) */
+    /** Schema versions that this upgrader class can upgrade from (an array of version strings). */
+    abstract protected function getSupportedSchemaVersions();
+    /** The schema version that this upgrader class will upgrade to. (returns a version string) */
     abstract public function getNewVersion();
 
-    public static function getCurrentVersion()
+    public static function getCurrentSchemaVersion()
     {
         CcPrefPeer::clearInstancePool(); //Ensure we don't get a cached Propel object (cached DB results) 
                                          //because we're updating this version number within this HTTP request as well.
+
+        //Old versions use system_version
         $pref = CcPrefQuery::create()
         ->filterByKeystr('system_version')
         ->findOne();
-        $airtime_version = $pref->getValStr();
-        return $airtime_version;
+        if (empty($pref)) {
+            //New versions use schema_version
+            $pref = CcPrefQuery::create()
+                ->filterByKeystr('schema_version')
+                ->findOne();
+        }
+        $schema_version = $pref->getValStr();
+        return $schema_version;
     }
     
     /** 
@@ -24,7 +91,7 @@ abstract class AirtimeUpgrader
      */
     public function checkIfUpgradeSupported()
     {        
-        if (!in_array(AirtimeUpgrader::getCurrentVersion(), $this->getSupportedVersions())) {
+        if (!in_array(AirtimeUpgrader::getCurrentSchemaVersion(), $this->getSupportedSchemaVersions())) {
             return false;
         }
         return true;
@@ -53,11 +120,58 @@ abstract class AirtimeUpgrader
     abstract public function upgrade();
 }
 
+/** This upgrade adds schema changes to accommodate show artwork and show instance descriptions */
+class AirtimeUpgrader252 extends AirtimeUpgrader {
+	protected function getSupportedSchemaVersions() {
+		return array (
+            '2.5.1'
+		);
+	}
+	
+	public function getNewVersion() {
+		return '2.5.2';
+	}
+	
+	public function upgrade($dir = __DIR__) {
+		Cache::clear();
+		assert($this->checkIfUpgradeSupported());
+		
+		$newVersion = $this->getNewVersion();
+		
+		try {
+			$this->toggleMaintenanceScreen(true);
+			Cache::clear();
+			
+			// Begin upgrade
+			$airtimeConf = isset($_SERVER['AIRTIME_CONF']) ? $_SERVER['AIRTIME_CONF'] : "/etc/airtime/airtime.conf";
+			$values = parse_ini_file($airtimeConf, true);
+			
+			$username = $values['database']['dbuser'];
+			$password = $values['database']['dbpass'];
+			$host = $values['database']['host'];
+			$database = $values['database']['dbname'];
+				
+			passthru("export PGPASSWORD=$password && psql -h $host -U $username -q -f $dir/upgrade_sql/airtime_"
+					.$this->getNewVersion()."/upgrade.sql $database 2>&1 | grep -v \"will create implicit index\"");
+			
+			Application_Model_Preference::SetSchemaVersion($newVersion);
+			Cache::clear();
+			
+			$this->toggleMaintenanceScreen(false);
+			
+			return true;
+		} catch(Exception $e) {
+			$this->toggleMaintenanceScreen(false);
+			throw $e;
+		}
+	}
+}
+
 class AirtimeUpgrader253 extends AirtimeUpgrader
 {
-    protected function getSupportedVersions()
+    protected function getSupportedSchemaVersions()
     {
-        return array('2.5.1', '2.5.2');
+        return array('2.5.2');
     }
     public function getNewVersion()
     {
@@ -122,7 +236,7 @@ class AirtimeUpgrader253 extends AirtimeUpgrader
 
 class AirtimeUpgrader254 extends AirtimeUpgrader
 {
-    protected function getSupportedVersions()
+    protected function getSupportedSchemaVersions()
     {
         return array('2.5.3');
     }
@@ -192,7 +306,7 @@ class AirtimeUpgrader254 extends AirtimeUpgrader
             }
             
             //$con->commit();
-            Application_Model_Preference::SetAirtimeVersion($newVersion);
+            Application_Model_Preference::SetSchemaVersion($newVersion);
             Cache::clear();
             
             $this->toggleMaintenanceScreen(false);
@@ -245,6 +359,37 @@ class AirtimeUpgrader255 extends AirtimeUpgrader {
             
             $this->toggleMaintenanceScreen(false);
             
+            return true;
+        } catch(Exception $e) {
+            $this->toggleMaintenanceScreen(false);
+            throw $e;
+        }
+    }
+}
+
+/** 
+ * This is a stub. Please implement this 2.5.6 upgrader for the next schema change that we need.
+ *
+ */
+class AirtimeUpgrader256 extends AirtimeUpgrader {
+    protected function getSupportedSchemaVersions() {
+        return array (
+                '2.5.5'
+        );
+    }
+
+    public function getNewVersion() {
+        return '2.5.6';
+    }
+
+    public function upgrade($dir = __DIR__) {
+        Cache::clear();
+        assert($this->checkIfUpgradeSupported());
+
+        $newVersion = $this->getNewVersion();
+
+        try {
+            //TODO: Implement this
             return true;
         } catch(Exception $e) {
             $this->toggleMaintenanceScreen(false);
