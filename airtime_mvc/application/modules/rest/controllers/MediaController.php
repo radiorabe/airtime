@@ -35,6 +35,10 @@ class Rest_MediaController extends Zend_Rest_Controller
     
     public function indexAction()
     {
+        if (!RestAuth::verifyAuth(true, true, $this)) {
+            return;
+        }
+
         $files_array = array();
         foreach (CcFilesQuery::create()->find() as $file)
         {
@@ -54,6 +58,10 @@ class Rest_MediaController extends Zend_Rest_Controller
 
     public function downloadAction()
     {
+        if (!RestAuth::verifyAuth(true, true, $this)) {
+            return;
+        }
+
         $id = $this->getId();
         if (!$id) {
             return;
@@ -64,11 +72,17 @@ class Rest_MediaController extends Zend_Rest_Controller
             $con = Propel::getConnection();
             $storedFile = new Application_Model_StoredFile($file, $con);
             $baseUrl = Application_Common_OsPath::getBaseDir();
-
             $CC_CONFIG = Config::getConfig();
-            $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->appendBody($this->_redirect($storedFile->getRelativeFileUrl($baseUrl).'/download/true/api_key/'.$CC_CONFIG["apiKey"][0]));
+
+            try {
+                $this->getResponse()
+                    ->setHttpResponseCode(200)
+                    ->appendBody($this->_redirect($storedFile->getRelativeFileUrl($baseUrl).'/download/true/api_key/'.$CC_CONFIG["apiKey"][0]));
+            } catch (Exception $e) {
+                $this->getResponse()
+                    ->setHttpResponseCode(401)
+                    ->appendBody(json_encode(array("message" => "ERROR: File not found.")));
+            }
         } else {
             $this->fileNotFoundResponse();
         }
@@ -76,6 +90,10 @@ class Rest_MediaController extends Zend_Rest_Controller
     
     public function getAction()
     {
+        if (!RestAuth::verifyAuth(true, true, $this)) {
+            return;
+        }
+
         $id = $this->getId();
         if (!$id) {
             return;
@@ -94,6 +112,10 @@ class Rest_MediaController extends Zend_Rest_Controller
     
     public function postAction()
     {
+        if (!RestAuth::verifyAuth(true, true, $this)) {
+            return;
+        }
+
         //If we do get an ID on a POST, then that doesn't make any sense
         //since POST is only for creating.
         if ($id = $this->_getParam('id', false)) {
@@ -135,7 +157,7 @@ class Rest_MediaController extends Zend_Rest_Controller
 
             
             $file->fromArray($whiteList);
-            $file->setDbOwnerId($this->getOwnerId());
+            $file->setDbOwnerId(RestAuth::getOwnerId());
             $now  = new DateTime("now", new DateTimeZone("UTC"));
             $file->setDbTrackTitle($_FILES["file"]["name"]);
             $file->setDbUtime($now);
@@ -144,7 +166,7 @@ class Rest_MediaController extends Zend_Rest_Controller
 
             $callbackUrl = $this->getRequest()->getScheme() . '://' . $this->getRequest()->getHttpHost() . $this->getRequest()->getRequestUri() . "/" . $file->getPrimaryKey();
 
-            $this->processUploadedFile($callbackUrl, $relativePath, $this->getOwnerId());
+            $this->processUploadedFile($callbackUrl, $relativePath, RestAuth::getOwnerId());
 
             $this->getResponse()
                 ->setHttpResponseCode(201)
@@ -243,6 +265,10 @@ class Rest_MediaController extends Zend_Rest_Controller
 
     public function deleteAction()
     {
+        if (!RestAuth::verifyAuth(true, true, $this)) {
+            return;
+        }
+
         $id = $this->getId();
         if (!$id) {
             return;
@@ -377,29 +403,6 @@ class Rest_MediaController extends Zend_Rest_Controller
                  $storageBackend->getFilePrefix());
     }
     
-    private function getOwnerId()
-    {
-        try {
-            if (Zend_Auth::getInstance()->hasIdentity()) {
-                $service_user = new Application_Service_UserService();
-                return $service_user->getCurrentUser()->getDbId();
-            } else {
-                $defaultOwner = CcSubjsQuery::create()
-                    ->filterByDbType(array('A', 'S'), Criteria::IN)
-                    ->orderByDbId()
-                    ->findOne();
-                if (!$defaultOwner) {
-                    // what to do if there is no admin user?
-                    // should we handle this case?
-                    return null;
-                }
-                return $defaultOwner->getDbId();
-            }
-        } catch(Exception $e) {
-            Logging::info($e->getMessage());
-        }
-    }
-
     /**
      *
      * Strips out fields from incoming request data that should never be modified

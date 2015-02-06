@@ -3,10 +3,6 @@ require_once CONFIG_PATH . "conf.php";
 $CC_CONFIG = Config::getConfig();
 
 require_once CONFIG_PATH . "ACL.php";
-if (!@include_once('propel/propel1/runtime/lib/Propel.php'))
-{
-    die('Error: Propel not found. Did you install Airtime\'s third-party dependencies with composer? (Check the README.)');
-}
 
 // Since we initialize the database during the configuration check,
 // check the $configRun global to avoid reinitializing unnecessarily

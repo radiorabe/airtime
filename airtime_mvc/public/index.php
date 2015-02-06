@@ -22,18 +22,22 @@ function isApiCall() {
 }
 
 // Define application path constants
-define('ROOT_PATH', dirname( __DIR__) . '/');
-define('LIB_PATH', ROOT_PATH . 'library/');
+define('ROOT_PATH', dirname(__DIR__) . '/');
 define('BUILD_PATH', ROOT_PATH . 'build/');
 define('SETUP_PATH', BUILD_PATH . 'airtime-setup/');
 define('APPLICATION_PATH', ROOT_PATH . 'application/');
 define('CONFIG_PATH', APPLICATION_PATH . 'configs/');
 
 define("AIRTIME_CONFIG_STOR", "/etc/airtime/");
-
 define('AIRTIME_CONFIG', 'airtime.conf');
 
-require_once(LIB_PATH . "propel/runtime/lib/Propel.php");
+// Vendors - include this here so we can call Propel from load.php
+set_include_path(ROOT_PATH . '../vendor');
+if (!@include_once('propel/propel1/runtime/lib/Propel.php'))
+{
+    die('Error: Propel not found. Did you install Airtime\'s third-party dependencies with composer? (Check the README.)');
+}
+
 require_once(CONFIG_PATH . 'conf.php');
 require_once(SETUP_PATH . 'load.php');
 

@@ -2,6 +2,9 @@
 define("BUILD_PATH", dirname(dirname(__DIR__)) . "/build/");
 define("AIRTIME_CONF_TEMP_PATH", "/tmp/airtime.conf.temp");
 
+// 3rd-party plugins installed via Composer
+set_include_path(dirname(dirname(__DIR__)) . '/../vendor');
+
 /**
  * Class Setup
  *

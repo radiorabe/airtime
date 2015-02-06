@@ -322,7 +322,7 @@ class AirtimeUpgrader254 extends AirtimeUpgrader
 }
 
 class AirtimeUpgrader255 extends AirtimeUpgrader {
-    protected function getSupportedVersions() {
+    protected function getSupportedSchemaVersions() {
         return array (
             '2.5.4'
         );
@@ -399,7 +399,7 @@ class AirtimeUpgrader256 extends AirtimeUpgrader {
 }
 
 class AirtimeUpgrader259 extends AirtimeUpgrader {
-    protected function getSupportedVersions() {
+    protected function getSupportedSchemaVersions() {
         return array (
             '2.5.5'
         );

@@ -3,8 +3,8 @@
 define("CONFIG_PATH", dirname(dirname( __DIR__)) . "/application/configs/");
 define("DEFAULT_STOR_DIR", "/srv/airtime/stor/");
 
-require_once(dirname(dirname( __DIR__)) . "/library/propel/runtime/lib/Propel.php");
 require_once(CONFIG_PATH . 'conf.php');
+require_once('propel/propel1/runtime/lib/Propel.php');
 
 require_once(dirname(dirname( __DIR__)) . "/application/models/airtime/map/CcMusicDirsTableMap.php");
 require_once(dirname(dirname( __DIR__)) . "/application/models/airtime/om/BaseCcMusicDirsQuery.php");
@@ -62,8 +62,8 @@ class MediaSetup extends Setup {
         // Finalize and move airtime.conf.temp
         if (file_exists("/etc/airtime/")) {
             if (!$this->moveAirtimeConfig()) {
-                $message = "Error moving airtime.conf or deleting /tmp/airtime.conf.temp!";
-                $errors[] = "ERR";
+                self::$message = "Error moving airtime.conf or deleting /tmp/airtime.conf.temp!";
+                self::$errors[] = "ERR";
             }
             
             /* 
@@ -75,8 +75,8 @@ class MediaSetup extends Setup {
                 rename(self::AIRTIME_CONF_PATH . ".tmp", self::AIRTIME_CONF_PATH . ".bak");
             }
         } else {
-            $message = "Failed to move airtime.conf; /etc/airtime doesn't exist!";
-            $errors[] = "ERR";
+            self::$message = "Failed to move airtime.conf; /etc/airtime doesn't exist!";
+            self::$errors[] = "ERR";
         }
         
         return array(

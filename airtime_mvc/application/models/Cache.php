@@ -36,13 +36,6 @@ class Cache
         return false;
     }
 
-	public static function clear()
-	{
-	   // Disabled on SaaS
-	   // apc_clear_cache('user');
-	   // apc_clear_cache();
-	}
-	
     public static function clear() {
         // Disabled on SaaS
         // apc_clear_cache('user');

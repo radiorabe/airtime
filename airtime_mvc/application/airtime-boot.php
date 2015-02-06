@@ -29,13 +29,10 @@ defined('APPLICATION_ENV')
 defined('VERBOSE_STACK_TRACE')
     || define('VERBOSE_STACK_TRACE', (getenv('VERBOSE_STACK_TRACE') ? getenv('VERBOSE_STACK_TRACE') : true));
 
-//Vendors
-set_include_path(ROOT_PATH . '../vendor');
-
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
-    realpath(LIB_PATH)
+    realpath(ROOT_PATH . 'library/')
 )));
 
 set_include_path(APPLICATION_PATH . 'common' . PATH_SEPARATOR . get_include_path());
