@@ -251,10 +251,17 @@ class Rest_MediaController extends Zend_Rest_Controller
         if ($file) {
             $con = Propel::getConnection();
             $storedFile = Application_Model_StoredFile::RecallById($id, $con);
-            $storedFile->delete(); //TODO: This checks your session permissions... Make it work without a session?
-            
-            $this->getResponse()
-                ->setHttpResponseCode(204);
+
+            // Surround this in a try/catch to avoid errors bubbling up to sentry
+            try {
+                $storedFile->delete(); //TODO: This checks your session permissions... Make it work without a session?
+                $this->getResponse()
+                    ->setHttpResponseCode(204);
+            } catch (Exception $e) {
+                $this->getResponse()
+                    ->setHttpResponseCode(400)
+                    ->appendBody("ERROR deleting file");
+            }
         } else {
             $this->fileNotFoundResponse();
         }
@@ -276,13 +283,6 @@ class Rest_MediaController extends Zend_Rest_Controller
         $resp = $this->getResponse();
         $resp->setHttpResponseCode(404);
         $resp->appendBody("ERROR: Media not found."); 
-    }
-    
-    private function importFailedResponse()
-    {
-        $resp = $this->getResponse();
-        $resp->setHttpResponseCode(200);
-        $resp->appendBody("ERROR: Import Failed.");
     }
 
     private function invalidDataResponse()
