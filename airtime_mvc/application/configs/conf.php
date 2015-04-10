@@ -89,7 +89,13 @@ class Config {
 
         $CC_CONFIG['soundcloud-connection-retries'] = $values['soundcloud']['connection_retries'];
         $CC_CONFIG['soundcloud-connection-wait'] = $values['soundcloud']['time_between_retries'];
-        
+
+        if (array_key_exists('memcached', $values) && array_key_exists('servers', $values['memcached'])) {
+            $CC_CONFIG['memcached']['servers'] = $values['memcached']['servers'];
+        } else {
+            $CC_CONFIG['memcached']['servers'] = null;
+        }
+
         if(isset($values['demo']['demo'])){
             $CC_CONFIG['demo'] = $values['demo']['demo'];
         }

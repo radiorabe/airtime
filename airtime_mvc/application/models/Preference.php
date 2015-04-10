@@ -114,7 +114,7 @@ class Application_Model_Preference
         $cache->store($key, $value, $isUserValue, $userId);
     }
 
-    private static function getValue($key, $isUserValue = false)
+    private static function getValue($key, $isUserValue = false, $bypassCacheRead = false)
     {
         $cache = new Cache();
         
@@ -125,9 +125,13 @@ class Application_Model_Preference
             if ($isUserValue && is_null($userId))
                 throw new Exception("User id can't be null for a user preference.");
 
-            // If the value is already cached, return it
-            $res = $cache->fetch($key, $isUserValue, $userId);
-            if ($res !== false) return $res;
+            if (!$bypassCacheRead) {
+                // If the value is already cached, return it
+                $res = $cache->fetch($key, $isUserValue, $userId);
+                if ($res["found"] === true) {
+                    return $res["value"];
+                }
+            }
            
             //Check if key already exists
             $sql = "SELECT COUNT(*) FROM cc_pref"
