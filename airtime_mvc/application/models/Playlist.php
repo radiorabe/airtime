@@ -65,9 +65,9 @@ class Application_Model_Playlist implements Application_Model_LibraryEditable
             $this->pl->save();
         }
 
-        $this->plItem["fadein"] = Application_Model_Preference::GetDefaultFadeIn();
-        $this->plItem["fadeout"] = Application_Model_Preference::GetDefaultFadeOut();
-        $this->plItem["crossfadeDuration"] = Application_Model_Preference::GetDefaultCrossfadeDuration();
+        $this->plItem["fadein"] = Application_Model_Preferences::GetDefaultFadeIn();
+        $this->plItem["fadeout"] = Application_Model_Preferences::GetDefaultFadeOut();
+        $this->plItem["crossfadeDuration"] = Application_Model_Preferences::GetDefaultCrossfadeDuration();
 
         $this->con = isset($con) ? $con : Propel::getConnection(CcPlaylistPeer::DATABASE_NAME);
         $this->id = $this->pl->getDbId();
@@ -685,7 +685,7 @@ SQL;
     	$this->con->beginTransaction();
     	
     	if (!isset($offset)) {
-    		$offset = Application_Model_Preference::GetDefaultCrossfadeDuration();	
+    		$offset = Application_Model_Preferences::GetDefaultCrossfadeDuration();
     	}
     	
     	try {

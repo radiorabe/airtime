@@ -4,7 +4,7 @@ class Airtime_View_Helper_TrialRemaining extends Zend_View_Helper_Abstract
 {
     public function trialRemaining()
     {
-        $ending_date = Application_Model_Preference::GetTrialEndingDate();
+        $ending_date = Application_Model_Preferences::GetTrialEndingDate();
         if ($ending_date == '') {
             return '';
         }

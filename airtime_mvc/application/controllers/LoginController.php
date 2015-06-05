@@ -18,7 +18,7 @@ class LoginController extends Zend_Controller_Action
         
         $request = $this->getRequest();
         $response = $this->getResponse();
-        $stationLocale = Application_Model_Preference::GetDefaultLocale();
+        $stationLocale = Application_Model_Preferences::GetDefaultLocale();
         
         //Enable AJAX requests from www.airtime.pro for the sign-in process.
         CORSHelper::enableATProCrossOriginRequests($request, $response);
@@ -28,7 +28,7 @@ class LoginController extends Zend_Controller_Action
         $auth = Zend_Auth::getInstance();
         
         if ($auth->hasIdentity()) {
-            $this->_redirect('Showbuilder');
+            $this->_redirect('now-playing');
         }
 
         //uses separate layout without a navigation.
@@ -76,9 +76,9 @@ class LoginController extends Zend_Controller_Action
                     Application_Model_Subjects::resetLoginAttempts($username);
 
                     //set the user locale in case user changed it in when logging in
-                    Application_Model_Preference::SetUserLocale($locale);
+                    Application_Model_Preferences::SetUserLocale($locale);
 
-                    $this->_redirect('Showbuilder');
+                    $this->_redirect('now-playing');
                 } else {
                     $email = $form->getValue('username');
                     $authAdapter = new WHMCS_Auth_Adapter("admin", $email, $password);
@@ -87,9 +87,9 @@ class LoginController extends Zend_Controller_Action
                     if ($result->isValid()) {
                         Zend_Session::regenerateId();
                         //set the user locale in case user changed it in when logging in
-                        Application_Model_Preference::SetUserLocale($locale);
+                        Application_Model_Preferences::SetUserLocale($locale);
                         
-                        $this->_redirect('Showbuilder');
+                        $this->_redirect('now-playing');
                     }
                     else {
                         $message = _("Wrong username or password provided. Please try again.");
@@ -110,7 +110,7 @@ class LoginController extends Zend_Controller_Action
         $this->view->message = $message;
         $this->view->error = $error;
         $this->view->form = $form;
-        $this->view->airtimeVersion = Application_Model_Preference::GetAirtimeVersion();
+        $this->view->airtimeVersion = Application_Model_Preferences::GetAirtimeVersion();
         $this->view->airtimeCopyright = AIRTIME_COPYRIGHT_DATE;
         if (isset($CC_CONFIG['demo'])) {
             $this->view->demo = $CC_CONFIG['demo'];
@@ -124,7 +124,7 @@ class LoginController extends Zend_Controller_Action
         // Unset all session variables relating to CSRF prevention on logout
         $csrf_namespace = new Zend_Session_Namespace('csrf_namespace');
         $csrf_namespace->unsetAll();
-        $this->_redirect('showbuilder/index');
+        $this->_redirect('now-playing/index');
     }
 
     public function passwordRestoreAction()
@@ -136,11 +136,11 @@ class LoginController extends Zend_Controller_Action
         $this->view->headScript()->appendFile($baseUrl.'js/airtime/login/password-restore.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
 
         $request = $this->getRequest();
-        $stationLocale = Application_Model_Preference::GetDefaultLocale();
+        $stationLocale = Application_Model_Preferences::GetDefaultLocale();
         
         Application_Model_Locale::configureLocalization($request->getcookie('airtime_locale', $stationLocale));
 
-        if (!Application_Model_Preference::GetEnableSystemEmail()) {
+        if (!Application_Model_Preferences::GetEnableSystemEmail()) {
             $this->_redirect('login');
         } else {
             //uses separate layout without a navigation.
@@ -182,7 +182,7 @@ class LoginController extends Zend_Controller_Action
     public function passwordRestoreAfterAction()
     {
         $request = $this->getRequest();
-        $stationLocale = Application_Model_Preference::GetDefaultLocale();
+        $stationLocale = Application_Model_Preferences::GetDefaultLocale();
         
         Application_Model_Locale::configureLocalization($request->getcookie('airtime_locale', $stationLocale));
 
@@ -203,7 +203,7 @@ class LoginController extends Zend_Controller_Action
         $auth = new Application_Model_Auth();
         $user = CcSubjsQuery::create()->findPK($user_id);
         
-        $stationLocale = Application_Model_Preference::GetDefaultLocale();
+        $stationLocale = Application_Model_Preferences::GetDefaultLocale();
 
         Application_Model_Locale::configureLocalization($request->getcookie('airtime_locale', $stationLocale));
 
@@ -236,7 +236,7 @@ class LoginController extends Zend_Controller_Action
             $authStorage = $zend_auth->getStorage();
             $authStorage->write($userInfo);
 
-            $this->_helper->redirector('index', 'showbuilder');
+            $this->_helper->redirector('index', 'now-playing');
         }
 
         $this->view->form = $form;

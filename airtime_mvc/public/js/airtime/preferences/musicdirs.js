@@ -14,7 +14,7 @@ function setWatchedDirEvents() {
         knownPaths: [],
         imageUrl: 'img/icons/',
         systemImageUrl: baseUrl+'css/img/',
-        handlerUrl: baseUrl+'Preference/server-browse/format/json',
+        handlerUrl: baseUrl+'preferences/server-browse/format/json',
         title: $.i18n._('Choose Storage Folder'),
         basePath: '',
         requestMethod: 'POST',
@@ -34,7 +34,7 @@ function setWatchedDirEvents() {
         knownPaths: [],
         imageUrl: 'img/icons/',
         systemImageUrl: baseUrl+'css/img/',
-        handlerUrl: baseUrl+'Preference/server-browse/format/json',
+        handlerUrl: baseUrl+'preferences/server-browse/format/json',
         title: $.i18n._('Choose Folder to Watch'),
         basePath: '',
         requestMethod: 'POST',
@@ -44,7 +44,7 @@ function setWatchedDirEvents() {
         var url, chosen;
         
         if(confirm(sprintf($.i18n._("Are you sure you want to change the storage folder?\nThis will remove the files from your %s library!"), PRODUCT_NAME))){
-            url = baseUrl+"Preference/change-stor-directory";
+            url = baseUrl+"preferences/change-stor-directory";
             chosen = $('#storageFolder').val();
 
             $.post(url,
@@ -64,7 +64,7 @@ function setWatchedDirEvents() {
     $('#watchedFolder-ok').click(function(){
         var url, chosen;
 
-        url = baseUrl+"Preference/reload-watch-directory";
+        url = baseUrl+"preferences/reload-watch-directory";
         chosen = $('#watchedFolder').val();
 
         $.post(url,
@@ -80,7 +80,7 @@ function setWatchedDirEvents() {
     
     $('.selected-item').find('.ui-icon-refresh').click(function(){
         var folder = $(this).prev().text();
-        $.get(baseUrl+"Preference/rescan-watch-directory", {format: "json", dir: folder});
+        $.get(baseUrl+"preferences/rescan-watch-directory", {format: "json", dir: folder});
     });
 
     $('.selected-item').find('.ui-icon-close').click(function(){
@@ -88,7 +88,7 @@ function setWatchedDirEvents() {
             var row = $(this).parent();
             var folder = row.find('#folderPath').text();
 
-            url = baseUrl+"Preference/remove-watch-directory";
+            url = baseUrl+"preferences/remove-watch-directory";
 
             $.post(url,
                 {format: "json", dir: folder},

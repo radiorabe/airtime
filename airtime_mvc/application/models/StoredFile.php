@@ -415,7 +415,7 @@ SQL;
         }
 
         //Update the user's disk usage
-        Application_Model_Preference::updateDiskUsage(-1 * $filesize);
+        Application_Model_Preferences::updateDiskUsage(-1 * $filesize);
         
         //Explicitly update any playlist's and block's length that contain
         //the file getting deleted
@@ -862,7 +862,7 @@ SQL;
         self::updatePastFilesIsScheduled();
         $results = Application_Model_Datatables::findEntries($con, $displayColumns, $fromTable, $datatables);
 
-        $displayTimezone = new DateTimeZone(Application_Model_Preference::GetUserTimezone());
+        $displayTimezone = new DateTimeZone(Application_Model_Preferences::GetUserTimezone());
         $utcTimezone = new DateTimeZone("UTC");
         
         foreach ($results['aaData'] as &$row) {
@@ -1246,7 +1246,7 @@ SQL;
         if (is_null($file)) {
             return "File does not exist";
         }
-        if (Application_Model_Preference::GetUploadToSoundcloudOption()) {
+        if (Application_Model_Preferences::GetUploadToSoundcloudOption()) {
             for ($i=0; $i<$CC_CONFIG['soundcloud-connection-retries']; $i++) {
                 $description = $file->getDbTrackTitle();
                 $tag         = array();

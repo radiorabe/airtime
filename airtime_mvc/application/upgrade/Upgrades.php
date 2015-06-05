@@ -92,7 +92,7 @@ class AirtimeUpgrader253 extends AirtimeUpgrader
             $storDir = isset($_SERVER['AIRTIME_BASE']) ? $_SERVER['AIRTIME_BASE']."srv/airtime/stor" : "/srv/airtime/stor";
             $diskUsage = shell_exec("du -sb $storDir | awk '{print $1}'");
         
-            Application_Model_Preference::setDiskUsage($diskUsage);
+            Application_Model_Preferences::setDiskUsage($diskUsage);
                     
             //clear out the cache
             Cache::clear();
@@ -110,7 +110,7 @@ class AirtimeUpgrader253 extends AirtimeUpgrader
         
             passthru("export PGPASSWORD=$password && psql -h $host -U $username -q -f $dir/upgrade_sql/airtime_".$this->getNewVersion()."/upgrade.sql $database 2>&1 | grep -v -E \"will create implicit sequence|will create implicit index\"");
         
-            Application_Model_Preference::SetAirtimeVersion($this->getNewVersion());
+            Application_Model_Preferences::SetAirtimeVersion($this->getNewVersion());
             //clear out the cache
             Cache::clear();
             
@@ -195,7 +195,7 @@ class AirtimeUpgrader254 extends AirtimeUpgrader
             }
             
             //$con->commit();
-            Application_Model_Preference::SetAirtimeVersion($newVersion);
+            Application_Model_Preferences::SetAirtimeVersion($newVersion);
             Cache::clear();
             
             $this->toggleMaintenanceScreen(false);
@@ -243,7 +243,7 @@ class AirtimeUpgrader255 extends AirtimeUpgrader {
             passthru("export PGPASSWORD=$password && psql -h $host -U $username -q -f $dir/upgrade_sql/airtime_"
                     .$this->getNewVersion()."/upgrade.sql $database 2>&1 | grep -v -E \"will create implicit sequence|will create implicit index\"");
             
-            Application_Model_Preference::SetAirtimeVersion($newVersion);
+            Application_Model_Preferences::SetAirtimeVersion($newVersion);
             Cache::clear();
             
             $this->toggleMaintenanceScreen(false);
@@ -289,7 +289,7 @@ class AirtimeUpgrader259 extends AirtimeUpgrader {
             passthru("export PGPASSWORD=$password && psql -h $host -U $username -q -f $dir/upgrade_sql/airtime_"
                      .$this->getNewVersion()."/upgrade.sql $database 2>&1 | grep -v -E \"will create implicit sequence|will create implicit index\"");
             
-            Application_Model_Preference::SetAirtimeVersion($newVersion);
+            Application_Model_Preferences::SetAirtimeVersion($newVersion);
             Cache::clear();
             
             $this->toggleMaintenanceScreen(false);
@@ -334,7 +334,7 @@ class AirtimeUpgrader2510 extends AirtimeUpgrader
             passthru("export PGPASSWORD=$password && psql -h $host -U $username -q -f $dir/upgrade_sql/airtime_"
                 .$this->getNewVersion()."/upgrade.sql $database 2>&1 | grep -v -E \"will create implicit sequence|will create implicit index\"");
 
-            Application_Model_Preference::SetAirtimeVersion($newVersion);
+            Application_Model_Preferences::SetAirtimeVersion($newVersion);
             Cache::clear();
 
             $this->toggleMaintenanceScreen(false);
@@ -373,9 +373,9 @@ class AirtimeUpgrader2511 extends AirtimeUpgrader
                 ->withColumn('SUM(CcFiles.filesize)', 'disk_usage')
                 ->find();
             $disk_usage = $queryResult[0];
-            Application_Model_Preference::setDiskUsage($disk_usage);
+            Application_Model_Preferences::setDiskUsage($disk_usage);
 
-            Application_Model_Preference::SetAirtimeVersion($newVersion);
+            Application_Model_Preferences::SetAirtimeVersion($newVersion);
             Cache::clear();
 
             $this->toggleMaintenanceScreen(false);
@@ -424,7 +424,7 @@ class AirtimeUpgrader2512 extends AirtimeUpgrader
             passthru("export PGPASSWORD=$password && psql -h $host -U $username -q -f $dir/upgrade_sql/airtime_"
                 .$this->getNewVersion()."/upgrade.sql $database 2>&1 | grep -v -E \"will create implicit sequence|will create implicit index\"");
 
-            Application_Model_Preference::SetAirtimeVersion($newVersion);
+            Application_Model_Preferences::SetAirtimeVersion($newVersion);
             Cache::clear();
 
             $this->toggleMaintenanceScreen(false);

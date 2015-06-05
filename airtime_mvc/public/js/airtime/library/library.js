@@ -1108,7 +1108,7 @@ function closeDialogLibrary(event, ui) {
 }
 
 function checkImportStatus() {
-    $.getJSON(baseUrl+'Preference/is-import-in-progress', function(data){
+    $.getJSON(baseUrl+'preferences/is-import-in-progress', function(data){
         var $div = $('#import_status');
         var table = $('#library_display').dataTable();
         if (data == true){

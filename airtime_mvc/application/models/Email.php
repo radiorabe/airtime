@@ -12,20 +12,20 @@ class Application_Model_Email
      */
     public static function send($subject, $message, $tos, $from = null)
     {
-        $mailServerConfigured = Application_Model_Preference::GetMailServerConfigured() == true ? true : false;
-        $mailServerRequiresAuth = Application_Model_Preference::GetMailServerRequiresAuth() == true ? true : false;
+        $mailServerConfigured = Application_Model_Preferences::GetMailServerConfigured() == true ? true : false;
+        $mailServerRequiresAuth = Application_Model_Preferences::GetMailServerRequiresAuth() == true ? true : false;
         $success = true;
 
         if ($mailServerConfigured) {
-            $mailServer = Application_Model_Preference::GetMailServer();
-            $mailServerPort = Application_Model_Preference::GetMailServerPort();
+            $mailServer = Application_Model_Preferences::GetMailServer();
+            $mailServerPort = Application_Model_Preferences::GetMailServerPort();
             if (!empty($mailServerPort)) {
                 $port = $mailServerPort;
             }
 
             if ($mailServerRequiresAuth) {
-                $username = Application_Model_Preference::GetMailServerEmailAddress();
-                $password = Application_Model_Preference::GetMailServerPassword();
+                $username = Application_Model_Preferences::GetMailServerEmailAddress();
+                $password = Application_Model_Preferences::GetMailServerPassword();
 
                 $config = array(
                     'auth' => 'login',
@@ -55,14 +55,14 @@ class Application_Model_Email
         }
 
         if ($mailServerConfigured) {
-            $mail->setFrom(isset($from) ? $from : Application_Model_Preference::GetMailServerEmailAddress());
+            $mail->setFrom(isset($from) ? $from : Application_Model_Preferences::GetMailServerEmailAddress());
             try {
                 $mail->send($transport);
             } catch (Exception $e) {
                 $success = false;
             }
         } else {
-            $mail->setFrom(isset($from) ? $from : Application_Model_Preference::GetSystemEmail());
+            $mail->setFrom(isset($from) ? $from : Application_Model_Preferences::GetSystemEmail());
             try {
                 $mail->send();
             } catch (Exception $e) {

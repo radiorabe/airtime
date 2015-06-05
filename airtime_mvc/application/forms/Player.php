@@ -35,7 +35,7 @@ class Application_Form_Player extends Zend_Form_SubForm
         $streamURL = new Zend_Form_Element_Radio('player_stream_url');
         $opusStreamCount = 0;
         $urlOptions = Array();
-        foreach(Application_Model_StreamSetting::getEnabledStreamData() as $stream => $data) {
+        foreach(Application_Model_Streams::getEnabledStreamData() as $stream => $data) {
             $urlOptions[$stream] = strtoupper($data["codec"])." - ".$data["bitrate"]."kbps";
             if ($data["mobile"]) {
                 $urlOptions[$stream] .= _(" - Mobile friendly");

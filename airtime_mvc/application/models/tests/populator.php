@@ -5,7 +5,7 @@ require_once __DIR__.'/../Show.php';
 require_once __DIR__.'/../StoredFile.php';
 require_once __DIR__.'/../Playlist.php';
 require_once __DIR__.'/../Schedule.php';
-require_once __DIR__.'/../Preference.php';
+require_once __DIR__ . '/../Preferences.php';
 require_once __DIR__.'/../RabbitMq.php';
 require_once __DIR__.'/../../configs/conf.php';
 require_once __DIR__.'/../../../install_minimal/include/AirtimeIni.php';
@@ -99,7 +99,7 @@ while ($showTime < $endDate) {
 }
 
 if (Application_Model_RabbitMq::$doPush) {
-    $md = array('schedule' => Application_Model_Schedule::getSchedule());
+    $md = array('calendar' => Application_Model_Schedule::getSchedule());
     Application_Model_RabbitMq::SendMessageToPypo("update_schedule", $md);
 }
 

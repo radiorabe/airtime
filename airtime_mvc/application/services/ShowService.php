@@ -247,7 +247,7 @@ class Application_Service_ShowService
             if ($this->isUpdate) {
 
                 /* If the show is repeating and the start date changes we need
-                 * to ignore that difference when re-calculating schedule start times.
+                 * to ignore that difference when re-calculating calendar start times.
                  * Otherwise it might calculate a difference of a week, for example.
                  */
                 if ($this->ccShow->isRepeating() && 
@@ -337,7 +337,7 @@ class Application_Service_ShowService
         }
 
         /* In case the user is moving forward in the calendar and there are
-         * linked shows in the schedule we need to keep track of each cc_show
+         * linked shows in the calendar we need to keep track of each cc_show
          * so we know which shows need to be filled with content
          */
         $ccShows = array();
@@ -354,7 +354,7 @@ class Application_Service_ShowService
             }
             
             //keep track of the new show instances getting created
-            //so we can fill their schedule after
+            //so we can fill their calendar after
             if (!isset($this->newInstanceIdsCreated[$show_id])) {
                 $this->newInstanceIdsCreated[$show_id] = array();
             }
@@ -1766,11 +1766,11 @@ SQL;
      */
     private static function getPopulateShowUntilDateTIme()
     {
-        $populateUntil = Application_Model_Preference::GetShowsPopulatedUntil();
+        $populateUntil = Application_Model_Preferences::GetShowsPopulatedUntil();
 
         if (is_null($populateUntil)) {
             $populateUntil = new DateTime("now", new DateTimeZone('UTC'));
-            Application_Model_Preference::SetShowsPopulatedUntil($populateUntil);
+            Application_Model_Preferences::SetShowsPopulatedUntil($populateUntil);
         }
         return $populateUntil;
     }

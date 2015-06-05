@@ -114,7 +114,7 @@ class SentryLogger
     private static function addUserData($client)
     {
         $userData = array();
-        $userData['client_id'] = Application_Model_Preference::GetClientId();
+        $userData['client_id'] = Application_Model_Preferences::GetClientId();
         $userData['station_url'] = array_key_exists('SERVER_NAME', $_SERVER) ? $_SERVER['SERVER_NAME'] : "";
         $client->user_context($userData);
     }
@@ -124,7 +124,7 @@ class SentryLogger
     {
         $extraData = array();
         $extraData['php_version'] = phpversion();
-        $extraData['client_id'] = Application_Model_Preference::GetClientId();
+        $extraData['client_id'] = Application_Model_Preferences::GetClientId();
         return $extraData;
     }
 

@@ -6,7 +6,7 @@ class Application_Model_RabbitMq
     public static $doPush = false;
 
     /**
-     * Sets a flag to push the schedule at the end of the request.
+     * Sets a flag to push the calendar at the end of the request.
      */
     public static function PushSchedule()
     {
@@ -69,7 +69,7 @@ class Application_Model_RabbitMq
 
         $temp = array();
         $temp['event_type'] = $event_type;
-        $temp['server_timezone'] = Application_Model_Preference::GetTimezone();
+        $temp['server_timezone'] = Application_Model_Preferences::GetTimezone();
         if ($event_type == "update_recorder_schedule") {
             $temp['shows'] = Application_Model_Show::getShows($now,
                 $end_timestamp, $onlyRecord=true);

@@ -40,8 +40,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var schedulePreLoaded = <?php
         //Awful hack to speed up loading - Embed the schedule in the response so that the dashboard
         //doesn't have to make a separate AJAX request to get this data.
-    require_once("ScheduleController.php");
-    ScheduleController::printCurrentPlaylistForEmbedding();
+    require_once("CalendarController.php");
+    CalendarController::printCurrentPlaylistForEmbedding();
  ?>;
         //The DOM elements that these calls depend on exist by this point:
         parseItems(schedulePreLoaded.entries);
@@ -62,8 +62,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               </li>
             </ol>
         </div>
+        <div id="mobile-nav">
+            <div class="menu-btn" id="menu-btn">
+                <div></div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="responsive-menu">
+            <?php echo $this->navigation()->menu() ?>
+        </div>
 
-        <?php echo $this->navigation()->menu() ?>
         <div style="clear:both;"></div>
     </div>
     <?php endif; //suspended ?>

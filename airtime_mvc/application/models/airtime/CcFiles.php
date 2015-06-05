@@ -78,7 +78,7 @@ class CcFiles extends BaseCcFiles {
      */
     public static function createFromUpload($fileArray)
     {
-        if (Application_Model_Systemstatus::isDiskOverQuota()) {
+        if (Application_Model_SystemStatus::isDiskOverQuota()) {
             throw new OverDiskQuotaException();
         }
 
@@ -202,7 +202,7 @@ class CcFiles extends BaseCcFiles {
                 $cloudFile->setCcFiles($file);
                 $cloudFile->save();
 
-                Application_Model_Preference::updateDiskUsage($fileSizeBytes);
+                Application_Model_Preferences::updateDiskUsage($fileSizeBytes);
 
                 $now = new DateTime("now", new DateTimeZone("UTC"));
                 $file->setDbMtime($now);
@@ -223,7 +223,7 @@ class CcFiles extends BaseCcFiles {
                     if (!isset($fileSizeBytes) || $fileSizeBytes === false) {
                         throw new FileNotFoundException("Invalid filesize for $fileId");
                     }
-                    Application_Model_Preference::updateDiskUsage($fileSizeBytes);
+                    Application_Model_Preferences::updateDiskUsage($fileSizeBytes);
 
                     $fullPath = $fileArray["full_path"];
                     $storDir = Application_Model_MusicDir::getStorDir()->getDirectory();

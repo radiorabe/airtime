@@ -100,7 +100,7 @@ class LibraryController extends Zend_Controller_Action
             //get user settings and determine if we need to hide
             // or show the playlist editor
             $showPlaylist = false;
-            $data = Application_Model_Preference::getLibraryScreenSettings();
+            $data = Application_Model_Preferences::getLibraryScreenSettings();
             if (!is_null($data)) {
                 if ($data["playlist"] == "true") {
                     $showPlaylist = true;
@@ -266,7 +266,7 @@ class LibraryController extends Zend_Controller_Action
         }
 
         //SOUNDCLOUD MENU OPTIONS
-        if ($type === "audioclip" && Application_Model_Preference::GetUploadToSoundcloudOption()) {
+        if ($type === "audioclip" && Application_Model_Preferences::GetUploadToSoundcloudOption()) {
 
             //create a menu separator
             $menu["sep1"] = "-----------";

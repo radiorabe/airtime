@@ -15,7 +15,7 @@ class Application_Form_SoundcloudPreferences extends Zend_Form_SubForm
         $this->addElement('checkbox', 'UploadToSoundcloudOption', array(
             'label'      => _('Enable SoundCloud Upload'),
             'required'   => false,
-            'value' => Application_Model_Preference::GetUploadToSoundcloudOption(),
+            'value' => Application_Model_Preferences::GetUploadToSoundcloudOption(),
             'decorators' => array(
                 'ViewHelper'
             )
@@ -25,7 +25,7 @@ class Application_Form_SoundcloudPreferences extends Zend_Form_SubForm
         $this->addElement('checkbox', 'SoundCloudDownloadbleOption', array(
             'label'      => _('Automatically Mark Files "Downloadable" on SoundCloud'),
             'required'   => false,
-            'value' => Application_Model_Preference::GetSoundCloudDownloadbleOption(),
+            'value' => Application_Model_Preferences::GetSoundCloudDownloadbleOption(),
             'decorators' => array(
                 'ViewHelper'
             )
@@ -37,7 +37,7 @@ class Application_Form_SoundcloudPreferences extends Zend_Form_SubForm
             'label'      => _('SoundCloud Email'),
             'filters'    => array('StringTrim'),
             'autocomplete' => 'off',
-            'value' => Application_Model_Preference::GetSoundCloudUser(),
+            'value' => Application_Model_Preferences::GetSoundCloudUser(),
             'decorators' => array(
                 'ViewHelper'
             ),
@@ -57,7 +57,7 @@ class Application_Form_SoundcloudPreferences extends Zend_Form_SubForm
             'label'      => _('SoundCloud Password'),
             'filters'    => array('StringTrim'),
             'autocomplete' => 'off',
-            'value' => Application_Model_Preference::GetSoundCloudPassword(),
+            'value' => Application_Model_Preferences::GetSoundCloudPassword(),
             'decorators' => array(
                 'ViewHelper'
             ),
@@ -77,7 +77,7 @@ class Application_Form_SoundcloudPreferences extends Zend_Form_SubForm
             'label'      => _('SoundCloud Tags: (separate tags with spaces)'),
             'required'   => false,
             'class'      => 'input_text_area',
-            'value' => Application_Model_Preference::GetSoundCloudTags(),
+            'value' => Application_Model_Preferences::GetSoundCloudTags(),
             'decorators' => array(
                 'ViewHelper'
             )
@@ -89,7 +89,7 @@ class Application_Form_SoundcloudPreferences extends Zend_Form_SubForm
             'label'      => _('Default Genre:'),
             'required'   => false,
             'filters'    => array('StringTrim'),
-            'value' => Application_Model_Preference::GetSoundCloudGenre(),
+            'value' => Application_Model_Preferences::GetSoundCloudGenre(),
             'decorators' => array(
                 'ViewHelper'
             )
@@ -115,7 +115,7 @@ class Application_Form_SoundcloudPreferences extends Zend_Form_SubForm
                 "other" => _("Other")
             ));
         $select->setRequired(false);
-        $select->setValue(Application_Model_Preference::GetSoundCloudTrackType());
+        $select->setValue(Application_Model_Preferences::GetSoundCloudTrackType());
         $select->setDecorators(array('ViewHelper'));
         $this->addElement($select);
 
@@ -134,7 +134,7 @@ class Application_Form_SoundcloudPreferences extends Zend_Form_SubForm
                 "cc-by-nc-sa" => _("Creative Commons Attribution Noncommercial Share Alike")
             ));
         $select->setRequired(false);
-        $select->setValue(Application_Model_Preference::GetSoundCloudLicense());
+        $select->setValue(Application_Model_Preferences::GetSoundCloudLicense());
         $select->setDecorators(array('ViewHelper'));
         $this->addElement($select);
     }

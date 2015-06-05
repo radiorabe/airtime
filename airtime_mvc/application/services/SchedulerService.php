@@ -173,7 +173,7 @@ class Application_Service_SchedulerService
         $con = Propel::getConnection();
         
         if (is_null($instanceId)) {
-            $showsPopulatedUntil = Application_Model_Preference::GetShowsPopulatedUntil();
+            $showsPopulatedUntil = Application_Model_Preferences::GetShowsPopulatedUntil();
 
             $showInstanceWithMostRecentSchedule = CcShowInstancesQuery::create()
                 ->filterByDbShowId($showId)
@@ -210,7 +210,7 @@ class Application_Service_SchedulerService
      */
     public static function fillLinkedInstances($ccShow, $instanceIdsToFill, $instanceId=null)
     {
-        //Get the "template" schedule for the linked show (contents of the linked show) that will be 
+        //Get the "template" schedule for the linked show (contents of the linked show) that will be
         //copied into to all the new show instances.
         $linkedShowSchedule = self::getLinkedShowSchedule($ccShow->getDbId(), $instanceIdsToFill, $instanceId);
 
@@ -252,7 +252,7 @@ class Application_Service_SchedulerService
                                 Application_Common_Database::COLUMN), 
                         new DateTimeZone("UTC"));
                 
-                $defaultCrossfadeDuration = Application_Model_Preference::GetDefaultCrossfadeDuration();
+                $defaultCrossfadeDuration = Application_Model_Preferences::GetDefaultCrossfadeDuration();
                 unset($values);
                 $values = array();
                 foreach ($linkedShowSchedule as $item) {
@@ -345,7 +345,7 @@ class Application_Service_SchedulerService
                         ->save();
 
                     $nextStartDT = self::findTimeDifference($endTimeDT,
-                        Application_Model_Preference::GetDefaultCrossfadeDuration());
+                        Application_Model_Preferences::GetDefaultCrossfadeDuration());
                 } //foreach show item
 
                 $ccShowInstance

@@ -70,7 +70,7 @@ class Application_Model_Datatables
         if (isset($data['advSearch']) && $data['advSearch'] === 'true') {
 
             $librarySetting =
-            Application_Model_Preference::getCurrentLibraryTableColumnMap();
+            Application_Model_Preferences::getCurrentLibraryTableColumnMap();
             //$displayColumns[] = 'owner';
 
             // map that maps original column position to db name

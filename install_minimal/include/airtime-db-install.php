@@ -21,7 +21,7 @@ Propel::init(AirtimeInstall::GetAirtimeSrcDir()."/application/configs/airtime-co
 
 //use this class to set new values in the cache as well.
 require_once(AirtimeInstall::GetAirtimeSrcDir().'/application/common/Database.php');
-require_once(AirtimeInstall::GetAirtimeSrcDir().'/application/models/Preference.php');
+require_once(AirtimeInstall::GetAirtimeSrcDir().'/application/models/Preferences.php');
 
 echo PHP_EOL."* Database Installation".PHP_EOL;
 

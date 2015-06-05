@@ -34,7 +34,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require_once($CC_CONFIG['phpDir'].'/application/common/Database.php');
 require_once($CC_CONFIG['phpDir'].'/application/models/StoredFile.php');
-require_once($CC_CONFIG['phpDir'].'/application/models/Preference.php');
+require_once($CC_CONFIG['phpDir'].'/application/models/Preferences.php');
 require_once($CC_CONFIG['phpDir'].'/application/models/MusicDir.php');
 require_once($CC_CONFIG['phpDir'].'/application/common/OsPath.php');
 

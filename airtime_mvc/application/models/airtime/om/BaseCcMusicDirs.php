@@ -1173,7 +1173,7 @@ abstract class BaseCcMusicDirs extends BaseObject implements Persistent
     /**
      * Sets a collection of CcFiles objects related by a one-to-many relationship
      * to the current object.
-     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * It will also calendar objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
      * @param PropelCollection $ccFiless A Propel collection.

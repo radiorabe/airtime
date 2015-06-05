@@ -30,7 +30,7 @@
 
     <?php echo $this->element->getElement('csrf') ?>
     
-    <?php if (Application_Model_Preference::GetEnableSystemEmail()): ?>
+    <?php if (Application_Model_Preferences::GetEnableSystemEmail()): ?>
         <dt id="reset-label" class="hidden">&nbsp;</dt>
         <dd id="reset-element" class="text-right">
           <a href="<?php echo $this->baseUrl('login/password-restore'); ?>" class="link reset"><?php echo _("Reset password") ?></a>

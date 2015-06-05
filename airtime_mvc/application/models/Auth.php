@@ -125,7 +125,7 @@ class Application_Model_Auth
 
         $serverName = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : "";
         $remoteAddr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : "";
-        $sessionIdentifier = 'Airtime' . '-' . $serverName .  '-' . $remoteAddr .  '-' . Application_Model_Preference::GetClientId() .  '-' . $CC_CONFIG["baseDir"];
+        $sessionIdentifier = 'Airtime' . '-' . $serverName .  '-' . $remoteAddr .  '-' . Application_Model_Preferences::GetClientId() .  '-' . $CC_CONFIG["baseDir"];
         $auth->setStorage(new Zend_Auth_Storage_Session($sessionIdentifier));
     }
 }

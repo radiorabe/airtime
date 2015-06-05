@@ -50,7 +50,7 @@ class Application_Common_DateHelper
      */
     public static function getUserTimezoneAbbreviation()
     {
-        return self::getTimezoneAbbreviation(Application_Model_Preference::GetUserTimezone());
+        return self::getTimezoneAbbreviation(Application_Model_Preferences::GetUserTimezone());
     }
     
     /** Get the abbreviated timezone string of the timezone the station is set to.
@@ -58,7 +58,7 @@ class Application_Common_DateHelper
      */
     public static function getStationTimezoneAbbreviation()
     {
-        return self::getTimezoneAbbreviation(Application_Model_Preference::GetDefaultTimezone());
+        return self::getTimezoneAbbreviation(Application_Model_Preferences::GetDefaultTimezone());
     }
     
     private static function getTimezoneAbbreviation($fullTimeZoneName)
@@ -70,7 +70,7 @@ class Application_Common_DateHelper
     
     public static function getUserTimezoneOffset()
     {
-        $userTimezone = new DateTimeZone(Application_Model_Preference::GetUserTimezone());
+        $userTimezone = new DateTimeZone(Application_Model_Preferences::GetUserTimezone());
         $now = new DateTime("now", $userTimezone);
         
         return $now->format("Z");
@@ -78,7 +78,7 @@ class Application_Common_DateHelper
     
     public static function getStationTimezoneOffset()
     {
-        $stationTimezone = new DateTimeZone(Application_Model_Preference::GetDefaultTimezone());
+        $stationTimezone = new DateTimeZone(Application_Model_Preferences::GetDefaultTimezone());
         $now = new DateTime("now", $stationTimezone);
         
         return $now->format("Z");
@@ -90,7 +90,7 @@ class Application_Common_DateHelper
      */
     public static function getTodayStationStartDateTime()
     {
-        $stationTimezone = new DateTimeZone(Application_Model_Preference::GetDefaultTimezone());
+        $stationTimezone = new DateTimeZone(Application_Model_Preferences::GetDefaultTimezone());
         $now = new DateTime("now", $stationTimezone);
         
         $now->setTime(0, 0, 0);
@@ -104,7 +104,7 @@ class Application_Common_DateHelper
      */
     public static function getTodayStationEndDateTime()
     {
-        $stationTimezone = new DateTimeZone(Application_Model_Preference::GetDefaultTimezone());
+        $stationTimezone = new DateTimeZone(Application_Model_Preferences::GetDefaultTimezone());
         $now = new DateTime("now", $stationTimezone);
          
         $now->add(new DateInterval("P1D"));
@@ -250,7 +250,7 @@ class Application_Common_DateHelper
      * @return string in $format default Y-m-d H:i:s in station timezone
      */
     public static function UTCStringToStationTimezoneString($datetime, $format="Y-m-d H:i:s") {
-        $stationTimezone = new DateTimeZone(Application_Model_Preference::GetDefaultTimezone());
+        $stationTimezone = new DateTimeZone(Application_Model_Preferences::GetDefaultTimezone());
         $utcTimezone = new DateTimeZone("UTC");
         
         $d = new DateTime($datetime, $utcTimezone);
@@ -265,7 +265,7 @@ class Application_Common_DateHelper
     * @return string Y-m-d H:i:s in user's timezone
     */
     public static function UTCStringToUserTimezoneString($datetime, $format="Y-m-d H:i:s") {
-        $userTimezone = new DateTimeZone(Application_Model_Preference::GetUserTimezone());
+        $userTimezone = new DateTimeZone(Application_Model_Preferences::GetUserTimezone());
         $utcTimezone = new DateTimeZone("UTC");
         
         $d = new DateTime($datetime, $utcTimezone);
@@ -280,7 +280,7 @@ class Application_Common_DateHelper
     * @return string Y-m-d H:i:s in UTC timezone
     */
     public static function UserTimezoneStringToUTCString($datetime, $format="Y-m-d H:i:s") {
-        $userTimezone = new DateTimeZone(Application_Model_Preference::GetUserTimezone());
+        $userTimezone = new DateTimeZone(Application_Model_Preferences::GetUserTimezone());
         $utcTimezone = new DateTimeZone("UTC");
          
         $d = new DateTime($datetime, $userTimezone);
@@ -456,7 +456,7 @@ class Application_Common_DateHelper
      */
     public static function getStartEnd($startTimestamp, $endTimestamp, $timezone)
     {
-        $prefTimezone = Application_Model_Preference::GetTimezone();
+        $prefTimezone = Application_Model_Preferences::GetTimezone();
         $utcTimezone = new DateTimeZone("UTC");
         $utcNow = new DateTime("now", $utcTimezone);
 

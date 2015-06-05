@@ -42,7 +42,7 @@ class ThankYouController extends Zend_Controller_Action
             Logging::info("Goal conversion from trial to paid.");
             // Clear old plan level so we prevent duplicate events.
             // This should only be called from AJAX. See thank-you/index.phtml
-            Application_Model_Preference::ClearOldPlanLevel();
+            Application_Model_Preferences::ClearOldPlanLevel();
         }
     }
 }

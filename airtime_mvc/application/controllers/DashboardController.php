@@ -25,7 +25,7 @@ class DashboardController extends Zend_Controller_Action
 
         $show = Application_Model_Show::getCurrentShow();
         $show_id = isset($show[0]['id'])?$show[0]['id']:0;
-        $source_connected = Application_Model_Preference::GetSourceStatus($sourcename);
+        $source_connected = Application_Model_Preferences::GetSourceStatus($sourcename);
 
         if ($user->canSchedule($show_id) && $source_connected) {
             $data = array("sourcename"=>$sourcename);
@@ -50,7 +50,7 @@ class DashboardController extends Zend_Controller_Action
         $show = Application_Model_Show::getCurrentShow();
         $show_id = isset($show[0]['id'])?$show[0]['id']:0;
 
-        $source_connected = Application_Model_Preference::GetSourceStatus($sourcename);
+        $source_connected = Application_Model_Preferences::GetSourceStatus($sourcename);
         if ($user->canSchedule($show_id) && ($source_connected || $sourcename == 'scheduled_play' || $current_status == "on")) {
 
             $change_status_to = "on";
@@ -62,14 +62,14 @@ class DashboardController extends Zend_Controller_Action
             $data = array("sourcename"=>$sourcename, "status"=>$change_status_to);
             Application_Model_RabbitMq::SendMessageToPypo("switch_source", $data);
             if (strtolower($current_status) == "on") {
-                Application_Model_Preference::SetSourceSwitchStatus($sourcename, "off");
+                Application_Model_Preferences::SetSourceSwitchStatus($sourcename, "off");
                 $this->view->status = "OFF";
 
                 //Log table updates
                 Application_Model_LiveLog::SetEndTime($sourcename == 'scheduled_play'?'S':'L',
                                                       new DateTime("now", new DateTimeZone('UTC')));
             } else {
-                Application_Model_Preference::SetSourceSwitchStatus($sourcename, "on");
+                Application_Model_Preferences::SetSourceSwitchStatus($sourcename, "on");
                 $this->view->status = "ON";
 
                 //Log table updates
@@ -98,7 +98,7 @@ class DashboardController extends Zend_Controller_Action
         $this->view->headLink()->appendStylesheet($baseUrl.'js/jplayer/skin/jplayer.blue.monday.css?'.$CC_CONFIG['airtime_version']);
         $this->_helper->layout->setLayout('livestream');
 
-        $logo = Application_Model_Preference::GetStationLogo();
+        $logo = Application_Model_Preferences::GetStationLogo();
         if ($logo) {
             $this->view->logo = "data:image/png;base64,$logo";
         } else {
@@ -113,7 +113,7 @@ class DashboardController extends Zend_Controller_Action
 
     public function aboutAction()
     {
-        $this->view->airtime_version = Application_Model_Preference::GetAirtimeVersion();
+        $this->view->airtime_version = Application_Model_Preferences::GetAirtimeVersion();
     }
 
 }

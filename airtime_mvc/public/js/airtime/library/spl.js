@@ -838,7 +838,7 @@ var AIRTIME = (function(AIRTIME){
         $lib.on("click", "#pl_edit", function() {
             openPlaylistPanel();
             $.ajax( {
-                url : baseUrl+"usersettings/set-library-screen-settings",
+                url : baseUrl+"user-settings/set-library-screen-settings",
                 type : "POST",
                 data : {
                     settings : {
@@ -856,7 +856,7 @@ var AIRTIME = (function(AIRTIME){
             $lib.width(screenWidth).find("#library_display_length").append($togglePl.show());
 
             $.ajax( {
-                url : baseUrl+"usersettings/set-library-screen-settings",
+                url : baseUrl+"user-settings/set-library-screen-settings",
                 type : "POST",
                 data : {
                     settings : {

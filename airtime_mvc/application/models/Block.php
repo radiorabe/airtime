@@ -100,9 +100,9 @@ class Application_Model_Block implements Application_Model_LibraryEditable
             $this->block->save();
         }
 
-        $this->blockItem["fadein"] = Application_Model_Preference::GetDefaultFadeIn();
-        $this->blockItem["fadeout"] = Application_Model_Preference::GetDefaultFadeOut();
-        $this->blockItem["crossfadeDuration"] = Application_Model_Preference::GetDefaultCrossfadeDuration();
+        $this->blockItem["fadein"] = Application_Model_Preferences::GetDefaultFadeIn();
+        $this->blockItem["fadeout"] = Application_Model_Preferences::GetDefaultFadeOut();
+        $this->blockItem["crossfadeDuration"] = Application_Model_Preferences::GetDefaultCrossfadeDuration();
 
         $this->con = isset($con) ? $con : Propel::getConnection(CcBlockPeer::DATABASE_NAME);
         $this->id = $this->block->getDbId();
@@ -688,7 +688,7 @@ SQL;
     	$this->con->beginTransaction();
     	
     	if (!isset($offset)) {
-    		$offset = Application_Model_Preference::GetDefaultCrossfadeDuration();
+    		$offset = Application_Model_Preferences::GetDefaultCrossfadeDuration();
     	}
     	 
     	try {

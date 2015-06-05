@@ -13,7 +13,7 @@ class LocaleController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
         header("Content-type: text/javascript");
 
-        $locale = Application_Model_Preference::GetLocale();
+        $locale = Application_Model_Preferences::GetLocale();
         echo "var datatables_dict =" .
             file_get_contents(Application_Common_OsPath::join(
                 //$_SERVER["DOCUMENT_ROOT"],
@@ -120,7 +120,7 @@ class LocaleController extends Zend_Controller_Action
             "Playlist shuffled" => _("Playlist shuffled"),
             "Airtime is unsure about the status of this file. This can happen when the file is on a remote drive that is unaccessible or the file is in a directory that isn't 'watched' anymore."
                 => _("Airtime is unsure about the status of this file. This can happen when the file is on a remote drive that is unaccessible or the file is in a directory that isn't 'watched' anymore."),
-            //listenerstat/listenerstat.js
+            //listener-stats/listener-stats.js
             "Listener Count on %s: %s" => _("Listener Count on %s: %s"),
             //nowplaying/register.js
             "Remind me in 1 week" => _("Remind me in 1 week"),
@@ -156,7 +156,7 @@ class LocaleController extends Zend_Controller_Action
             "Manage Media Folders" => _("Manage Media Folders"),
             "Are you sure you want to remove the watched folder?" => _("Are you sure you want to remove the watched folder?"),
             "This path is currently not accessible." => _("This path is currently not accessible."),
-            //preferences/streamsetting.js
+            //preferences/streams.js
         	"Some stream types require extra configuration. Details about enabling %sAAC+ Support%s or %sOpus Support%s are provided." => _("Some stream types require extra configuration. Details about enabling %sAAC+ Support%s or %sOpus Support%s are provided."),
             "Connected to the streaming server" => _("Connected to the streaming server"),
             "The stream is disabled" => _("The stream is disabled"),
@@ -176,7 +176,7 @@ class LocaleController extends Zend_Controller_Action
             "This is the admin username and password for Icecast/SHOUTcast to get listener statistics." => _("This is the admin username and password for Icecast/SHOUTcast to get listener statistics."),
             //preferences/support-setting.js
             "Image must be one of jpg, jpeg, png, or gif" => _("Image must be one of jpg, jpeg, png, or gif"),
-            //schedule/add-show.js
+            //calendar/add-show.js
             "Warning: You cannot change this field while the show is currently playing" => _("Warning: You cannot change this field while the show is currently playing"),
             "No result found" => _("No result found"),
             "This follows the same security pattern for the shows: only users assigned to the show can connect." => _("This follows the same security pattern for the shows: only users assigned to the show can connect."),
@@ -186,8 +186,8 @@ class LocaleController extends Zend_Controller_Action
             "Warning: Shows cannot be re-linked" => _("Warning: Shows cannot be re-linked"),
             "By linking your repeating shows any media items scheduled in any repeat show will also get scheduled in the other repeat shows" => _("By linking your repeating shows any media items scheduled in any repeat show will also get scheduled in the other repeat shows"),
             "Timezone is set to the station timezone by default. Shows in the calendar will be displayed in your local time defined by the Interface Timezone in your user settings." => _("Timezone is set to the station timezone by default. Shows in the calendar will be displayed in your local time defined by the Interface Timezone in your user settings."),
-            //schedule/full-calendar-functions
-            //already in schedule/add-show.js
+            //calendar/full-calendar-functions
+            //already in calendar/add-show.js
             //"The show instance doesn't exist anymore!" => _("The show instance doesn't exist anymore!"),
             "Show" => _("Show"),
             "Show is empty" => _("Show is empty"),
@@ -206,9 +206,9 @@ class LocaleController extends Zend_Controller_Action
             //"Error msg: " => _("Error msg: "),
             "This show has no scheduled content." => _("This show has no scheduled content."),
             "This show is not completely filled with content." => _("This show is not completely filled with content."),
-            //already in schedule/add-show.js
+            //already in calendar/add-show.js
             //"The show instance doesn"t exist anymore!" => _("The show instance doesn"t exist anymore!"),
-            //schedule/schedule.js
+            //calendar/calendar.js
             "January" => _("January"),
             "February" => _("February"),
             "March" => _("March"),
@@ -256,10 +256,10 @@ class LocaleController extends Zend_Controller_Action
             "Stop recording current show?" => _("Stop recording current show?"),
             "Ok" => _("Ok"),
             "Contents of Show" => _("Contents of Show"),
-            //already in schedule/add-show.js
+            //already in calendar/add-show.js
             //"The show instance doesn"t exist anymore!" => _("The show instance doesn"t exist anymore!"),
             "Remove all content?" => _("Remove all content?"),
-            //showbuilder/builder.js
+            //now-playing/builder.js
             "Delete selected item(s)?" => _("Delete selected item(s)?"),
             "Start" => _("Start"),
             "End" => _("End"),
@@ -295,10 +295,10 @@ class LocaleController extends Zend_Controller_Action
             "Remove selected scheduled items" => _("Remove selected scheduled items"),
             "Jump to the current playing track" => _("Jump to the current playing track"),
             "Cancel current show" => _("Cancel current show"),
-            //already in schedule/schedule.js
+            //already in calendar/calendar.js
             //"Cancel Current Show?" => _("Cancel Current Show?"),
             "Stop recording current show?" => _("Stop recording current show?"),
-            //showbuilder/main_builder.js
+            //now-playing/main_builder.js
             "Open library to add or remove content" => _("Open library to add or remove content"),
             "Add / Remove Content" => _("Add / Remove Content"),
             //status/status.js
@@ -314,7 +314,7 @@ class LocaleController extends Zend_Controller_Action
             "Program Manager" => _("Program Manager"),
             "Guest" => _("Guest"),
             "Guests can do the following:" => _("Guests can do the following:"),
-            "View schedule" => _("View schedule"),
+            "View calendar" => _("View calendar"),
             "View show content" => _("View show content"),
             "DJs can do the following:" => _("DJs can do the following:"),
             "Manage assigned show content" => _("Manage assigned show content"),
@@ -342,7 +342,7 @@ class LocaleController extends Zend_Controller_Action
             "hh:mm:ss.t" => _("hh:mm:ss.t"),
             "kHz" => _("kHz"),
             //datepicker
-            //months are already in schedule/schedule.js
+            //months are already in calendar/calendar.js
             "Su" => _("Su"),
             "Mo" => _("Mo"),
             "Tu" => _("Tu"),

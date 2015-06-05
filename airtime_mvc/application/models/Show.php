@@ -255,7 +255,7 @@ SQL;
 
         //keep track of instance ids for update show instances start/end times
         $instanceIds = array();
-        $displayTimezone = new DateTimeZone(Application_Model_Preference::GetUserTimezone());
+        $displayTimezone = new DateTimeZone(Application_Model_Preferences::GetUserTimezone());
         
         //check if new show time overlaps with any other shows
         foreach ($showInstances as $si) {
@@ -844,12 +844,12 @@ SQL;
     public static function createAndFillShowInstancesPastPopulatedUntilDate($needScheduleUntil)
     {
         //UTC DateTime object
-        $showsPopUntil = Application_Model_Preference::GetShowsPopulatedUntil();
+        $showsPopUntil = Application_Model_Preferences::GetShowsPopulatedUntil();
         //if application is requesting shows past our previous populated until date, generate shows up until this point.
         if (is_null($showsPopUntil) || $showsPopUntil->getTimestamp() < $needScheduleUntil->getTimestamp()) {
             $service_show = new Application_Service_ShowService();
             $ccShow = $service_show->delegateInstanceCreation(null, $needScheduleUntil, true);
-            Application_Model_Preference::SetShowsPopulatedUntil($needScheduleUntil);
+            Application_Model_Preferences::SetShowsPopulatedUntil($needScheduleUntil);
         }
     }
 
@@ -967,7 +967,7 @@ SQL;
             $p_start, $p_end);
         $isFull = Application_Model_ShowInstance::getIsFull($p_start, $p_end);
 
-        $displayTimezone = new DateTimeZone(Application_Model_Preference::GetUserTimezone());
+        $displayTimezone = new DateTimeZone(Application_Model_Preferences::GetUserTimezone());
         $utcTimezone = new DateTimeZone("UTC");
         $now = new DateTime("now", $utcTimezone);
 
@@ -1433,7 +1433,7 @@ SQL;
         $utcTimeZone = new DateTimeZone("UTC");
 
         //We have to get the start of the day in the user's timezone, and then convert that to UTC.
-        $start = new DateTime("first day of this month", new DateTimeZone(Application_Model_Preference::GetUserTimezone()));
+        $start = new DateTime("first day of this month", new DateTimeZone(Application_Model_Preferences::GetUserTimezone()));
 
         $start->setTimezone($utcTimeZone); //Covert it to UTC.
         $monthInterval = new DateInterval("P1M");
@@ -1453,7 +1453,7 @@ SQL;
         $utcTimeZone = new DateTimeZone("UTC");
 
         //We have to get the start of the day in the user's timezone, and then convert that to UTC.
-        $start = new DateTime("first day of this month", new DateTimeZone(Application_Model_Preference::GetUserTimezone()));
+        $start = new DateTime("first day of this month", new DateTimeZone(Application_Model_Preferences::GetUserTimezone()));
 
         $dayOfWeekNumeric = $start->format('w');
         $start->sub(new DateInterval("P{$dayOfWeekNumeric}D")); //Subtract the index of the day of the week the month starts on. (adds this many days from the previous month)
@@ -1469,11 +1469,11 @@ SQL;
 
     public static function getStartEndCurrentWeekView() {
 
-        $weekStartDayNum = Application_Model_Preference::GetWeekStartDay();
+        $weekStartDayNum = Application_Model_Preferences::GetWeekStartDay();
         $utcTimeZone = new DateTimeZone("UTC");
 
         //We have to get the start of the week in the user's timezone, and then convert that to UTC.
-        $start = new DateTime("Sunday last week", new DateTimeZone(Application_Model_Preference::GetUserTimezone()));
+        $start = new DateTime("Sunday last week", new DateTimeZone(Application_Model_Preferences::GetUserTimezone()));
         $start->add(new DateInterval("P{$weekStartDayNum}D")); //Shift the start date to the station's "Week Starts on Day"
 
         $start->setTimezone($utcTimeZone); //Covert it to UTC.
@@ -1487,7 +1487,7 @@ SQL;
         $utcTimeZone = new DateTimeZone("UTC");
 
         //We have to get the start of the day in the user's timezone, and then convert that to UTC.
-        $start = new DateTime("today", new DateTimeZone(Application_Model_Preference::GetUserTimezone()));
+        $start = new DateTime("today", new DateTimeZone(Application_Model_Preferences::GetUserTimezone()));
 
         $start->setTimezone($utcTimeZone); //Covert it to UTC.
         $dayInterval = new DateInterval("P1D");

@@ -287,7 +287,7 @@ class Application_Model_LiveLog
     {
         try {
 
-            $scheduled = Application_Model_Preference::GetSourceSwitchStatus('scheduled_play');
+            $scheduled = Application_Model_Preferences::GetSourceSwitchStatus('scheduled_play');
             if ($state == 'L' && $scheduled == 'on') {
                 self::SetEndTime('S', $dateTime);
             }
@@ -329,8 +329,8 @@ class Application_Model_LiveLog
     public static function SetEndTime($state, $dateTime, $override=false)
     {
         try {
-            $dj_live = Application_Model_Preference::GetSourceSwitchStatus('live_dj');
-            $master_live = Application_Model_Preference::GetSourceSwitchStatus('master_dj');
+            $dj_live = Application_Model_Preferences::GetSourceSwitchStatus('live_dj');
+            $master_live = Application_Model_Preferences::GetSourceSwitchStatus('master_dj');
 
             if (($dj_live=='off' && $master_live=='off') || $state == 'S' || $override) {
                 $sql = "SELECT id, state from cc_live_log"
@@ -354,7 +354,7 @@ class Application_Model_LiveLog
                 }
 
                 //If live broadcasting is off, turn scheduled play on
-                $scheduled = Application_Model_Preference::GetSourceSwitchStatus('scheduled_play');
+                $scheduled = Application_Model_Preferences::GetSourceSwitchStatus('scheduled_play');
                 if ($state == 'L' && $scheduled=='on' && !$override) {
                     self::SetNewLogTime('S', $dateTime);
                 }

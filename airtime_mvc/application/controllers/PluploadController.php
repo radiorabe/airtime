@@ -15,7 +15,7 @@ class PluploadController extends Zend_Controller_Action
         $CC_CONFIG = Config::getConfig();
 
         $baseUrl = Application_Common_OsPath::getBaseDir();
-        $locale = Application_Model_Preference::GetLocale();
+        $locale = Application_Model_Preferences::GetLocale();
 
         $this->view->headScript()->appendFile($baseUrl.'js/datatables/js/jquery.dataTables.js?'.$CC_CONFIG['airtime_version'], 'text/javascript');
         $this->view->headScript()->appendFile($baseUrl.'js/plupload/plupload.full.min.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
@@ -27,7 +27,7 @@ class PluploadController extends Zend_Controller_Action
         $this->view->headLink()->appendStylesheet($baseUrl.'css/addmedia.css?'.$CC_CONFIG['airtime_version']);
 
         $this->view->quotaLimitReached = false;
-        if (Application_Model_Systemstatus::isDiskOverQuota()) {
+        if (Application_Model_SystemStatus::isDiskOverQuota()) {
             $this->view->quotaLimitReached = true;
         }
 
@@ -95,7 +95,7 @@ class PluploadController extends Zend_Controller_Action
         
         $uploadsArray = array();
         $utcTimezone = new DateTimeZone("UTC");
-        $displayTimezone = new DateTimeZone(Application_Model_Preference::GetUserTimezone());
+        $displayTimezone = new DateTimeZone(Application_Model_Preferences::GetUserTimezone());
         
         foreach ($recentUploads as $upload)
         {

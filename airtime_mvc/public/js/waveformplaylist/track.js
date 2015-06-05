@@ -835,7 +835,7 @@ TrackEditor.prototype.schedulePlay = function(now, delay, startTime, endTime) {
     //the track starts in the future of the cursor position
     if (this.startTime >= startTime) {
         start = 0;
-        when = when + this.startTime - startTime; //schedule additional delay for this audio node.
+        when = when + this.startTime - startTime; //calendar additional delay for this audio node.
         window = window - (this.startTime - startTime);
         duration = (endTime) ? Math.min(window, this.duration) : this.duration;
     }

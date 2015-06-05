@@ -368,7 +368,7 @@ SQL;
         $p_dir = Application_Common_OsPath::normpath($p_dir)."/";
         if (!is_dir($p_dir)) {
             return array("code"=>2, "error"=>sprintf(_("%s is not a valid directory."), $p_dir));
-        } elseif (Application_Model_Preference::GetImportTimestamp()+10 > time()) {
+        } elseif (Application_Model_Preferences::GetImportTimestamp()+10 > time()) {
             return array("code"=>3, "error"=>"Airtime is currently importing files. Please wait until this is complete before changing the storage directory.");
         }
         $dir = self::getStorDir();

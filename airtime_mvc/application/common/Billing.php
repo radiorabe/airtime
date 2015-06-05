@@ -98,7 +98,7 @@ class Billing
         $postfields["password"] = md5($credentials["password"]);
         $postfields["action"] = "getclientsproducts";
         $postfields["responsetype"] = "json";
-        $postfields["clientid"] = Application_Model_Preference::GetClientId();
+        $postfields["clientid"] = Application_Model_Preferences::GetClientId();
 
         $query_string = "";
         foreach ($postfields AS $k=>$v) $query_string .= "$k=".urlencode($v)."&";
@@ -151,7 +151,7 @@ class Billing
             $postfields["password"] = md5($credentials["password"]);
             $postfields["action"] = "getclientsdetails";
             $postfields["stats"] = true;
-            $postfields["clientid"] = Application_Model_Preference::GetClientId();
+            $postfields["clientid"] = Application_Model_Preferences::GetClientId();
             $postfields["responsetype"] = "json";
 
             $query_string = "";
@@ -192,9 +192,9 @@ class Billing
 
     public static function ensureClientIdIsValid()
     {
-        if (Application_Model_Preference::GetClientId() == null)
+        if (Application_Model_Preferences::GetClientId() == null)
         {
-            throw new Exception("Invalid client ID: " . Application_Model_Preference::GetClientId());
+            throw new Exception("Invalid client ID: " . Application_Model_Preferences::GetClientId());
         }
     }
 

@@ -79,7 +79,7 @@ class ApiController extends Zend_Controller_Action
     public function versionAction()
     {
         $this->_helper->json->sendJson( array(
-            "airtime_version" => Application_Model_Preference::GetAirtimeVersion(),
+            "airtime_version" => Application_Model_Preferences::GetAirtimeVersion(),
             "api_version" => AIRTIME_API_VERSION));
     }
 
@@ -121,15 +121,15 @@ class ApiController extends Zend_Controller_Action
         $isCurrentItemPlaying = $range["current"]["media_item_played"] ? true : false;
 
         if ($isItemCurrentlyScheduled ||
-            Application_Model_Preference::GetSourceSwitchStatus("live_dj") == "on" ||
-            Application_Model_Preference::GetSourceSwitchStatus("master_dj") == "on")
+            Application_Model_Preferences::GetSourceSwitchStatus("live_dj") == "on" ||
+            Application_Model_Preferences::GetSourceSwitchStatus("master_dj") == "on")
         {
             $result["on_air_light_expected_status"] = true;
         }
 
         if (($isItemCurrentlyScheduled && $isCurrentItemPlaying) ||
-            Application_Model_Preference::GetSourceSwitchStatus("live_dj") == "on" ||
-            Application_Model_Preference::GetSourceSwitchStatus("master_dj") == "on")
+            Application_Model_Preferences::GetSourceSwitchStatus("live_dj") == "on" ||
+            Application_Model_Preferences::GetSourceSwitchStatus("master_dj") == "on")
         {
             $result["on_air_light"] = true;
         }
@@ -158,7 +158,7 @@ class ApiController extends Zend_Controller_Action
      */
     public function liveInfoAction()
     {
-        if (Application_Model_Preference::GetAllow3rdPartyApi() || $this->checkAuth()) {
+        if (Application_Model_Preferences::GetAllow3rdPartyApi() || $this->checkAuth()) {
             // disable the view and the layout
             $this->view->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
@@ -169,7 +169,7 @@ class ApiController extends Zend_Controller_Action
             $utcTimeEnd = "";   // if empty, getNextShows will use interval instead of end of day
     
             // default to the station timezone
-            $timezone = Application_Model_Preference::GetDefaultTimezone();
+            $timezone = Application_Model_Preferences::GetDefaultTimezone();
             $userDefinedTimezone = strtolower($request->getParam('timezone'));
             $upcase = false; // only upcase the timezone abbreviations
             $this->checkTimezone($userDefinedTimezone, $timezone, $upcase);
@@ -253,7 +253,7 @@ class ApiController extends Zend_Controller_Action
      */
     public function liveInfoV2Action()
     {
-        if (Application_Model_Preference::GetAllow3rdPartyApi() || $this->checkAuth()) {
+        if (Application_Model_Preferences::GetAllow3rdPartyApi() || $this->checkAuth()) {
             // disable the view and the layout
             $this->view->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
@@ -264,7 +264,7 @@ class ApiController extends Zend_Controller_Action
             $utcTimeEnd = "";   // if empty, getNextShows will use interval instead of end of day
 
             // default to the station timezone
-            $timezone = Application_Model_Preference::GetDefaultTimezone();
+            $timezone = Application_Model_Preferences::GetDefaultTimezone();
             $userDefinedTimezone = strtolower($request->getParam('timezone'));
             $upcase = false; // only upcase the timezone abbreviations
             $this->checkTimezone($userDefinedTimezone, $timezone, $upcase);
@@ -361,7 +361,7 @@ class ApiController extends Zend_Controller_Action
     
     public function weekInfoAction()
     {
-        if (Application_Model_Preference::GetAllow3rdPartyApi() || $this->checkAuth()) {
+        if (Application_Model_Preferences::GetAllow3rdPartyApi() || $this->checkAuth()) {
             // disable the view and the layout
             $this->view->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
@@ -376,7 +376,7 @@ class ApiController extends Zend_Controller_Action
             $result = array();
             
             // default to the station timezone
-            $timezone = Application_Model_Preference::GetDefaultTimezone();
+            $timezone = Application_Model_Preferences::GetDefaultTimezone();
             $userDefinedTimezone = strtolower($this->getRequest()->getParam("timezone"));
             // if the timezone defined by the user exists, use that
             if (array_key_exists($userDefinedTimezone, timezone_abbreviations_list())) {
@@ -484,7 +484,7 @@ class ApiController extends Zend_Controller_Action
         $this->view->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        if (Application_Model_Preference::GetAllow3rdPartyApi() || $this->checkAuth()) {
+        if (Application_Model_Preferences::GetAllow3rdPartyApi() || $this->checkAuth()) {
             $request = $this->getRequest();
             $showId = $request->getParam('id');
             if (empty($showId)) {
@@ -523,7 +523,7 @@ class ApiController extends Zend_Controller_Action
      */
     public function stationMetadataAction()
     {
-        if (Application_Model_Preference::GetAllow3rdPartyApi() || $this->checkAuth()) {
+        if (Application_Model_Preferences::GetAllow3rdPartyApi() || $this->checkAuth()) {
             // disable the view and the layout
             $this->view->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
@@ -532,12 +532,12 @@ class ApiController extends Zend_Controller_Action
             $baseDir = Application_Common_OsPath::formatDirectoryWithDirectorySeparators($CC_CONFIG['baseDir']);
             $path = 'http://'.$_SERVER['HTTP_HOST'].$baseDir."api/station-logo";
             
-            $result["name"] = Application_Model_Preference::GetStationName();
+            $result["name"] = Application_Model_Preferences::GetStationName();
             $result["logo"] = $path;
-            $result["description"] = Application_Model_Preference::GetStationDescription();
-            $result["timezone"] = Application_Model_Preference::GetDefaultTimezone();
-            $result["locale"] = Application_Model_Preference::GetDefaultLocale();
-            $result["stream_data"] = Application_Model_StreamSetting::getEnabledStreamData();
+            $result["description"] = Application_Model_Preferences::GetStationDescription();
+            $result["timezone"] = Application_Model_Preferences::GetDefaultTimezone();
+            $result["locale"] = Application_Model_Preferences::GetDefaultLocale();
+            $result["stream_data"] = Application_Model_Streams::getEnabledStreamData();
             
             // used by caller to determine if the airtime they are running or widgets in use is out of date.
             $result['AIRTIME_API_VERSION'] = AIRTIME_API_VERSION;
@@ -562,12 +562,12 @@ class ApiController extends Zend_Controller_Action
      */
     public function stationLogoAction() 
     {
-        if (Application_Model_Preference::GetAllow3rdPartyApi() || $this->checkAuth()) {
+        if (Application_Model_Preferences::GetAllow3rdPartyApi() || $this->checkAuth()) {
             // disable the view and the layout
             $this->view->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
             
-            $logo = Application_Model_Preference::GetStationLogo();
+            $logo = Application_Model_Preferences::GetStationLogo();
             // if there's no logo, just die - redirects to a 404
             if (!$logo || $logo === '') {
                 return;
@@ -631,7 +631,7 @@ class ApiController extends Zend_Controller_Action
                     $file->setLastPlayedTime($now);
 
                     // Push metadata to TuneIn
-                    if (Application_Model_Preference::getTuneinEnabled()) {
+                    if (Application_Model_Preferences::getTuneinEnabled()) {
                         $filePropelOrm = $file->getPropelOrm();
                         $title = urlencode($filePropelOrm->getDbTrackTitle());
                         $artist = urlencode($filePropelOrm->getDbArtistName());
@@ -668,7 +668,7 @@ class ApiController extends Zend_Controller_Action
                 $onlyRecord = true);
 
         $this->view->is_recording = false;
-        $this->view->server_timezone = Application_Model_Preference::GetDefaultTimezone();
+        $this->view->server_timezone = Application_Model_Preferences::GetDefaultTimezone();
 
         $rows = Application_Model_Show::getCurrentShow();
         
@@ -731,7 +731,7 @@ class ApiController extends Zend_Controller_Action
         $file->setMetadataValue('MDATA_KEY_CREATOR', "Airtime Show Recorder");
         $file->setMetadataValue('MDATA_KEY_TRACKNUMBER', $show_instance_id);
 
-        if (!$showCanceled && Application_Model_Preference::GetAutoUploadRecordedShowToSoundcloud()) {
+        if (!$showCanceled && Application_Model_Preferences::GetAutoUploadRecordedShowToSoundcloud()) {
             $id = $file->getId();
             Application_Model_Soundcloud::uploadSoundcloud($id);
         }
@@ -752,7 +752,7 @@ class ApiController extends Zend_Controller_Action
     public function dispatchMetadata($md, $mode)
     {
         $return_hash = array();
-        Application_Model_Preference::SetImportTimestamp();
+        Application_Model_Preferences::SetImportTimestamp();
 
         $con = Propel::getConnection(CcFilesPeer::DATABASE_NAME);
         $con->beginTransaction();
@@ -948,7 +948,7 @@ class ApiController extends Zend_Controller_Action
 
     public function getStreamSettingAction()
     {
-        $info = Application_Model_StreamSetting::getStreamSetting();
+        $info = Application_Model_Streams::getStreamSetting();
         $this->view->msg = $info;
     }
 
@@ -958,17 +958,17 @@ class ApiController extends Zend_Controller_Action
         $getDiskInfo = $request->getParam('diskinfo') == "true";
 
         $status = array(
-            "platform"=>Application_Model_Systemstatus::GetPlatformInfo(),
-            "airtime_version"=>Application_Model_Preference::GetAirtimeVersion(),
+            "platform"=>Application_Model_SystemStatus::GetPlatformInfo(),
+            "airtime_version"=>Application_Model_Preferences::GetAirtimeVersion(),
             "services"=>array(
-                "pypo"=>Application_Model_Systemstatus::GetPypoStatus(),
-                "liquidsoap"=>Application_Model_Systemstatus::GetLiquidsoapStatus(),
-                "media_monitor"=>Application_Model_Systemstatus::GetMediaMonitorStatus()
+                "pypo"=>Application_Model_SystemStatus::GetPypoStatus(),
+                "liquidsoap"=>Application_Model_SystemStatus::GetLiquidsoapStatus(),
+                "media_monitor"=>Application_Model_SystemStatus::GetMediaMonitorStatus()
             )
         );
 
         if ($getDiskInfo) {
-            $status["partitions"] = Application_Model_Systemstatus::GetDiskInfo();
+            $status["partitions"] = Application_Model_SystemStatus::GetDiskInfo();
         }
 
         $this->view->status = $status;
@@ -1015,7 +1015,7 @@ class ApiController extends Zend_Controller_Action
         $stream_id = $request->getParam('stream_id');
         $boot_time = $request->getParam('boot_time');
 
-        Application_Model_StreamSetting::setLiquidsoapError($stream_id, $msg, $boot_time);
+        Application_Model_Streams::setLiquidsoapError($stream_id, $msg, $boot_time);
     }
 
     public function updateSourceStatusAction()
@@ -1027,20 +1027,20 @@ class ApiController extends Zend_Controller_Action
 
         // on source disconnection sent msg to pypo to turn off the switch
         // Added AutoTransition option
-        if ($status == "false" && Application_Model_Preference::GetAutoTransition()) {
+        if ($status == "false" && Application_Model_Preferences::GetAutoTransition()) {
             $data = array("sourcename"=>$sourcename, "status"=>"off");
             Application_Model_RabbitMq::SendMessageToPypo("switch_source", $data);
-            Application_Model_Preference::SetSourceSwitchStatus($sourcename, "off");
+            Application_Model_Preferences::SetSourceSwitchStatus($sourcename, "off");
             Application_Model_LiveLog::SetEndTime($sourcename == 'scheduled_play'?'S':'L',
                                                   new DateTime("now", new DateTimeZone('UTC')));
-        } elseif ($status == "true" && Application_Model_Preference::GetAutoSwitch()) {
+        } elseif ($status == "true" && Application_Model_Preferences::GetAutoSwitch()) {
             $data = array("sourcename"=>$sourcename, "status"=>"on");
             Application_Model_RabbitMq::SendMessageToPypo("switch_source", $data);
-            Application_Model_Preference::SetSourceSwitchStatus($sourcename, "on");
+            Application_Model_Preferences::SetSourceSwitchStatus($sourcename, "on");
             Application_Model_LiveLog::SetNewLogTime($sourcename == 'scheduled_play'?'S':'L',
                                                   new DateTime("now", new DateTimeZone('UTC')));
         }
-        Application_Model_Preference::SetSourceStatus($sourcename, $status);
+        Application_Model_Preferences::SetSourceStatus($sourcename, $status);
     }
 
     // handles addition/deletion of mount point which watched dirs reside
@@ -1132,15 +1132,15 @@ class ApiController extends Zend_Controller_Action
 
     public function getBootstrapInfoAction()
     {
-        $live_dj = Application_Model_Preference::GetSourceSwitchStatus('live_dj');
-        $master_dj = Application_Model_Preference::GetSourceSwitchStatus('master_dj');
-        $scheduled_play = Application_Model_Preference::GetSourceSwitchStatus('scheduled_play');
+        $live_dj = Application_Model_Preferences::GetSourceSwitchStatus('live_dj');
+        $master_dj = Application_Model_Preferences::GetSourceSwitchStatus('master_dj');
+        $scheduled_play = Application_Model_Preferences::GetSourceSwitchStatus('scheduled_play');
 
         $res = array("live_dj"=>$live_dj, "master_dj"=>$master_dj, "scheduled_play"=>$scheduled_play);
         $this->view->switch_status = $res;
-        $this->view->station_name = Application_Model_Preference::GetStationName();
-        $this->view->stream_label = Application_Model_Preference::GetStreamLabelFormat();
-        $this->view->transition_fade = Application_Model_Preference::GetDefaultTransitionFade();
+        $this->view->station_name = Application_Model_Preferences::GetStationName();
+        $this->view->stream_label = Application_Model_Preferences::GetStreamLabelFormat();
+        $this->view->transition_fade = Application_Model_Preferences::GetDefaultTransitionFade();
     }
 
     /* This is used but Liquidsoap to check authentication of live streams*/
@@ -1154,8 +1154,8 @@ class ApiController extends Zend_Controller_Action
 
         if ($djtype == 'master') {
             //check against master
-            if ($username == Application_Model_Preference::GetLiveStreamMasterUsername()
-                    && $password == Application_Model_Preference::GetLiveStreamMasterPassword()) {
+            if ($username == Application_Model_Preferences::GetLiveStreamMasterUsername()
+                    && $password == Application_Model_Preferences::GetLiveStreamMasterPassword()) {
                 $this->view->msg = true;
             } else {
                 $this->view->msg = false;
@@ -1337,7 +1337,7 @@ class ApiController extends Zend_Controller_Action
         $stream_params = array();
         foreach ($streams as $s) {
             $stream_params[$s] =
-                Application_Model_StreamSetting::getStreamDataNormalized($s);
+                Application_Model_Streams::getStreamDataNormalized($s);
         }
         $this->view->stream_params = $stream_params;
     }
@@ -1355,7 +1355,7 @@ class ApiController extends Zend_Controller_Action
         $data = json_decode($request->getParam("data"), true);
         
         foreach ($data as $k=>$v) {
-            Application_Model_StreamSetting::SetListenerStatError($k, $v);
+            Application_Model_Streams::SetListenerStatError($k, $v);
         }
     }
 
@@ -1410,7 +1410,7 @@ class ApiController extends Zend_Controller_Action
     }
 
     /**
-     * display show info (without schedule) for given show_id
+     * display show info (without calendar) for given show_id
      *
      * @return json array
      */
@@ -1441,7 +1441,7 @@ class ApiController extends Zend_Controller_Action
     }
    
     /**
-     * display show schedule for given show_id
+     * display show calendar for given show_id
      *
      * @return json array
      */
@@ -1487,7 +1487,7 @@ class ApiController extends Zend_Controller_Action
     public function showTracksAction()
     {
         $baseUrl = Application_Common_OsPath::getBaseDir();
-        $prefTimezone = Application_Model_Preference::GetTimezone();
+        $prefTimezone = Application_Model_Preferences::GetTimezone();
 
         $instanceId = $this->_getParam('instance_id');
 
@@ -1537,11 +1537,11 @@ class ApiController extends Zend_Controller_Action
      */
     public function updateMetadataOnTuneinAction()
     {
-        if (!Application_Model_Preference::getTuneinEnabled()) {
+        if (!Application_Model_Preferences::getTuneinEnabled()) {
             $this->_helper->json->sendJson(array(0));
         }
 
-        $lastTuneInMetadataUpdate = Application_Model_Preference::geLastTuneinMetadataUpdate();
+        $lastTuneInMetadataUpdate = Application_Model_Preferences::geLastTuneinMetadataUpdate();
         if (time() - $lastTuneInMetadataUpdate >= 240) {
             $metadata = $metadata = Application_Model_Schedule::getCurrentPlayingTrack();
             if (!is_null($metadata)) {

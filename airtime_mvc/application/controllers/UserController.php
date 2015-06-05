@@ -154,8 +154,8 @@ class UserController extends Zend_Controller_Action
                 $user->setJabber($formData['cu_jabber']);
                 $user->save();
 
-                Application_Model_Preference::SetUserLocale($formData['cu_locale']);
-                Application_Model_Preference::SetUserTimezone($formData['cu_timezone']);
+                Application_Model_Preferences::SetUserLocale($formData['cu_locale']);
+                Application_Model_Preferences::SetUserTimezone($formData['cu_timezone']);
 
                 //configure localization with new locale setting
                 Application_Model_Locale::configureLocalization($formData['cu_locale']);

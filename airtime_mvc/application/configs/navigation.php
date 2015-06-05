@@ -11,80 +11,80 @@ $pages = array(
     array(
         'label'      => _('Now Playing'),
         'module'     => 'default',
-        'controller' => 'Showbuilder',
+        'controller' => 'now-playing',
         'action'     => 'index',
-        'resource'   =>    'showbuilder'
+        'resource'   => 'now-playing'
     ),
     array(
         'label'      => _('Add Media'),
         'module'     => 'default',
-        'controller' => 'Plupload',
+        'controller' => 'plupload',
         'action'     => 'index',
         'resource'   => 'plupload'
     ),
     array(
         'label'      => _('Library'),
         'module'     => 'default',
-        'controller' => 'Library',
+        'controller' => 'library',
         'action'     => 'index',
-        'resource'   =>    'playlist'
+        'resource'   => 'playlist'
     ),
     array(
         'label'      => _('Calendar'),
         'module'     => 'default',
-        'controller' => 'Schedule',
+        'controller' => 'calendar',
         'action'     => 'index',
-        'resource'   =>    'schedule'
+        'resource'   =>    'calendar'
     ),
     array(
         'label'      => _('System'),
         'uri'        => '#',
-        'resource'   => 'preference',
+        'resource'   => 'preferences',
         'pages'      => array(
             array(
                 'label'      => _('Preferences'),
                 'module'     => 'default',
-                'controller' => 'Preference'
+                'controller' => 'preferences'
             ),
             array(
                 'label'      => _('Users'),
                 'module'     => 'default',
                 'controller' => 'user',
                 'action'     => 'add-user',
-                'resource'   =>    'user'
+                'resource'   => 'user'
             ),
             array(
                 'label'      => _('Media Folders'),
                 'module'     => 'default',
-                'controller' => 'Preference',
+                'controller' => 'preferences',
                 'action'     => 'directory-config',
                 'id'         => 'manage_folder'
             ),
             array(
                 'label'      => _('Streams'),
                 'module'     => 'default',
-                'controller' => 'Preference',
-                'action'     => 'stream-setting'
+                'controller' => 'preferences',
+                'action'     => 'streams'
             ),
             array(
                 'label'      => _('Support Feedback'),
                 'module'     => 'default',
-                'controller' => 'Preference',
+                'controller' => 'preferences',
                 'action'     => 'support-setting'
             ),
             array(
                 'label'      => _('Status'),
                 'module'     => 'default',
-                'controller' => 'systemstatus',
+                'controller' => 'system-status',
                 'action'     => 'index',
-                'resource'   =>    'systemstatus'
+                'resource'   => 'system-status'
             ),
             array(
                 'label'      => _('Listener Stats'),
                 'module'     => 'default',
-                'controller' => 'listenerstat',
+                'controller' => 'listener-stats',
                 'action'     => 'index',
-                'resource'   => 'listenerstat'
+                'resource'   => 'listener-stats'
             ),
             array(
                 'label'      => _('Player'),
@@ -97,21 +97,21 @@ $pages = array(
 	array(
 		'label' => _('History'),
 		'uri' => '#',
-		'resource'   => 'playouthistory',
+		'resource'   => 'playout-history',
 		'pages'      => array(
 			array(
 				'label'      => _('Playout History'),
 				'module'     => 'default',
-				'controller' => 'playouthistory',
+				'controller' => 'playout-history',
 				'action'     => 'index',
-				'resource'   => 'playouthistory'
+				'resource'   => 'playout-history'
 			),
 			array(
 				'label'      => _('History Templates'),
 				'module'     => 'default',
-				'controller' => 'playouthistorytemplate',
+				'controller' => 'playout-history-template',
 				'action'     => 'index',
-				'resource'   => 'playouthistorytemplate'
+				'resource'   => 'playout-history-template'
 			),
 		)
 	),

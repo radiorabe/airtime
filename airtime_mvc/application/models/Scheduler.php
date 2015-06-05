@@ -42,7 +42,7 @@ class Application_Model_Scheduler
 
         $this->user = Application_Model_User::getCurrentUser();
 
-        $this->crossfadeDuration = Application_Model_Preference::GetDefaultCrossfadeDuration();
+        $this->crossfadeDuration = Application_Model_Preferences::GetDefaultCrossfadeDuration();
     }
 
     public function setCheckUserPermissions($value)
@@ -228,8 +228,8 @@ class Application_Model_Scheduler
                 $data["cueout"] = $file->getDbCueout();
 
                 //fade is in format SS.uuuuuu
-                $data["fadein"] = Application_Model_Preference::GetDefaultFadeIn();
-                $data["fadeout"] = Application_Model_Preference::GetDefaultFadeOut();
+                $data["fadein"] = Application_Model_Preferences::GetDefaultFadeIn();
+                $data["fadeout"] = Application_Model_Preferences::GetDefaultFadeOut();
 
                 $files[] = $data;
             }
@@ -271,8 +271,8 @@ class Application_Model_Scheduler
                             $files[] = $data;
                         }
                     } else {
-                        $defaultFadeIn = Application_Model_Preference::GetDefaultFadeIn();
-                        $defaultFadeOut = Application_Model_Preference::GetDefaultFadeOut();
+                        $defaultFadeIn = Application_Model_Preferences::GetDefaultFadeIn();
+                        $defaultFadeOut = Application_Model_Preferences::GetDefaultFadeOut();
                         $dynamicFiles = $bl->getListOfFilesUnderLimit();
                         foreach ($dynamicFiles as $f) {
                             $fileId = $f['id'];
@@ -311,8 +311,8 @@ class Application_Model_Scheduler
                 $data["type"] = 1;
 
                 //fade is in format SS.uuuuuu
-                $data["fadein"] = Application_Model_Preference::GetDefaultFadeIn();
-                $data["fadeout"] = Application_Model_Preference::GetDefaultFadeOut();
+                $data["fadein"] = Application_Model_Preferences::GetDefaultFadeIn();
+                $data["fadeout"] = Application_Model_Preferences::GetDefaultFadeOut();
 
                 $files[] = $data;
             }
@@ -330,8 +330,8 @@ class Application_Model_Scheduler
                     $files[] = $data;
                 }
             } else {
-                $defaultFadeIn = Application_Model_Preference::GetDefaultFadeIn();
-                $defaultFadeOut = Application_Model_Preference::GetDefaultFadeOut();
+                $defaultFadeIn = Application_Model_Preferences::GetDefaultFadeIn();
+                $defaultFadeOut = Application_Model_Preferences::GetDefaultFadeOut();
                 $dynamicFiles = $bl->getListOfFilesUnderLimit();
                 foreach ($dynamicFiles as $f) {
                     $fileId = $f['id'];

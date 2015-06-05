@@ -57,7 +57,7 @@ class Application_Service_CalendarService
                 }
 
                 //recorded show can be uploaded to soundcloud
-                if (Application_Model_Preference::GetUploadToSoundcloudOption()) {
+                if (Application_Model_Preferences::GetUploadToSoundcloudOption()) {
                     $scid = $ccFile->getDbSoundcloudId();
 
                     if ($scid > 0) {
@@ -76,7 +76,7 @@ class Application_Service_CalendarService
                 $menu["content"] = array(
                     "name"=> _("Show Content"),
                     "icon" => "overview",
-                    "url" => $baseUrl."schedule/show-content-dialog");
+                    "url" => $baseUrl."calendar/show-content-dialog");
             }
         } else {
             // Show content can be modified from the calendar if:
@@ -92,10 +92,10 @@ class Application_Service_CalendarService
                 //the user can add/remove content
                 if (!$showIsLinked || ($showIsLinked  && $currentShowId != $this->ccShow->getDbId())) {
 
-                    $menu["schedule"] = array(
+                    $menu["calendar"] = array(
                         "name"=> _("Add / Remove Content"),
                         "icon" => "add-remove-content",
-                        "url" => $baseUrl."showbuilder/builder-dialog/");
+                        "url" => $baseUrl."now-playing/builder-dialog/");
                 }
             }
             
@@ -108,7 +108,7 @@ class Application_Service_CalendarService
                    $menu["clear"] = array(
                         "name"=> _("Remove All Content"),
                         "icon" => "remove-all-content",
-                        "url" => $baseUrl."schedule/clear-show");
+                        "url" => $baseUrl."calendar/clear-show");
                 }
             }
 
@@ -119,7 +119,7 @@ class Application_Service_CalendarService
                 $menu["content"] = array(
                     "name"=> _("Show Content"),
                     "icon" => "overview",
-                    "url" => $baseUrl."schedule/show-content-dialog");
+                    "url" => $baseUrl."calendar/show-content-dialog");
             }
 
             //show is currently playing and user is admin
@@ -150,7 +150,7 @@ class Application_Service_CalendarService
                         $menu["edit"] = array(
                             "name" => _("Edit This Instance"),
                             "icon" => "edit",
-                            "url" => $baseUrl . "Schedule/populate-repeating-show-instance-form"
+                            "url" => $baseUrl . "calendar/populate-repeating-show-instance-form"
                         );
                     } else {
                         $menu["edit"] = array(
@@ -162,13 +162,13 @@ class Application_Service_CalendarService
                         $menu["edit"]["items"]["all"] = array(
                             "name" => _("Edit Show"),
                             "icon" => "edit",
-                            "url" => $baseUrl . "Schedule/populate-show-form"
+                            "url" => $baseUrl . "calendar/populate-show-form"
                         );
 
                         $menu["edit"]["items"]["instance"] = array(
                             "name" => _("Edit This Instance"),
                             "icon" => "edit",
-                            "url" => $baseUrl . "Schedule/populate-repeating-show-instance-form"
+                            "url" => $baseUrl . "calendar/populate-repeating-show-instance-form"
                         );
                     }
                 } else {
@@ -176,7 +176,7 @@ class Application_Service_CalendarService
                         "name"=> _("Edit Show"),
                         "icon" => "edit",
                         "_type"=>"all",
-                        "url" => $baseUrl."Schedule/populate-show-form");
+                        "url" => $baseUrl."calendar/populate-show-form");
                 }
             }
 
@@ -193,22 +193,22 @@ class Application_Service_CalendarService
                     $menu["del"]["items"]["single"] = array(
                         "name"=> _("Delete This Instance"),
                         "icon" => "delete",
-                        "url" => $baseUrl."schedule/delete-show-instance");
+                        "url" => $baseUrl."calendar/delete-show-instance");
 
                     $menu["del"]["items"]["following"] = array(
                         "name"=> _("Delete This Instance and All Following"),
                         "icon" => "delete",
-                        "url" => $baseUrl."schedule/delete-show");
+                        "url" => $baseUrl."calendar/delete-show");
                 } elseif ($populateInstance) {
                     $menu["del"] = array(
                         "name"=> _("Delete"),
                         "icon" => "delete",
-                        "url" => $baseUrl."schedule/delete-show-instance");
+                        "url" => $baseUrl."calendar/delete-show-instance");
                 } else {
                     $menu["del"] = array(
                         "name"=> _("Delete"),
                         "icon" => "delete",
-                        "url" => $baseUrl."schedule/delete-show");
+                        "url" => $baseUrl."calendar/delete-show");
                 }
             }
         }

@@ -4,7 +4,7 @@
 
 
    The purpose of this script is to take a file from cc_files table, and insert it into
-   the schedule table. DB columns at the time of writing are
+   the calendar table. DB columns at the time of writing are
  
  starts | ends | file_id | clip_length | fade_in | fade_out | cue_in | cue_out | media_item_played | instance_id
  

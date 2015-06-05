@@ -273,7 +273,7 @@ SQL;
     private function checkToDeleteShow($showId)
     {
         //UTC DateTime object
-        $showsPopUntil = Application_Model_Preference::GetShowsPopulatedUntil();
+        $showsPopUntil = Application_Model_Preferences::GetShowsPopulatedUntil();
 
         $showDays = CcShowDaysQuery::create()
             ->filterByDbShowId($showId)
@@ -613,7 +613,7 @@ SQL;
         if (isset($timezone)) {
             $displayTimezone = new DateTimeZone($timezone);
         } else { 
-            $userTimezone = Application_Model_Preference::GetUserTimezone();
+            $userTimezone = Application_Model_Preferences::GetUserTimezone();
             $displayTimezone = new DateTimeZone($userTimezone);
         }
 

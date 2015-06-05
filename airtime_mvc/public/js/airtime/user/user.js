@@ -123,7 +123,7 @@ function assignUserRightsToUserTypes() {
                 $(this).attr('id', 'user-type-G');
                 $(this).attr('user-rights',
                     $.i18n._('Guests can do the following:')+'<br><br>'+
-                    $.i18n._('View schedule')+'<br>'+
+                    $.i18n._('View calendar')+'<br>'+
                     $.i18n._('View show content')
                 );
                 break;
@@ -131,7 +131,7 @@ function assignUserRightsToUserTypes() {
                 $(this).attr('id', 'user-type-H');
                 $(this).attr('user-rights',
                     $.i18n._('DJs can do the following:')+'<br><br>'+
-                    $.i18n._('View schedule')+'<br>'+
+                    $.i18n._('View calendar')+'<br>'+
                     $.i18n._('View show content')+'<br>'+
                     $.i18n._('Manage assigned show content')+'<br>'+
                     $.i18n._('Import media files')+'<br>'+
@@ -143,7 +143,7 @@ function assignUserRightsToUserTypes() {
                 $(this).attr('id', 'user-type-P');
                 $(this).attr('user-rights',
                     $.i18n._('Program Managers can do the following:')+'<br><br>'+
-                    $.i18n._('View schedule')+'<br>'+
+                    $.i18n._('View calendar')+'<br>'+
                     $.i18n._('View and manage show content')+'<br>'+
                     $.i18n._('Schedule shows')+'<br>'+
                     $.i18n._('Import media files')+'<br>'+
@@ -162,7 +162,7 @@ function assignUserRightsToUserTypes() {
                     $.i18n._('View system status')+'<br>'+
                     $.i18n._('Access playout history')+'<br>'+
                     $.i18n._('View listener stats')+'<br>'+
-                    $.i18n._('View schedule')+'<br>'+
+                    $.i18n._('View calendar')+'<br>'+
                     $.i18n._('View and manage show content')+'<br>'+
                     $.i18n._('Schedule shows')+'<br>'+
                     $.i18n._('Import media files')+'<br>'+

@@ -43,7 +43,7 @@ class Application_Form_AddShowLiveStream extends Zend_Form_SubForm
                         ->setDecorators(array('ViewHelper'));
         $this->addElement($custom_password);
 
-        $connection_url = Application_Model_Preference::GetLiveDJSourceConnectionURL();
+        $connection_url = Application_Model_Preferences::GetLiveDJSourceConnectionURL();
         if (trim($connection_url) == "") {
             $connection_url = "N/A";
         }

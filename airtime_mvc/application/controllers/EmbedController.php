@@ -31,7 +31,7 @@ class EmbedController extends Zend_Controller_Action
         $this->view->player_title = json_encode($request->getParam('title'));
 
         $stream = $request->getParam('stream');
-        $streamData = Application_Model_StreamSetting::getEnabledStreamData();
+        $streamData = Application_Model_Streams::getEnabledStreamData();
         $availableMobileStreams = array();
         $availableDesktopStreams = array();
 

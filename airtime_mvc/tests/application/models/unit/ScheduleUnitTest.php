@@ -43,7 +43,7 @@ class ScheduleUnitTest extends Zend_Test_PHPUnit_ControllerTestCase //PHPUnit_Fr
         //set to a week ahead in the future.
         $populateUntil = new DateTime("now", new DateTimeZone('UTC'));
         $populateUntil = $populateUntil->add(new DateInterval("P2Y")); //2 years ahead in the future.
-        Application_Model_Preference::SetShowsPopulatedUntil($populateUntil);
+        Application_Model_Preferences::SetShowsPopulatedUntil($populateUntil);
 
         //$showService->setCcShow($testShowData); //Denise says this is not needed.
         $showService->addUpdateShow($testShowData); //Create show instances

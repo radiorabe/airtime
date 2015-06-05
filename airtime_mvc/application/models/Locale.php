@@ -39,7 +39,7 @@ class Application_Model_Locale
     {
         $codeset = 'UTF-8';
         if (is_null($locale)) {
-            $lang = Application_Model_Preference::GetLocale().'.'.$codeset;
+            $lang = Application_Model_Preferences::GetLocale().'.'.$codeset;
         } else {
             $lang = $locale.'.'.$codeset;
         }
@@ -75,7 +75,7 @@ class Application_Model_Locale
      */
     public static function getUserLocale() {
         $request = Zend_Controller_Front::getInstance()->getRequest();
-        $locale = $request->getCookie('airtime_locale', Application_Model_Preference::GetLocale());
+        $locale = $request->getCookie('airtime_locale', Application_Model_Preferences::GetLocale());
         return $locale;
     }
 

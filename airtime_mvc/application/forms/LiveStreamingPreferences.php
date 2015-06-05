@@ -7,21 +7,21 @@ class Application_Form_LiveStreamingPreferences extends Zend_Form_SubForm
     {
         $CC_CONFIG = Config::getConfig();
         $isDemo = isset($CC_CONFIG['demo']) && $CC_CONFIG['demo'] == 1;
-        $isStreamConfigable = Application_Model_Preference::GetEnableStreamConf() == "true";
+        $isStreamConfigable = Application_Model_Preferences::GetEnableStreamConf() == "true";
 
-        $defaultFade = Application_Model_Preference::GetDefaultTransitionFade();
+        $defaultFade = Application_Model_Preferences::GetDefaultTransitionFade();
 
         // automatic trasition on source disconnection
         $auto_transition = new Zend_Form_Element_Checkbox("auto_transition");
         $auto_transition->setLabel(_("Auto Switch Off"))
-                        ->setValue(Application_Model_Preference::GetAutoTransition())
+                        ->setValue(Application_Model_Preferences::GetAutoTransition())
                         ->setDecorators(array('ViewHelper'));
         $this->addElement($auto_transition);
 
         // automatic switch on upon source connection
         $auto_switch = new Zend_Form_Element_Checkbox("auto_switch");
         $auto_switch->setLabel(_("Auto Switch On"))
-                        ->setValue(Application_Model_Preference::GetAutoSwitch())
+                        ->setValue(Application_Model_Preferences::GetAutoSwitch())
                         ->setDecorators(array('ViewHelper'));
         $this->addElement($auto_switch);
 
@@ -41,7 +41,7 @@ class Application_Form_LiveStreamingPreferences extends Zend_Form_SubForm
                         ->setAllowEmpty(true)
                         ->setLabel(_('Master Username'))
                         ->setFilters(array('StringTrim'))
-                        ->setValue(Application_Model_Preference::GetLiveStreamMasterUsername())
+                        ->setValue(Application_Model_Preferences::GetLiveStreamMasterUsername())
                         ->setDecorators(array('ViewHelper'));
         $this->addElement($master_username);
 
@@ -55,7 +55,7 @@ class Application_Form_LiveStreamingPreferences extends Zend_Form_SubForm
         $master_password->setAttrib('autocomplete', 'off')
                         ->setAttrib('renderPassword','true')
                         ->setAllowEmpty(true)
-                        ->setValue(Application_Model_Preference::GetLiveStreamMasterPassword())
+                        ->setValue(Application_Model_Preferences::GetLiveStreamMasterPassword())
                         ->setLabel(_('Master Password'))
                         ->setFilters(array('StringTrim'))
                         ->setDecorators(array('ViewHelper'));
@@ -65,7 +65,7 @@ class Application_Form_LiveStreamingPreferences extends Zend_Form_SubForm
         $master_dj_connection_url = new Zend_Form_Element_Text('master_dj_connection_url');
         $master_dj_connection_url->setAttrib('readonly', true)
                                  ->setLabel(_('Master Source Connection URL'))
-                                 ->setValue(Application_Model_Preference::GetMasterDJSourceConnectionURL())
+                                 ->setValue(Application_Model_Preferences::GetMasterDJSourceConnectionURL())
                                  ->setDecorators(array('ViewHelper'));
         $this->addElement($master_dj_connection_url);
 
@@ -73,7 +73,7 @@ class Application_Form_LiveStreamingPreferences extends Zend_Form_SubForm
         $live_dj_connection_url = new Zend_Form_Element_Text('live_dj_connection_url');
         $live_dj_connection_url->setAttrib('readonly', true)
                                  ->setLabel(_('Show Source Connection URL'))
-                                 ->setValue(Application_Model_Preference::GetLiveDJSourceConnectionURL())
+                                 ->setValue(Application_Model_Preferences::GetLiveDJSourceConnectionURL())
                                  ->setDecorators(array('ViewHelper'));
         $this->addElement($live_dj_connection_url);
 
@@ -93,8 +93,8 @@ class Application_Form_LiveStreamingPreferences extends Zend_Form_SubForm
         $CC_CONFIG = Config::getConfig();
 
         $isDemo = isset($CC_CONFIG['demo']) && $CC_CONFIG['demo'] == 1;
-        $master_dj_connection_url = Application_Model_Preference::GetMasterDJSourceConnectionURL();
-        $live_dj_connection_url = Application_Model_Preference::GetLiveDJSourceConnectionURL();
+        $master_dj_connection_url = Application_Model_Preferences::GetMasterDJSourceConnectionURL();
+        $live_dj_connection_url = Application_Model_Preferences::GetLiveDJSourceConnectionURL();
 
         $this->setDecorators(array(
             array('ViewScript', array('viewScript' => 'form/preferences_livestream.phtml', 'master_dj_connection_url'=>$master_dj_connection_url, 'live_dj_connection_url'=>$live_dj_connection_url, 'isDemo' => $isDemo))

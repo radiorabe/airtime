@@ -211,7 +211,7 @@ class CcShowInstances extends BaseCcShowInstances {
     public function getLocalStartDateTime()
     {
         $startDT = $this->getDbStarts(null);
-        return $startDT->setTimezone(new DateTimeZone(Application_Model_Preference::GetTimezone()));
+        return $startDT->setTimezone(new DateTimeZone(Application_Model_Preferences::GetTimezone()));
     }
 
 } // CcShowInstances

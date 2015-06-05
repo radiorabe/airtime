@@ -82,7 +82,7 @@ class Application_Form_AddShowWhen extends Zend_Form_SubForm
         $timezone->setRequired(true)
                  ->setLabel(_("Timezone:"))
                  ->setMultiOptions(Application_Common_Timezone::getTimezones())
-                 ->setValue(Application_Model_Preference::GetUserTimezone())
+                 ->setValue(Application_Model_Preferences::GetUserTimezone())
                  ->setAttrib('class', 'input_select add_show_input_select')
                  ->setDecorators(array('ViewHelper'));
         $this->addElement($timezone);
@@ -185,11 +185,11 @@ class Application_Form_AddShowWhen extends Zend_Form_SubForm
 
                 //get repeating show end date
                 if ($formData["add_show_no_end"]) {
-                    $date = Application_Model_Preference::GetShowsPopulatedUntil();
+                    $date = Application_Model_Preferences::GetShowsPopulatedUntil();
 
                     if (is_null($date)) {
                         $populateUntilDateTime = new DateTime("now", $utc);
-                        Application_Model_Preference::SetShowsPopulatedUntil($populateUntilDateTime);
+                        Application_Model_Preferences::SetShowsPopulatedUntil($populateUntilDateTime);
                     } else {
                         $populateUntilDateTime = clone $date;
                     }
@@ -275,7 +275,7 @@ class Application_Form_AddShowWhen extends Zend_Form_SubForm
 
                             if ($overlapping) {
                                 $valid = false;
-                                $this->getElement('add_show_duration')->setErrors(array(_('Cannot schedule overlapping shows')));
+                                $this->getElement('add_show_duration')->setErrors(array(_('Cannot calendar overlapping shows')));
                                 break 1;
                             } else {
                                 if ($formData["add_show_repeat_type"] == 2 && $formData["add_show_monthly_repeat_type"] == 3) {
@@ -303,13 +303,13 @@ class Application_Form_AddShowWhen extends Zend_Form_SubForm
                     }
                 } else {
                     $valid = false;
-                    $this->getElement('add_show_duration')->setErrors(array(_('Cannot schedule overlapping shows')));
+                    $this->getElement('add_show_duration')->setErrors(array(_('Cannot calendar overlapping shows')));
                 }
 
             } else {
               $overlapping = Application_Model_Schedule::checkOverlappingShows($showStartDateTime, $showEndDateTime, $update, $instanceId);
                 if ($overlapping) {
-                    $this->getElement('add_show_duration')->setErrors(array(_('Cannot schedule overlapping shows')));
+                    $this->getElement('add_show_duration')->setErrors(array(_('Cannot calendar overlapping shows')));
                     $valid = false;
                 }
             }

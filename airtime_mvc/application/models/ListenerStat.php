@@ -38,7 +38,7 @@ SQL;
                     array('p1'=>$p_start, 'p2'=>$p_end, 'p3'=>$d['mount_name'], 'p4'=>$jump, 'p5'=>$remainder));
             
             $utcTimezone = new DateTimeZone("UTC");
-            $displayTimezone = new DateTimeZone(Application_Model_Preference::GetUserTimezone());
+            $displayTimezone = new DateTimeZone(Application_Model_Preferences::GetUserTimezone());
             
             foreach ($result as $r) {
                 $t = new DateTime($r['timestamp'], $utcTimezone);
@@ -51,7 +51,7 @@ SQL;
             }
         }
 
-        $enabledStreamIds = Application_Model_StreamSetting::getEnabledStreamIds();
+        $enabledStreamIds = Application_Model_Streams::getEnabledStreamIds();
         $enabledOut = array();
 
         foreach ($enabledStreamIds as $sId) {

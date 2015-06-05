@@ -1,7 +1,7 @@
 <div id="content" class="jp-container">
 <h1><?php echo _("Live stream") ?></h1>
 <a id="popup-link" href="#"><?php echo _("Share") ?></a> 
-<?php $ids = Application_Model_StreamSetting::getEnabledStreamIds(); ?>
+<?php $ids = Application_Model_Streams::getEnabledStreamIds(); ?>
 <script>
 function setjPlayer(url, type, serverType){
     var obj = new Object();
@@ -35,7 +35,7 @@ $(document).ready(function(){
     <?php
         if (count($ids) > 0){
             $id = $ids[0];
-            $streamData = Application_Model_StreamSetting::getStreamData($id);
+            $streamData = Application_Model_Streams::getStreamData($id);
             $url = "http://".$streamData["${id}_host"].":".$streamData["${id}_port"]."/".$streamData["${id}_mount"];
             $type = $streamData["${id}_type"];
             $serverType = $streamData["${id}_output"];
@@ -67,7 +67,7 @@ $(document).ready(function(){
                 <select id="combo-box">
                     <?php
                         foreach($ids as $id) {
-                            $streamData = Application_Model_StreamSetting::getStreamData($id);
+                            $streamData = Application_Model_Streams::getStreamData($id);
                             $url = "http://".$streamData["${id}_host"].":".$streamData["${id}_port"]."/".$streamData["${id}_mount"];
                             $type = $streamData["${id}_type"];
                             $serverType = $streamData["${id}_output"];

@@ -62,9 +62,9 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
         ),
 ));
 
-$infoArray = Application_Model_Preference::GetSystemInfo(true);
+$infoArray = Application_Model_Preferences::GetSystemInfo(true);
 
-if(Application_Model_Preference::GetSupportFeedback() == '1'){
+if(Application_Model_Preferences::GetSupportFeedback() == '1'){
     $url = 'http://stat.sourcefabric.org/index.php?p=airtime';
     //$url = 'http://localhost:9999/index.php?p=airtime';
 
@@ -83,7 +83,7 @@ if(Application_Model_Preference::GetSupportFeedback() == '1'){
 }
 
 // Get latest version from stat server and store to db
-if(Application_Model_Preference::GetPlanLevel() == 'disabled'){
+if(Application_Model_Preferences::GetPlanLevel() == 'disabled'){
     $url = 'http://stat.sourcefabric.org/airtime-stats/airtime_latest_version';
     //$url = 'http://localhost:9999/index.php?p=airtime';
 
@@ -97,10 +97,10 @@ if(Application_Model_Preference::GetPlanLevel() == 'disabled'){
     } else {
         $resultArray = explode("\n", $result);
         if (isset($resultArray[0])) {
-            Application_Model_Preference::SetLatestVersion($resultArray[0]);
+            Application_Model_Preferences::SetLatestVersion($resultArray[0]);
         }
         if (isset($resultArray[1])) {
-            Application_Model_Preference::SetLatestLink($resultArray[1]);
+            Application_Model_Preferences::SetLatestLink($resultArray[1]);
         }
     }
 

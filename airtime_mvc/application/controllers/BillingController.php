@@ -60,7 +60,7 @@ class BillingController extends Zend_Controller_Action {
                 $postfields["username"] = $credentials["username"];
                 $postfields["password"] = md5($credentials["password"]);
                 $postfields["action"] = "upgradeproduct";
-                $postfields["clientid"] = Application_Model_Preference::GetClientId();
+                $postfields["clientid"] = Application_Model_Preferences::GetClientId();
                 
                 $postfields["serviceid"] = Billing::getClientInstanceId();
                 $postfields["type"] = "product";
@@ -78,7 +78,7 @@ class BillingController extends Zend_Controller_Action {
                 $clientfields["username"] = $credentials["username"];
                 $clientfields["password"] = md5($credentials["password"]);
                 $clientfields["action"] = "updateclient";                
-                $clientfields["clientid"] = Application_Model_Preference::GetClientId();
+                $clientfields["clientid"] = Application_Model_Preferences::GetClientId();
                 $clientfields["customfields"] = base64_encode(serialize($formData["customfields"]));
                 unset($formData["customfields"]);
                 $clientfields["responsetype"] = "json";
@@ -228,7 +228,7 @@ class BillingController extends Zend_Controller_Action {
                 $postfields["customfields"] = base64_encode(serialize($formData["customfields"]));
                 unset($formData["customfields"]);
                 
-                $postfields["clientid"] = Application_Model_Preference::GetClientId();
+                $postfields["clientid"] = Application_Model_Preferences::GetClientId();
                 $postfields["responsetype"] = "json";
                 $postfields = array_merge($postfields, $formData);
                 unset($postfields["password2verify"]);
@@ -269,7 +269,7 @@ class BillingController extends Zend_Controller_Action {
         $postfields["password"] = md5($credentials["password"]);
         $postfields["action"] = "getinvoices";
         $postfields["responsetype"] = "json";
-        $postfields["userid"] = Application_Model_Preference::GetClientId();
+        $postfields["userid"] = Application_Model_Preferences::GetClientId();
         
         $query_string = "";
         foreach ($postfields AS $k=>$v) $query_string .= "$k=".urlencode($v)."&";

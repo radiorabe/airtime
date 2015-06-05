@@ -4,7 +4,7 @@ class Application_Form_SupportSettings extends Zend_Form
 {
     public function init()
     {
-        $country_list = Application_Model_Preference::GetCountryList();
+        $country_list = Application_Model_Preferences::GetCountryList();
         $notEmptyValidator = Application_Form_Helper_ValidationTypes::overrideNotEmptyValidator();
 
         $this->setDecorators(array(
@@ -19,7 +19,7 @@ class Application_Form_SupportSettings extends Zend_Form
             'required'   => true,
             'filters'    => array('StringTrim'),
             'validators'  => array($notEmptyValidator),
-            'value' => Application_Model_Preference::GetStationName(),
+            'value' => Application_Model_Preferences::GetStationName(),
             'decorators' => array(
                 'ViewHelper'
             )
@@ -31,7 +31,7 @@ class Application_Form_SupportSettings extends Zend_Form
             'label'      => _('Phone:'),
             'required'   => false,
             'filters'    => array('StringTrim'),
-            'value' => Application_Model_Preference::GetPhone(),
+            'value' => Application_Model_Preferences::GetPhone(),
             'decorators' => array(
                 'ViewHelper'
             )
@@ -43,7 +43,7 @@ class Application_Form_SupportSettings extends Zend_Form
             'label'      => _('Email:'),
             'required'   => false,
             'filters'    => array('StringTrim'),
-            'value' => Application_Model_Preference::GetEmail(),
+            'value' => Application_Model_Preferences::GetEmail(),
             'decorators' => array(
                 'ViewHelper'
             )
@@ -54,7 +54,7 @@ class Application_Form_SupportSettings extends Zend_Form
             'label'      => _('Station Web Site:'),
             'required'   => false,
             'class'      => 'input_text',
-            'value' => Application_Model_Preference::GetStationWebSite(),
+            'value' => Application_Model_Preferences::GetStationWebSite(),
             'decorators' => array(
                 'ViewHelper'
             )
@@ -64,7 +64,7 @@ class Application_Form_SupportSettings extends Zend_Form
         $this->addElement('select', 'Country', array(
             'label'        => _('Country:'),
             'required'    => false,
-            'value'        => Application_Model_Preference::GetStationCountry(),
+            'value'        => Application_Model_Preferences::GetStationCountry(),
             'multiOptions'    => $country_list,
             'decorators' => array(
                 'ViewHelper'
@@ -76,7 +76,7 @@ class Application_Form_SupportSettings extends Zend_Form
             'label'      => _('City:'),
             'required'   => false,
             'class'      => 'input_text',
-            'value' => Application_Model_Preference::GetStationCity(),
+            'value' => Application_Model_Preferences::GetStationCity(),
             'decorators' => array(
                 'ViewHelper'
             )
@@ -87,7 +87,7 @@ class Application_Form_SupportSettings extends Zend_Form
         $description->class = 'input_text_area';
         $description->setLabel(_('Station Description:'))
                     ->setRequired(false)
-                    ->setValue(Application_Model_Preference::GetStationDescription())
+                    ->setValue(Application_Model_Preferences::GetStationDescription())
                     ->setDecorators(array('ViewHelper'))
                     ->setAttrib('ROWS','2')
                     ->setAttrib('COLS','58');
@@ -97,7 +97,7 @@ class Application_Form_SupportSettings extends Zend_Form
             $this->addElement('checkbox', 'SupportFeedback', array(
                 'label'      => _('Send support feedback'),
                 'required'   => false,
-                'value' => Application_Model_Preference::GetSupportFeedback(),
+                'value' => Application_Model_Preferences::GetSupportFeedback(),
                 'decorators' => array(
                     'ViewHelper'
                 )
@@ -108,8 +108,8 @@ class Application_Form_SupportSettings extends Zend_Form
             $checkboxPublicise->setLabel(sprintf(_('Promote my station on %s'), COMPANY_SITE))
                               ->setRequired(false)
                               ->setDecorators(array('ViewHelper'))
-                              ->setValue(Application_Model_Preference::GetPublicise());
-            if (Application_Model_Preference::GetSupportFeedback() == '0') {
+                              ->setValue(Application_Model_Preferences::GetPublicise());
+            if (Application_Model_Preferences::GetSupportFeedback() == '0') {
                 $checkboxPublicise->setAttrib("disabled", "disabled");
             }
             $this->addElement($checkboxPublicise);

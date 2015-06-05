@@ -22,6 +22,6 @@ class StorageQuotaUpgrade
         $size = substr($size, 0, strpos($size, "\t"));
         pclose($io);
 
-        Application_Model_Preference::setDiskUsage($size);
+        Application_Model_Preferences::setDiskUsage($size);
     }
 }

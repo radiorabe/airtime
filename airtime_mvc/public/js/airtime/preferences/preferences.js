@@ -135,14 +135,14 @@ function setSoundCloudCheckBoxListener() {
 }
 
 function removeLogo() {
-    $.post(baseUrl+'Preference/remove-logo', function(json){});
+    $.post(baseUrl+'preferences/remove-logo', function(json){});
     location.reload();
 }
 
 function deleteAllFiles() {
     var resp = confirm($.i18n._("Are you sure you want to delete all the tracks in your library?"))
     if (resp) {
-        $.post(baseUrl+'Preference/delete-all-files', function(json){});
+        $.post(baseUrl+'preferences/delete-all-files', function(json){});
         location.reload();
     }
 }
@@ -162,7 +162,7 @@ $(document).ready(function() {
     /* No longer using AJAX for this form. Zend + our code makes it needlessly hard to deal with. -- Albert
     $('#pref_save').live('click', function() {
         var data = $('#pref_form').serialize();
-        var url = baseUrl+'Preference/index';
+        var url = baseUrl+'preferences/index';
         
         $.post(url, {format: "json", data: data}, function(json){
             $('#content').empty().append(json.html);

@@ -28,15 +28,15 @@ class Application_Common_TuneIn
             Logging::info("Error occurred pushing metadata to TuneIn:");
             Logging::info($xmlResponse);
         } else if ($xmlObj->head->status == "200") {
-            Application_Model_Preference::setLastTuneinMetadataUpdate(time());
+            Application_Model_Preferences::setLastTuneinMetadataUpdate(time());
         }
 
     }
 
     private static function getCredentialsQueryString() {
-        $tuneInStationID = Application_Model_Preference::getTuneinStationId();
-        $tuneInPartnerID = Application_Model_Preference::getTuneinPartnerId();
-        $tuneInPartnerKey = Application_Model_Preference::getTuneinPartnerKey();
+        $tuneInStationID = Application_Model_Preferences::getTuneinStationId();
+        $tuneInPartnerID = Application_Model_Preferences::getTuneinPartnerId();
+        $tuneInPartnerKey = Application_Model_Preferences::getTuneinPartnerKey();
 
         return "?partnerId=".$tuneInPartnerID."&partnerKey=".$tuneInPartnerKey."&id=".$tuneInStationID;
     }

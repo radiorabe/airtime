@@ -309,13 +309,13 @@ class AirtimeInstall
         $sql = "DELETE FROM cc_pref WHERE keystr = 'system_version'";
         $con->exec($sql);
 
-        Application_Model_Preference::SetAirtimeVersion($p_version);
+        Application_Model_Preferences::SetAirtimeVersion($p_version);
     }
 
     public static function SetUniqueId()
     {
         $uniqueId = md5(uniqid("", true));
-        Application_Model_Preference::SetUniqueId($uniqueId);
+        Application_Model_Preferences::SetUniqueId($uniqueId);
     }
 
     public static function GetAirtimeVersion()
