@@ -37,6 +37,13 @@ $pages = array(
         'resource'   =>    'calendar'
     ),
     array(
+        'label' => _('Radio Page'),
+        'uri' => '/',
+        'resource' => '',
+        'pages' => array(
+        )
+    ),
+    array(
         'label'      => _('System'),
         'uri'        => '#',
         'resource'   => 'preferences',
@@ -87,10 +94,10 @@ $pages = array(
                 'resource'   => 'listener-stats'
             ),
             array(
-                'label'      => _('Player'),
+                'label'      => _('Embeddable Widgets'),
                 'module'     => 'default',
-                'controller' => 'player',
-                'action'     => 'customize'
+                'controller' => 'embeddablewidgets',
+                'action'     => 'index'
             )
         )
     ),

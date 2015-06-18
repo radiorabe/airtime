@@ -7,7 +7,6 @@ class ErrorController extends Zend_Controller_Action {
         //We cannot show that.
         $this->view->layout()->disableLayout();
         $this->setupCSS();
-
     }
 
     public function errorAction() {
@@ -31,16 +30,19 @@ class ErrorController extends Zend_Controller_Action {
                     break;
             }
         } else {
-            $exceptions = $this->_getAllParams();
-            Logging::error($exceptions);
-            $this->error500Action();
+            //$exceptions = $this->_getAllParams();
+            //Logging::error($exceptions);
+            $this->error404Action();
             return;
         }
 
         // Log exception, if logger available
+        /* No idea why this doesn't work or why it was implemented like this. Disabling it -- Albert
         if (($log = $this->getLog())) {
             $log->crit($this->view->message, $errors->exception);
-        }
+        }*/
+        //Logging that actually works: -- Albert
+        Logging::error($this->view->message . ": " . $errors->exception);
 
         // conditionally display exceptions
         if ($this->getInvokeArg('displayExceptions') == true) {
@@ -71,7 +73,7 @@ class ErrorController extends Zend_Controller_Action {
      * 404 error - route or controller
      */
     public function error404Action() {
-        $this->_helper->viewRenderer('error-404');
+        $this->_helper->viewRenderer('error');
         $this->getResponse()->setHttpResponseCode(404);
         $this->view->message = _('Page not found.');
     }

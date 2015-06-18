@@ -38,7 +38,8 @@ $ccAcl->addResource(new Zend_Acl_Resource('library'))
       ->addResource(new Zend_Acl_Resource('billing'))
       ->addResource(new Zend_Acl_Resource('thank-you'))
       ->addResource(new Zend_Acl_Resource('provisioning'))
-      ->addResource(new Zend_Acl_Resource('player'));
+      ->addResource(new Zend_Acl_Resource('player'))
+      ->addResource(new Zend_Acl_Resource('embeddablewidgets'));
 
 /** Creating permissions */
 $ccAcl->allow('G', 'index')
@@ -72,6 +73,7 @@ $ccAcl->allow('G', 'index')
       ->allow('A', 'system-status')
       ->allow('A', 'preferences')
       ->allow('A', 'player')
+      ->allow('A', 'embeddablewidgets')
       ->allow('S', 'thank-you')
       ->allow('S', 'billing');
       

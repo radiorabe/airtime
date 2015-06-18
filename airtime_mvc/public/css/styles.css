@@ -603,7 +603,7 @@ table.library-get-file-md.table-small{
 }
 
 .file-md-qtip-row-width-small{
-    width:40x;
+    width: 40px;
     max-width: 40px;
     text-align:right;
 }
@@ -756,7 +756,6 @@ dl.inline-list dt {
     font-weight: bold;
     color:#333333;
     font-size:12px;
-    font-weight:bold;
     text-align:left;
     min-width:70px;
 }
@@ -1019,8 +1018,8 @@ input[type="checkbox"] {
 }
 
 .login_box h2 {
-    background:#1f1f1f;
-    background: -moz-linear-gradient(center top , #2c2c2c 0pt, #1f1f1f 100%);
+    background: #1f1f1f;
+    background: -moz-linear-gradient(center top, #2c2c2c 0pt, #1f1f1f 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2c2c2c), color-stop(100%, #1f1f1f));
     border:1px solid #181818;
     border-top-color:#4f4f4f;
@@ -1519,13 +1518,13 @@ h2#scheduled_playlist_name span {
 
 .search_control {
     padding:8px;
-    border:1pxp solid #8f8f8f;
+    border:1px solid #8f8f8f;
     background:#d8d8d8;
     margin-bottom:8px;
 }
 .search_group {
     padding:8px;
-    border:1pxp solid #8f8f8f;
+    border:1px solid #8f8f8f;
     margin-bottom:8px;
 }
 .search_group > fieldset {
@@ -1541,7 +1540,7 @@ h2#scheduled_playlist_name span {
 }
 .search_group fieldset .ui-button-icon-only .ui-button-text, .search_group fieldset .ui-button-icons-only .ui-button-text {
     padding: 3px 2px;
-    text-indent: -1e+7px;
+    text-indent: -1em+7px;
 }
 .search_group fieldset .ui-button-icon-only {
     width: 2.1em;
@@ -1632,7 +1631,7 @@ h2#scheduled_playlist_name span {
 }
 .ui-button-icon-only.crossfade-main-button .ui-button-text, .ui-button-icons-only.crossfade-main-button .ui-button-text {
     padding: 0;
-    text-indent: -1e+7px;
+    text-indent: -1em+7px;
     padding: 0.1em 1em;
 }
 
@@ -1868,7 +1867,7 @@ span.errors.sp-errors{
     top:8px;
     
 }
-.collapsible-header.closed .arrow-icon, collapsible-header-disabled.close  .arrow-icon {
+.collapsible-header.closed .arrow-icon, .collapsible-header-disabled.close  .arrow-icon {
     background-position: 0 -11px !important;
     
 }
@@ -2277,7 +2276,7 @@ dd.radio-inline-list, .preferences dd.radio-inline-list, .stream-config dd.radio
 }
 .preferences.simple-formblock dd.block-display,
  .preferences.simple-formblock dd.block-display select, .stream-config.simple-formblock dd.block-display select,
- .preferences dd.block-display .input_select, .stream-config dd.block-display .input_select {
+.preferences dd.block-display .input_select, .stream-config dd.block-display .input_select {
     width: 100%;
 }
 .preferences dd.block-display .input_text_area, .preferences dd.block-display .input_text 
@@ -2423,7 +2422,6 @@ label span {
     clear: left;
     font-weight:bold;
     width:auto;
-    min-width:auto;
     padding-right:8px;
 }
 #show_what_sending textarea {
@@ -3275,4 +3273,41 @@ dd .stream-status {
 
 .enable-tunein {
     font-weight:bold;
+}
+
+#weekly-schedule-widget {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+#widget-menu {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 40%;
+}
+
+#widget-menu a {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+#player-widget {
+    margin-bottom: 20px;
+}
+
+#weekly-schedule-widget label {
+    font-weight: bold;
+}
+
+.schedule_iframe_wrapper {
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding: 10px;
+}
+
+#schedule_iframe {
+    margin: 0 auto;
 }

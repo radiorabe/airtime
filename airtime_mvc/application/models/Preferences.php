@@ -408,7 +408,7 @@ class Application_Model_Preferences
     public static function GetAllow3rdPartyApi()
     {
         $val = self::getValue("third_party_api");
-        return (strlen($val) == 0 ) ? "0" : $val;
+        return (strlen($val) == 0 ) ? "1" : $val;
     }
 
     public static function SetPhone($phone)
@@ -498,7 +498,12 @@ class Application_Model_Preferences
 
     public static function GetStationDescription()
     {
-        return self::getValue("description");
+        $description = self::getValue("description");
+        if (!empty($description)) {
+            return $description;
+        } else {
+            return sprintf(_("Powered by %s"), SAAS_PRODUCT_BRANDING_NAME);
+        }
     }
 
     // Sets station default timezone (from preferences)
@@ -602,7 +607,14 @@ class Application_Model_Preferences
 
     public static function GetStationLogo()
     {
-        return self::getValue("logoImage");
+        $logoImage = self::getValue("logoImage");
+        if (!empty($logoImage)) {
+            return $logoImage;
+        } else {
+            // We return the Airtime logo if no logo is set in the database.
+            // airtime_logo.png is stored under the public directory
+            return DEFAULT_LOGO_PLACEHOLDER;
+        }
     }
     
     public static function SetUniqueId($id)
@@ -803,6 +815,19 @@ class Application_Model_Preferences
     public static function SetNumOfStreams($num)
     {
         self::setValue("num_of_streams", intval($num));
+
+        //Enable or disable each stream according to whatever was just changed.
+        for ($streamIdx = 1; $streamIdx <= MAX_NUM_STREAMS; $streamIdx++)
+        {
+            $prefix = 's' . $streamIdx . '_';
+            $enable = 'false';
+            if ($streamIdx <= intval($num)) {
+                $enable = 'true';
+            }
+
+            //Enable or disable the stream in the Stream Settings DB table.
+            Application_Model_StreamSetting::setIndividualStreamSetting(array($prefix.'enable' => $enable));
+        }
     }
 
     public static function GetNumOfStreams()
@@ -874,10 +899,30 @@ class Application_Model_Preferences
 
         return self::getValue("enable_stream_conf");
     }
-    
-    public static function SetAirtimeVersion($version)
+
+    public static function GetSchemaVersion()
     {
-        self::setValue("system_version", $version);
+        CcPrefPeer::clearInstancePool(); //Ensure we don't get a cached Propel object (cached DB results)
+        //because we're updating this version number within this HTTP request as well.
+
+        //New versions use schema_version
+        $pref = CcPrefQuery::create()
+            ->filterByKeystr('schema_version')
+            ->findOne();
+
+        if (empty($pref)) {
+            //Pre-2.5.2 releases all used this ambiguous "system_version" key to represent both the code and schema versions...
+            $pref = CcPrefQuery::create()
+                ->filterByKeystr('system_version')
+                ->findOne();
+        }
+        $schemaVersion = $pref->getValStr();
+        return $schemaVersion;
+    }
+
+    public static function SetSchemaVersion($version)
+    {
+        self::setValue("schema_version", $version);
     }
 
     public static function GetAirtimeVersion()

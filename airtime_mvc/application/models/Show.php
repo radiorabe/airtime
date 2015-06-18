@@ -1157,13 +1157,13 @@ WHERE si.show_id = s.id
   AND si.starts >= :timeNow::timestamp - INTERVAL '2 days'
   AND si.starts < :timeEnd::timestamp
   AND modified_instance != TRUE
-ORDER BY 
-  CASE 
+ORDER BY
+  CASE
     WHEN si.ends > :timeNow::timestamp
       AND  si.starts < :timeNow::timestamp THEN 1
     WHEN si.starts > :timeNow::timestamp THEN 2
     ELSE 3
-  END
+  END, si.starts
 LIMIT :lim
 SQL;
 
@@ -1287,7 +1287,7 @@ SQL;
                             "starts"                  => $rows[$i-1]['starts'],
                             "ends"                    => $rows[$i-1]['ends'],
                             "record"                  => $rows[$i-1]['record'],
-                            "image_path"             => $rows[$i-1]['image_path'],
+                            "image_path"              => $rows[$i-1]['image_path'],
                             "type"                   => "show");
                 }
     
@@ -1345,7 +1345,6 @@ SQL;
                     "starts"                  => $rows[$previousShowIndex]['starts'],
                     "ends"                    => $rows[$previousShowIndex]['ends'],
                     "record"                  => $rows[$previousShowIndex]['record'],
-                    "image_path"              => $rows[$previousShowIndex]['image_path'],
                     "type"                    => "show");
         }
     
