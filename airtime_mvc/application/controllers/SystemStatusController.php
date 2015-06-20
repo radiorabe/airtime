@@ -8,7 +8,7 @@ class SystemStatusController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $partitions = Application_Model_Systemstatus::GetDiskInfo();
+        $partitions = Application_Model_SystemStatus::GetDiskInfo();
 
         $this->view->status = new StdClass;
         $this->view->status->partitions = $partitions;

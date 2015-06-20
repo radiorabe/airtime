@@ -114,6 +114,8 @@ class Application_Form_SupportSettings extends Zend_Form
             }
             $this->addElement($checkboxPublicise);
 
+            $privacyPolicyAnchorOpen = "<a id='link_to_privacy' href='" . PRIVACY_POLICY_URL
+                . "' onclick='window.open(this.href); return false;'>";
             // checkbox for privacy policy
             $checkboxPrivacy = new Zend_Form_Element_Checkbox("Privacy");
             $checkboxPrivacy->setLabel(

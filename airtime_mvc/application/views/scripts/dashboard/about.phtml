@@ -8,12 +8,12 @@ $productSiteAnchor = "<a href='" . PRODUCT_SITE_URL . "' target='_blank'>"
                     . "</a>";
 echo sprintf(_('%1$s %2$s, the open radio software for scheduling and remote station management.'),
     $productSiteAnchor,
-    $this->airtime_version)
+    AIRTIME_CODE_VERSION)
 ?>
 <br />
 <br />© <?php echo(gmdate('Y')); ?>
 <?php 
-$companySiteAnchor = "<a href='" . COMPANY_SITE_URL . "' target='_blank'>"
+$companySiteAnchor = " <a href='" . COMPANY_SITE_URL . "' target='_blank'>"
                         . COMPANY_NAME . " " . COMPANY_SUFFIX
                     . "</a>";
 $licenseAnchor = "<a href='" . LICENSE_URL . "' target='_blank'>"
