@@ -54,6 +54,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div id="nav">
         <div class="logo"></div>
         <div class="personal-block solo">
+            <div id="messenger" class="center-block" onclick="toggleMessages()">
+                <?php
+                    /** @var Messenger $messenger */
+                    $messenger = Messenger::getInstance();
+                    if ($messenger->hasUnreadMessages()) { ?>
+                        <div id="message-count" class="center-block">
+                            <span class="center-el" style="font-weight: bolder;">
+                                <?php echo count($messenger->getUnreadMessages()) ?>
+                            </span>
+                        </div>
+                <?php } ?>
+                <span id="messenger-icon" class="icon-white icon-envelope center-el"></span>
+                <div id="messages"></div>
+            </div>
+
             <ol>
               <li>
                 <!-- <span class="trial-box-button"><a title="Billing" href=<?php echo $baseUrl . 'billing/upgrade'?>>Upgrade</a></span>&nbsp;-->

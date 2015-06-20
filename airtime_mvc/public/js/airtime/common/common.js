@@ -1,3 +1,5 @@
+var unread;
+
 $(document).ready(function() {
 
     /* Removed as this is now (hopefully) unnecessary */
@@ -9,6 +11,15 @@ $(document).ready(function() {
 
     //this statement tells the browser to fade out any success message after 5 seconds
     setTimeout(function(){$(".success").fadeOut("slow", function(){$(this).empty()});}, 5000);
+    $.get(baseUrl+'message/get', function(data) {
+        var json = JSON.parse(data);
+        unread = json.unread;
+        var messages = json.messages;
+        for (var k in messages) {
+            $("#messages").append("<span class='message'>" + (new Date(k)).toLocaleString()
+            + ": " + messages[k] + "</span><br/><br/>");
+        }
+    });
 });
 
 /*
@@ -156,3 +167,22 @@ function removeSuccessMsg() {
     
     $status.fadeOut("slow", function(){$status.empty()});
 }
+
+function toggleMessages() {
+    if (unread) {
+        $.get(baseUrl+'message/ack', function() {
+            unread = false;
+        });
+    }
+    var m = $("#messages");
+    m.slideToggle();
+    $("#message-count").hide();
+}
+
+$(document).mouseup(function (e) {
+    var m = $("#messages"),
+        mb = $("#messenger");
+    if (!mb.is(e.target) && mb.has(e.target).length === 0) {
+        m.slideUp();
+    }
+});

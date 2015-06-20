@@ -39,6 +39,7 @@ $ccAcl->addResource(new Zend_Acl_Resource('library'))
       ->addResource(new Zend_Acl_Resource('thank-you'))
       ->addResource(new Zend_Acl_Resource('provisioning'))
       ->addResource(new Zend_Acl_Resource('player'))
+      ->addResource(new Zend_Acl_Resource('message'))
       ->addResource(new Zend_Acl_Resource('embeddablewidgets'));
 
 /** Creating permissions */
@@ -57,6 +58,7 @@ $ccAcl->allow('G', 'index')
       ->allow('G', 'upgrade')
       ->allow('G', 'provisioning')
       ->allow('G', 'downgrade')
+      ->allow('G', 'message')
       ->allow('G', 'rest:show-image', 'get')
       ->allow('H', 'rest:show-image')
       ->allow('G', 'rest:media', 'get')

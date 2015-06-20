@@ -1037,7 +1037,7 @@ var AIRTIME = (function(AIRTIME) {
                             };
                             soundcloud.upload.callback = callback;
                         }
-                        
+
                         // define a view on soundcloud callback
                         if (soundcloud.view !== undefined) {
                             
