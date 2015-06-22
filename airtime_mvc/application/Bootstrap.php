@@ -208,9 +208,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headScript()->appendScript("var userType = '$userType';");
         if (array_key_exists('REQUEST_URI', $_SERVER)) { //Doesn't exist for unit tests
             if (strpos($_SERVER['REQUEST_URI'], $baseUrl . 'Dashboard/stream-player') === false
-                && strpos($_SERVER['REQUEST_URI'], $baseUrl . 'audiopreview/audio-preview') === false
-                && strpos($_SERVER['REQUEST_URI'], $baseUrl . 'audiopreview/playlist-preview') === false
-                && strpos($_SERVER['REQUEST_URI'], $baseUrl . 'audiopreview/block-preview') === false
+                && strpos($_SERVER['REQUEST_URI'], $baseUrl . 'audio-preview/audio-preview') === false
+                && strpos($_SERVER['REQUEST_URI'], $baseUrl . 'audio-preview/playlist-preview') === false
+                && strpos($_SERVER['REQUEST_URI'], $baseUrl . 'audio-preview/block-preview') === false
                 && $_SERVER['REQUEST_URI'] != "/"
             ) {
                 $plan_level = strval(Application_Model_Preferences::GetPlanLevel());
