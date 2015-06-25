@@ -6,9 +6,14 @@ $(document).ready(function() {
         var json = JSON.parse(data);
         unread = json.unread;
         var messages = json.messages;
-        for (var k in messages) {
-            $("#messages").append("<span class='message'>" + (new Date(k)).toLocaleString()
-            + ": " + messages[k] + "</span><br/><br/>");
+        var m = $("#messages");  // Since jquery lookups are (relatively) slow, only do this once
+        if (messages.length <= 0) {
+            m.append("<span class='message'>" + $.i18n._("You have no messages!") + "</span>");
+        } else {
+            for (var k in messages) {
+                m.append("<span class='message'>" + (new Date(k)).toLocaleString()
+                    + ": " + messages[k] + "</span><br/><br/>");
+            }
         }
     });
 });
@@ -20,15 +25,13 @@ function toggleMessages() {
             unread = false;
         });
     }
-    var m = $("#messages");
-    m.slideToggle();
+    $("#messages").slideToggle();
     $("#message-count").hide();
 }
 
 $(document).mouseup(function (e) {
-    var m = $("#messages"),
-        mb = $("#messenger");
+    var mb = $("#messenger");
     if (!mb.is(e.target) && mb.has(e.target).length === 0) {
-        m.slideUp();
+        $("#messages").slideUp();
     }
 });

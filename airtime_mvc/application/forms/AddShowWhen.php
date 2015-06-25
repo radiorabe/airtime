@@ -275,7 +275,7 @@ class Application_Form_AddShowWhen extends Zend_Form_SubForm
 
                             if ($overlapping) {
                                 $valid = false;
-                                $this->getElement('add_show_duration')->setErrors(array(_('Cannot calendar overlapping shows')));
+                                $this->getElement('add_show_duration')->setErrors(array(_('Cannot schedule overlapping shows')));
                                 break 1;
                             } else {
                                 if ($formData["add_show_repeat_type"] == 2 && $formData["add_show_monthly_repeat_type"] == 3) {
@@ -303,13 +303,13 @@ class Application_Form_AddShowWhen extends Zend_Form_SubForm
                     }
                 } else {
                     $valid = false;
-                    $this->getElement('add_show_duration')->setErrors(array(_('Cannot calendar overlapping shows')));
+                    $this->getElement('add_show_duration')->setErrors(array(_('Cannot schedule overlapping shows')));
                 }
 
             } else {
               $overlapping = Application_Model_Schedule::checkOverlappingShows($showStartDateTime, $showEndDateTime, $update, $instanceId);
                 if ($overlapping) {
-                    $this->getElement('add_show_duration')->setErrors(array(_('Cannot calendar overlapping shows')));
+                    $this->getElement('add_show_duration')->setErrors(array(_('Cannot schedule overlapping shows')));
                     $valid = false;
                 }
             }

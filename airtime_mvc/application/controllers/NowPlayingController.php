@@ -8,9 +8,9 @@ class NowPlayingController extends Zend_Controller_Action
     public function init()
     {
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
-        $ajaxContext->addActionContext('calendar-move', 'json')
-                    ->addActionContext('calendar-add', 'json')
-                    ->addActionContext('calendar-remove', 'json')
+        $ajaxContext->addActionContext('schedule-move', 'json')
+                    ->addActionContext('schedule-add', 'json')
+                    ->addActionContext('schedule-remove', 'json')
                     ->addActionContext('builder-dialog', 'json')
                     ->addActionContext('check-builder-feed', 'json')
                     ->addActionContext('builder-feed', 'json')
@@ -208,8 +208,8 @@ class NowPlayingController extends Zend_Controller_Action
 
         if ($now < floatval($item->getDbEnds("U.u")) && $user->canSchedule($instance->getDbShowId())) {
 
-            //remove/truncate the item from the calendar
-            $menu["del"] = array("name"=> _("Delete"), "icon" => "delete", "url" => $baseUrl."now-playing/calendar-remove");
+            //remove/truncate the item from the schedule
+            $menu["del"] = array("name"=> _("Delete"), "icon" => "delete", "url" => $baseUrl."now-playing/schedule-remove");
         }
 
         $this->view->items = $menu;
@@ -259,8 +259,8 @@ class NowPlayingController extends Zend_Controller_Action
         $opts = array("myShows" => $my_shows, "showFilter" => $show_filter);
         $showBuilder = new Application_Model_NowPlaying($startsDT, $endsDT, $opts);
 
-        //only send the calendar back if updates have been made.
-        // -1 default will always call the calendar to be sent back if no timestamp is defined.
+        //only send the schedule back if updates have been made.
+        // -1 default will always call the schedule to be sent back if no timestamp is defined.
         $this->view->update = $showBuilder->hasBeenUpdatedSince(
             $timestamp, $instances);
     }
@@ -282,7 +282,7 @@ class NowPlayingController extends Zend_Controller_Action
         $showBuilder = new Application_Model_NowPlaying($startsDT, $endsDT, $opts);
 
         $data = $showBuilder->getItems();
-        $this->view->schedule = $data["calendar"];
+        $this->view->schedule = $data["schedule"];
         $this->view->instances = $data["showInstances"];
         $this->view->timestamp = $current_time;
     }
@@ -296,7 +296,7 @@ class NowPlayingController extends Zend_Controller_Action
         
         $log_vars = array();
         $log_vars["url"] = $_SERVER['HTTP_HOST'];
-        $log_vars["action"] = "now-playing/calendar-add";
+        $log_vars["action"] = "now-playing/schedule-add";
         $log_vars["params"] = array();
         $log_vars["params"]["media_items"] = $mediaItems;
         $log_vars["params"]["scheduled_items"] = $scheduledItems;
@@ -321,7 +321,7 @@ class NowPlayingController extends Zend_Controller_Action
         
         $log_vars = array();
         $log_vars["url"] = $_SERVER['HTTP_HOST'];
-        $log_vars["action"] = "now-playing/calendar-remove";
+        $log_vars["action"] = "now-playing/schedule-remove";
         $log_vars["params"] = array();
         $log_vars["params"]["removed_items"] = $items;
         Logging::info($log_vars);
@@ -347,7 +347,7 @@ class NowPlayingController extends Zend_Controller_Action
         /*
         $log_vars = array();
         $log_vars["url"] = $_SERVER['HTTP_HOST'];
-        $log_vars["action"] = "now-playing/calendar-move";
+        $log_vars["action"] = "now-playing/schedule-move";
         $log_vars["params"] = array();
         $log_vars["params"]["selected_items"] = $selectedItems;
         $log_vars["params"]["destination_after_item"] = $afterItem;

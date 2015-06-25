@@ -82,7 +82,7 @@ class Application_Model_NowPlaying
     //check to see if this row should be editable by the user.
     private function isAllowed($p_item, &$row)
     {
-        //cannot calendar in a recorded show.
+        //cannot schedule in a recorded show.
         if (intval($p_item["si_record"]) === 1) {
             return;
         }
@@ -499,7 +499,7 @@ class Application_Model_NowPlaying
         }
         
         return array(
-            "calendar"      => $display_items,
+            "schedule"      => $display_items,
             "showInstances" => $this->showInstances);
     }
 }

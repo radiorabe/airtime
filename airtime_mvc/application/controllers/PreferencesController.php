@@ -280,7 +280,7 @@ class PreferencesController extends Zend_Controller_Action
                 if ($changeRGenabled || $changeRGmodifier) {
                     Application_Model_Preferences::SetEnableReplayGain($values["enableReplayGain"]);
                     Application_Model_Preferences::setReplayGainModifier($values["replayGainModifier"]);
-                    $md = array('calendar' => Application_Model_Schedule::getSchedule());
+                    $md = array('schedule' => Application_Model_Schedule::getSchedule());
                     Application_Model_RabbitMq::SendMessageToPypo("update_schedule", $md);
                     //Application_Model_RabbitMq::PushSchedule();
                 }

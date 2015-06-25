@@ -312,7 +312,7 @@ var AIRTIME = (function(AIRTIME){
     mod.fnAdd = function(aMediaIds, aSchedIds) {
         mod.disableUI();
         
-        $.post(baseUrl+"now-playing/calendar-add",
+        $.post(baseUrl+"now-playing/schedule-add",
             {"format": "json", "mediaIds": aMediaIds, "schedIds": aSchedIds}, 
             mod.fnItemCallback
         );
@@ -322,7 +322,7 @@ var AIRTIME = (function(AIRTIME){
         
         mod.disableUI();
         
-        $.post(baseUrl+"now-playing/calendar-move",
+        $.post(baseUrl+"now-playing/schedule-move",
             {"format": "json", "selectedItem": aSelect, "afterItem": aAfter},  
             mod.fnItemCallback
         );
@@ -332,7 +332,7 @@ var AIRTIME = (function(AIRTIME){
         
         mod.disableUI();
         if (confirm($.i18n._("Delete selected item(s)?"))) {
-	        $.post( baseUrl+"now-playing/calendar-remove",
+	        $.post( baseUrl+"now-playing/schedule-remove",
 	            {"items": aItems, "format": "json"},
 	            mod.fnItemCallback
 	        );
@@ -959,7 +959,7 @@ var AIRTIME = (function(AIRTIME){
                 //can't add items outside of shows.
                 if (prev.find("td:first").hasClass("dataTables_empty")
                         || prev.length === 0) {
-                    alert($.i18n._("Cannot calendar outside a show."));
+                    alert($.i18n._("Cannot schedule outside a show."));
                     ui.item.remove();
                     return;
                 }

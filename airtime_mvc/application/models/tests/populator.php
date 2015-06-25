@@ -99,7 +99,7 @@ while ($showTime < $endDate) {
 }
 
 if (Application_Model_RabbitMq::$doPush) {
-    $md = array('calendar' => Application_Model_Schedule::getSchedule());
+    $md = array('schedule' => Application_Model_Schedule::getSchedule());
     Application_Model_RabbitMq::SendMessageToPypo("update_schedule", $md);
 }
 
