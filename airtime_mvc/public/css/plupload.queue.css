@@ -164,7 +164,7 @@ li.plupload_done a {
 .plupload_clearer, .plupload_progress_bar {
 	display: block;
 	font-size: 0;
-	line-height: 0;	
+	line-height: 0;
 }
 
 li.plupload_droptext {
@@ -173,4 +173,12 @@ li.plupload_droptext {
 	vertical-align: middle;
 	border: 0;
 	line-height: 165px;
+}
+
+#recent_uploads_table_info {
+    padding: 1em !important;
+}
+
+#recent_uploads_wrapper, #plupload_form {
+    min-width: 460px;
 }

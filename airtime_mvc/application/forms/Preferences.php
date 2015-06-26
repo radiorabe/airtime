@@ -4,20 +4,11 @@ class Application_Form_Preferences extends Zend_Form
 {
     public function init()
     {
-        $baseUrl = Application_Common_OsPath::getBaseDir();
-
         $this->setDecorators(array(
             array('ViewScript', array('viewScript' => 'form/preferences.phtml'))
         ));
 
         $general_pref = new Application_Form_GeneralPreferences();
-
-        // $this->addElement('hash', 'csrf', array(
-        //     'salt' => 'unique',
-        //     'decorators' => array(
-        //         'ViewHelper'
-        //     )
-        // ));
 
         $csrf_namespace = new Zend_Session_Namespace('csrf_namespace');
         $csrf_element = new Zend_Form_Element_Hidden('csrf');

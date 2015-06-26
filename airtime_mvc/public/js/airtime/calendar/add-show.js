@@ -132,11 +132,10 @@ function autoSelect(event, ui) {
 function findHosts(request, callback) {
     var search, url;
 
-    url = baseUrl+"User/get-hosts";
+    url = baseUrl+"user/get-hosts";
     search = request.term;
 
-    var noResult = new Array();
-    noResult[0] = new Array();
+    var noResult = [[]];
     noResult[0]['value'] = $("#add_show_hosts_autocomplete").val();
     noResult[0]['label'] = $.i18n._("No result found");
     noResult[0]['index'] = null;

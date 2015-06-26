@@ -37,13 +37,13 @@ function populateForm(entries){
 }
 
 function rowClickCallback(row_id){
-      $.ajax({ url: baseUrl+'User/get-user-data/id/'+ row_id +'/format/json', dataType:"json", success:function(data){
+      $.ajax({ url: baseUrl+'user/get-user-data/id/'+ row_id +'/format/json', dataType:"json", success:function(data){
         populateForm(data.entries);
 	  }});    
 }
 
 function removeUserCallback(row_id, nRow){
-      $.ajax({ url: baseUrl+'User/remove-user/id/'+ row_id +'/format/json', dataType:"text", success:function(data){
+      $.ajax({ url: baseUrl+'user/remove-user/id/'+ row_id +'/format/json', dataType:"text", success:function(data){
         var o = $('#users_datatable').dataTable().fnDeleteRow(nRow);
 	  }});
 }
@@ -81,7 +81,7 @@ function populateUserTable() {
     $('#users_datatable').dataTable( {
         "bProcessing": true,
         "bServerSide": true,
-        "sAjaxSource": baseUrl+"User/get-user-data-table-info/format/json",
+        "sAjaxSource": baseUrl+"user/get-user-data-table-info/format/json",
         "fnServerData": function ( sSource, aoData, fnCallback ) {
             $.ajax( {
                 "dataType": 'json', 
@@ -202,7 +202,7 @@ $(document).ready(function() {
     
     $('#save_user').live('click', function(){
         var data = $('#user_form').serialize();
-        var url = baseUrl+'User/add-user';
+        var url = baseUrl+'user/add-user';
         
         $.post(url, {format: "json", data: data}, function(json){
             if (json.valid === "true") {

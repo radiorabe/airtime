@@ -853,7 +853,7 @@ var AIRTIME = (function(AIRTIME){
         $pl.on("click", "#lib_pl_close", function() {
             var screenWidth = Math.floor(viewport.width - 40);
             $pl.hide();
-            $lib.width(screenWidth).find("#library_display_length").append($togglePl.show());
+            $lib.width(screenWidth).find("#library_display_length").after($togglePl.show());
 
             $.ajax( {
                 url : baseUrl+"user-settings/set-library-screen-settings",
@@ -1481,7 +1481,7 @@ var AIRTIME = (function(AIRTIME){
         AIRTIME.playlist.init();
 
         if ($pl.is(':hidden')) {
-            $lib.find("#library_display_length").append($togglePl.show());
+            $lib.find("#library_display_length").after($togglePl.show());
         }
 
         $pl.find(".ui-icon-alert").qtip({

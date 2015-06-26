@@ -14,6 +14,7 @@ define('WHOS_USING_URL'             , 'http://sourcefabric.org/en/airtime/whosus
 define('TERMS_AND_CONDITIONS_URL'   , 'http://www.sourcefabric.org/en/about/policy/');
 define('PRIVACY_POLICY_URL'         , 'http://www.sourcefabric.org/en/about/policy/');
 define('USER_MANUAL_URL'            , 'http://sourcefabric.booktype.pro/airtime-pro-for-broadcasters');
+define('AIRTIME_TRANSIFEX_URL'      , 'https://www.transifex.com/projects/p/airtime/');
 
 define('LICENSE_VERSION'    , 'GNU AGPL v.3');
 define('LICENSE_URL'        , 'http://www.gnu.org/licenses/agpl-3.0-standalone.html');

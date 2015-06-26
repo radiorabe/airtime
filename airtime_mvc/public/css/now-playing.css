@@ -37,7 +37,7 @@
 	/*
 	the padding is needed here so that the cursor arrows with a negative margin are displayable.
 	*/
-	padding-left: 16px;
+	padding-left: 8px;
 }
 
 .sb-content fieldset legend {

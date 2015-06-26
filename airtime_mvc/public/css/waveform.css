@@ -6,7 +6,7 @@
 	margin: 0 -0.4em 0;
 }
 .btn-small [class^="icon-"] {
-	margin: 1px 5px 0 -3px;
+	/*margin: 1px 5px 0 -3px;*/
 }
 .btn {
 	margin-right: 3px;
@@ -96,7 +96,7 @@
 }
 label {
 	color:#333;
-	padding: 0 5px 0 6px;
+	/*padding: 0 5px 0 6px;*/
 	display: inline-block;
 	min-width: 50px;
 	text-align: right;

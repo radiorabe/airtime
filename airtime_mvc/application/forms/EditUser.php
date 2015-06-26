@@ -6,12 +6,6 @@ class Application_Form_EditUser extends Zend_Form
 
     public function init()
     {
-        /*
-        $this->addElementPrefixPath('Application_Validate',
-                                    '../application/validate',
-                                    'validate');
-                                    * */
-
         $currentUser = Application_Model_User::getCurrentUser();
         $currentUserId = $currentUser->getId();
         $userData = Application_Model_User::GetUserData($currentUserId);
