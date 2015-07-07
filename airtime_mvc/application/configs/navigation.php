@@ -92,6 +92,12 @@ $pages = array(
                 'module'     => 'default',
                 'controller' => 'embeddablewidgets',
                 'action'     => 'index'
+            ),
+            array(
+                'label'      => _("Customize Radio Page"),
+                'module'     => 'default',
+                'controller' => 'radiopage',
+                'action'     => 'customize'
             )
         )
     ),

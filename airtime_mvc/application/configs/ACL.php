@@ -40,7 +40,8 @@ $ccAcl->add(new Zend_Acl_Resource('library'))
       ->add(new Zend_Acl_Resource('provisioning'))
       ->add(new Zend_Acl_Resource('player'))
       ->add(new Zend_Acl_Resource('soundcloud'))
-      ->add(new Zend_Acl_Resource('embeddablewidgets'));
+      ->add(new Zend_Acl_Resource('embeddablewidgets'))
+      ->add(new Zend_Acl_Resource('radiopage'));
 
 /** Creating permissions */
 $ccAcl->allow('G', 'index')
@@ -76,6 +77,7 @@ $ccAcl->allow('G', 'index')
       ->allow('A', 'preference')
       ->allow('A', 'player')
       ->allow('A', 'embeddablewidgets')
+      ->allow('A', 'radiopage')
       ->allow('S', 'thank-you')
       ->allow('S', 'billing');
       
