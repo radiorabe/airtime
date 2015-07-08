@@ -30,13 +30,15 @@ function validateVATNumber()
 {
 	$.post("/billing/vat-validator", { "vatnumber" : $(vatFieldId).val(), "country" : $("#country").val() })
 		.success(function(data, textStatus, jqXHR) {
-    	if (data["result"]) {
-        	$("#vaterror").html("&#10003; Your VAT number is valid.");
-        	window.validVATNumber = true;
-    	} else {
-        	$("#vaterror").text("Error: Your VAT number is invalid.");
-        	window.validVATNumber = false;
-    	}
+        if(!$(vatFieldId + "-label").hasClass("disabled")) {
+            if (data["result"]) {
+                $("#vaterror").html("&#10003; Your VAT number is valid.");
+                window.validVATNumber = true;
+            } else {
+                $("#vaterror").text("Error: Your VAT number is invalid.");
+                window.validVATNumber = false;
+            }
+        }
     	recalculateTotals();
 	});
 	
@@ -124,6 +126,7 @@ $(document).ready(function() {
 	
 	configureByCountry($("#country").val());
 	recalculateTotals();
+    validatePlan();
     
     $("input[name='newproductid']").change(function() {
         validatePlan();
