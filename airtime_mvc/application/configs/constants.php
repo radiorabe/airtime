@@ -113,3 +113,6 @@ define('CELERY_FAILED_STATUS', 'FAILED');
 
 // Celery Services
 define('SOUNDCLOUD_SERVICE_NAME', 'soundcloud');
+
+//Radio Page
+define('DEFAULT_RADIO_PAGE_WIDGET_COLOUR', '459B8F');

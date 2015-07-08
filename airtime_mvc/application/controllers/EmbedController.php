@@ -30,6 +30,8 @@ class EmbedController extends Zend_Controller_Action
         $this->view->metadata_api_url = Application_Common_HTTPHelper::getStationUrl() . "api/live-info";
         $this->view->player_title = json_encode($this->view->escape($request->getParam('title')));
 
+        $this->view->customCss = Application_Common_HTTPHelper::getStationUrl() . "radiopage/radio-page-css?".$CC_CONFIG['airtime_version'];
+
         $styleParam = $request->getParam('style');
         $player_style = isset($styleParam) ? $styleParam : "basic";
         if ($player_style == "premium") {

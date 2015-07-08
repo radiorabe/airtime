@@ -18,7 +18,7 @@ class Application_Form_Player extends Zend_Form_SubForm
             'Errors',
             'Label'
         ));
-        $title->addDecorator('Label', array('class' => 'player-title'));
+        $title->addDecorator('Label', array('class' => 'form-inline-text-box'));
         $this->addElement($title);
 
         $streamMode = new Zend_Form_Element_Radio('player_stream_mode');

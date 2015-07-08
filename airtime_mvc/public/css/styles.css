@@ -3325,3 +3325,25 @@ dd .stream-status {
 #schedule_iframe {
     margin: 0 auto;
 }
+
+.form-inline-text-box {
+    clear: left;
+    color: #5b5b5b;
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 4px 0;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 17px;
+    margin-right: 10px;
+}
+
+/*****************************
+ * Customize Radio Page styles
+ */
+#radio-page-customize {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 50%;
+}

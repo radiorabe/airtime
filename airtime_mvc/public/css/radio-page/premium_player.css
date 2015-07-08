@@ -29,11 +29,11 @@ body {
 }
 
 .bottom_bar .play {
-    background: #459B8F url('img/play.png') no-repeat center center;
+    background: url('img/play.png') no-repeat center center;
 }
 
 .bottom_bar .pause {
-    background: #459B8F url('img/pause.png') no-repeat center center;
+    background: url('img/pause.png') no-repeat center center;
 }
 
 .on_air {

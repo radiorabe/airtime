@@ -1512,4 +1512,47 @@ class Application_Model_Preference
         self::setValue("task_manager_lock", $value);
     }
 
+    /************************************
+     * Radio Page Customization Settings
+     */
+    public static function getRadioPageDisplayLoginButton()
+    {
+        return self::getValue("radio_page_display_login_button");
+    }
+
+    public static function setRadioPageDisplayLoginButton($value)
+    {
+        self::setValue("radio_page_display_login_button", $value);
+    }
+
+    public static function getRadioPageWidgetColour()
+    {
+        return self::getValue("radio_page_widget_colour");
+    }
+
+    public static function setRadioPageWidgetColour($value)
+    {
+        return self::setValue("radio_page_widget_colour", $value);
+    }
+
+    public static function getRadioPageMetaTitle()
+    {
+        return self::getValue("radio_page_meta_title");
+    }
+
+    public static function setRadioPageMetaTitle($value)
+    {
+        self::setValue("radio_page_meta_title", $value);
+    }
+
+    public static function getRadioPageMetaDescription()
+    {
+        return self::getValue("radio_page_meta_description");
+    }
+
+    public static function setRadioPageMetaDescription($value)
+    {
+        self::setValue("radio_page_meta_description", $value);
+    }
+
 }
