@@ -35,6 +35,14 @@ class RadioPageController extends Zend_Controller_Action
     {
         $this->view->layout()->disableLayout();
         $this->getResponse()->setHeader('Content-Type', 'text/css');
-        $this->view->widgetColour = Application_Model_Preference::getRadioPageWidgetColour();
+
+        $customWidgetColour = "#".Application_Model_Preference::getRadioPageWidgetColour();
+        $this->view->widgetColour = $customWidgetColour;
+
+        list($r, $g, $b) = sscanf($customWidgetColour, "#%02x%02x%02x");
+        $this->view->widgetColourRgb = array(
+            "r" => $r,
+            "g" => $g,
+            "b" => $b);
     }
 }
