@@ -18,6 +18,7 @@ class Application_Form_GeneralPreferences extends Zend_Form_SubForm
 
         $defaultFadeIn = Application_Model_Preference::GetDefaultFadeIn();
         $defaultFadeOut = Application_Model_Preference::GetDefaultFadeOut();
+        $defaultPlaylist = Application_Model_Preference::GetDefaultPlaylist();
 
         //Station name
         $this->addElement('text', 'stationName', array(
@@ -97,6 +98,25 @@ class Application_Form_GeneralPreferences extends Zend_Form_SubForm
             ),
             'value' => $defaultFadeOut,
         ));
+
+        //Default fallback playlist
+        $this->addElement('select', 'stationDefaultPlaylist', array(
+            'label' => _('Default Fallback Playlist'),
+            'required' => true,
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                $notEmptyValidator
+            ),
+            'value' => $defaultPlaylist
+        ));
+        $station_default_playlist = $this->getElement('stationDefaultPlaylist');
+        $station_default_playlist->addMultiOption(-1, _('Fallback Playlist disabled'));
+        $playlists = Application_Model_Playlist::getAllPlaylists();
+        if (empty($playlists)) {
+            $station_default_playlist->setAttrib('disabled', 'disabled');
+        } else {
+            $station_default_playlist->addMultiOptions($playlists);
+        }
 
         $third_party_api = new Zend_Form_Element_Radio('thirdPartyApi');
         $third_party_api->setLabel(_('Public Airtime API'));

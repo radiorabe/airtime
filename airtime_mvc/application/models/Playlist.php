@@ -1088,6 +1088,20 @@ SQL;
         return array('result' => 0);
     }
 
+    public static function getAllPlaylists()
+    {
+        $sql = <<<SQL
+SELECT *
+FROM cc_playlist
+SQL;
+        $playlists = Application_Common_Database::prepareAndExecute($sql);
+        $real_playlists = array();
+        foreach ($playlists as $p) {
+            $real_playlists[$p['id']] = $p['name'];
+        }
+        return $real_playlists;
+    }
+
     public static function getAllPlaylistFiles()
     {
         $sql = <<<SQL

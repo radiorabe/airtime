@@ -284,6 +284,23 @@ class Application_Model_Preference
         return $fade;
     }
 
+    public static function SetDefaultPlaylist($playlist)
+    {
+        self::setValue("default_playlist", $playlist);
+    }
+    
+    public static function GetDefaultPlaylist()
+    {
+        $playlist = self::getValue("default_playlist");
+    
+        if ($playlist === "") {
+            // a default playlist of -1 deactivates falling back to a playlist
+            return -1;
+        }
+    
+        return $playlist;
+    }
+
     public static function SetDefaultFade($fade)
     {
         self::setValue("default_fade", $fade);
