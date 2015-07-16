@@ -1091,7 +1091,7 @@ SQL;
     public static function getAllPlaylists()
     {
         $sql = <<<SQL
-SELECT *
+SELECT id, name
 FROM cc_playlist
 SQL;
         $playlists = Application_Common_Database::prepareAndExecute($sql);
