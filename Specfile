@@ -1,6 +1,6 @@
 Name:           airtime
 Version:        2.5.x
-Release:        1%{?dist}.rabe
+Release:        2%{?dist}.rabe
 Summary:        radio rabe airtime installation
 
 License:        AGPL
@@ -24,11 +24,30 @@ ls -al
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
+# install airtime-web parts so apache finds them
 mkdir -p $RPM_BUILD_ROOT/opt/rh/httpd24/root/var/www/
 cp -rp airtime_mvc/* $RPM_BUILD_ROOT/opt/rh/httpd24/root/var/www/
 ls $RPM_BUILD_ROOT/opt/rh/httpd24/root/var/www
 mv $RPM_BUILD_ROOT/opt/rh/httpd24/root/var/www/public $RPM_BUILD_ROOT/opt/rh/httpd24/root/var/www/html
 
+# install airtime-utils so they can be called by a user
+
+mkdir -p $RPM_BUILD_ROOT/usr/{sbin,bin}
+pushd utils
+cp airtime-backup.py \
+   airtime-log \
+   airtime-log.php \
+   airtime-silan \
+   airtime-import/airtime-import \
+   $RPM_BUILD_ROOT/usr/sbin/
+
+cp airtime-test-soundcard \
+   airtime-test-soundcard.py \
+   airtime-test-stream \
+   airtime-test-stream.py \
+   $RPM_BUILD_ROOT/usr/bin/
+popd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -37,7 +56,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc
-
 
 
 %changelog
@@ -53,3 +71,17 @@ Installs the airtime web interface into http24/php56 using fpm.
 
 %files -n airtime-web
 /opt/rh/httpd24/root/var/www/
+
+%package -n airtime-utils
+
+Summary:    radio rabe airtime utils installation
+%description -n airtime-utils
+Installs the various utils neeeded by airtime to d stuff on the cli.
+
+%files -n airtime-utils
+/usr/sbin/airtime-backup.py
+/usr/sbin/airtime-log
+/usr/sbin/airtime-log.php
+/usr/sbin/airtime-silan
+/usr/sbin/airtime-import
+/usr/bin/airtime-test-*
