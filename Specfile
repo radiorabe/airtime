@@ -1,6 +1,6 @@
 Name:           airtime
 Version:        2.5.x
-Release:        2%{?dist}.rabe
+Release:        3%{?dist}.rabe
 Summary:        radio rabe airtime installation
 
 License:        AGPL
@@ -71,6 +71,7 @@ Installs the airtime web interface into http24/php56 using fpm.
 
 %files -n airtime-web
 /opt/rh/httpd24/root/var/www/
+%config /opt/rh/httpd24/root/var/www/application/configs/application.ini
 
 %package -n airtime-utils
 
