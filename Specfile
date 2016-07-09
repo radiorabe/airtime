@@ -1,6 +1,6 @@
 Name:           airtime
 Version:        2.5.x
-Release:        3%{?dist}.rabe
+Release:        4%{?dist}.rabe
 Summary:        radio rabe airtime installation
 
 License:        AGPL

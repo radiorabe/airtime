@@ -16,7 +16,12 @@ function exception_error_handler($errno, $errstr, $errfile, $errline) {
     //Check if the statement that threw this error wanted its errors to be
     //suppressed. If so then return without with throwing exception.
     if (0 === error_reporting()) return;
+    /* throwing an exception from this error leads to an error loop
+     * if we leave this out the errors get handled as php would usually
+     * do letting them get logged to apaches error_log.
+     *
     throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+     */
     return false;
 }
 
