@@ -1,6 +1,6 @@
 Name:           airtime
 Version:        2.5.x
-Release:        4%{?dist}.rabe
+Release:        5%{?dist}.rabe
 Summary:        radio rabe airtime installation
 
 License:        AGPL
@@ -49,6 +49,14 @@ cp airtime-test-soundcard \
    $RPM_BUILD_ROOT/usr/bin/
 popd
 
+# install media-monitor python app
+pushd python_apps/media-monitor/
+# this is not called in a specfile :)
+# python setup.py bdist_rpm
+# lets do it using pip :)
+pip install --install-option="--prefix=$RPM_BUILD_ROOT/%{_prefix}"  .
+popd
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -64,7 +72,8 @@ rm -rf $RPM_BUILD_ROOT
 
 Summary:    radio rabe airtime web interface installation
 Requires:   rh-php56-php
-#            httpd24-httpd
+Requires:   httpd24-httpd
+Requires:   liquidsoap
 
 %description -n airtime-web
 Installs the airtime web interface into http24/php56 using fpm.
@@ -86,3 +95,39 @@ Installs the various utils neeeded by airtime to d stuff on the cli.
 /usr/sbin/airtime-silan
 /usr/sbin/airtime-import
 /usr/bin/airtime-test-*
+
+%package -n airtime-media-monitor
+
+Summary:   radio rabe airtime media montitor installation
+%description -n airtime-media-monitor
+airtime media-monitor imports uploaded files and watches directories
+
+Requires: pytz
+Requires: python-mutagen
+Require:  python-amqp
+Require:  python-amqplib
+Require:  python-six
+%files -n airtime-media-monitor
+/usr/bin/airtime-media-monitor
+/usr/lib/python2.7/site-packages/_version.py
+/usr/lib/python2.7/site-packages/_version.pyc
+/usr/lib/python2.7/site-packages/_version.pyo
+/usr/lib/python2.7/site-packages/PyDispatcher-2.0.5-py2.7.egg-info/
+/usr/lib/python2.7/site-packages/airtime_media_monitor-1.0-py2.7.egg-info/
+/usr/lib/python2.7/site-packages/amqp-1.0.13-py2.7.egg-info/
+/usr/lib/python2.7/site-packages/amqp/
+/usr/lib/python2.7/site-packages/argparse-1.4.0-py2.7.egg-info/
+/usr/lib/python2.7/site-packages/argparse.*
+/usr/lib/python2.7/site-packages/configobj-5.0.6-py2.7.egg-info/
+/usr/lib/python2.7/site-packages/configobj.*
+/usr/lib/python2.7/site-packages/media_monitor/
+/usr/lib/python2.7/site-packages/mm2/
+/usr/lib/python2.7/site-packages/poster-0.8.1-py2.7.egg-info/
+/usr/lib/python2.7/site-packages/poster/
+/usr/lib/python2.7/site-packages/pydispatch/
+/usr/lib/python2.7/site-packages/pyinotify-0.9.6-py2.7.egg-info/
+/usr/lib/python2.7/site-packages/pyinotify.*
+/usr/lib/python2.7/site-packages/tests/
+/usr/lib/python2.7/site-packages/validate.*
+
+
