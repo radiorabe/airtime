@@ -20,7 +20,8 @@ RUN yum install -y \
     python-amqplib \
     python-argcomplete \
     python-six \
-    python-docopt
+    python-docopt \
+    python-configobj
 
 WORKDIR /usr/local/src/airtime
 

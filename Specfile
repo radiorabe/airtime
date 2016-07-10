@@ -1,6 +1,6 @@
 Name:           airtime
 Version:        2.5.x
-Release:        5%{?dist}.rabe
+Release:        6%{?dist}.rabe
 Summary:        radio rabe airtime installation
 
 License:        AGPL
@@ -107,19 +107,15 @@ Requires: python-mutagen
 Require:  python-amqp
 Require:  python-amqplib
 Require:  python-six
+Require:  python-configobj
 %files -n airtime-media-monitor
 /usr/bin/airtime-media-monitor
-/usr/lib/python2.7/site-packages/_version.py
-/usr/lib/python2.7/site-packages/_version.pyc
-/usr/lib/python2.7/site-packages/_version.pyo
 /usr/lib/python2.7/site-packages/PyDispatcher-2.0.5-py2.7.egg-info/
 /usr/lib/python2.7/site-packages/airtime_media_monitor-1.0-py2.7.egg-info/
 /usr/lib/python2.7/site-packages/amqp-1.0.13-py2.7.egg-info/
 /usr/lib/python2.7/site-packages/amqp/
 /usr/lib/python2.7/site-packages/argparse-1.4.0-py2.7.egg-info/
 /usr/lib/python2.7/site-packages/argparse.*
-/usr/lib/python2.7/site-packages/configobj-5.0.6-py2.7.egg-info/
-/usr/lib/python2.7/site-packages/configobj.*
 /usr/lib/python2.7/site-packages/media_monitor/
 /usr/lib/python2.7/site-packages/mm2/
 /usr/lib/python2.7/site-packages/poster-0.8.1-py2.7.egg-info/
@@ -128,6 +124,5 @@ Require:  python-six
 /usr/lib/python2.7/site-packages/pyinotify-0.9.6-py2.7.egg-info/
 /usr/lib/python2.7/site-packages/pyinotify.*
 /usr/lib/python2.7/site-packages/tests/
-/usr/lib/python2.7/site-packages/validate.*
 
 
