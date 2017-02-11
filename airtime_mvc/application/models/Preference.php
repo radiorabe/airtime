@@ -7,9 +7,20 @@ class Application_Model_Preference
     
     private static function getUserId()
     {
+        $ipaUser = array_key_exists('REMOTE_USER', $_SERVER);
+        // let freshly authed ipa users set a password
+        if ($ipaUser) {
+            // figure out if user already exists in database
+            $remoteUser = $_SERVER['REMOTE_USER'];
+            $remoteUsers = CcSubjsQuery::create()->findByDbLogin($remoteUser);
+            $remoteUserId = null;
+            foreach ($remoteUsers as $remoteUserObj) {
+                $remoteUserId = $remoteUserObj->getDBId();
+            }
+            $userId = $remoteUserId;
         //pass in true so the check is made with the autoloader
         //we need this check because saas calls this function from outside Zend
-        if (!class_exists("Zend_Auth", true) || !Zend_Auth::getInstance()->hasIdentity()) {
+        } elseif (!class_exists("Zend_Auth", true) || !Zend_Auth::getInstance()->hasIdentity()) {
             $userId = null;
         } else {
             $auth = Zend_Auth::getInstance();
