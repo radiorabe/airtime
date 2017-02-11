@@ -89,3 +89,20 @@ interesting branches.
 * [upstream tracking `master`](https://github.com/radiorabe/airtime/tree/master)
 * [upstream archival `saas`](https://github.com/radiorabe/airtime/tree/saas)
 
+## Developing
+
+Please direct your Pull Requests to the existing branches if applicable.
+
+To create a new feature branch you base it on the `master` branch. We will then
+merge it into the `rabe` branch and add it to the README in the merge commit.
+
+Any changes on the rabe branch get packaged into the [home:radiorabe:airtime obs project](https://build.opensuse.org/project/show/home:radiorabe:airtime) by the [airtime packaging repo](https://github.com/radiorabe/centos-rpm-airtime).
+
+## Releasing
+
+1. Create an empty commit with a message describing the version and its changes on the rabe branch (ie `git commit --allow-empty`)
+2. Use `<airtime-ver>.<next-rabe-ver>` as the version number in a description similiar to existing version commits.
+3. Tag this commit with the exact version
+4. Push rabe and the tag to github
+5. Update [airtime.spec](https://github.com/radiorabe/centos-rpm-airtime/blob/master/airtime.spec) with the version and reset the release number in the file.
+6. The openSUSE Build Service will get triggered when [centos-rpm-airtime](https://github.com/radiorabe/centos-rpm-airtime) is tagged
