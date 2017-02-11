@@ -40,39 +40,39 @@ To help you get an overview the branches are listed below.
 
 ## Branch Overview
 
-* [main `rabe` branch](https://github.com/radiorabe/centos/tree/master)
+* [main `rabe` branch](https://github.com/radiorabe/airtime/tree/master)
 
 ### Feature Branches
 
-* [tls-support](https://github.com/radiorabe/centos/tree/feature/tls-support)
+* [tls-support](https://github.com/radiorabe/airtime/tree/feature/tls-support)
 
   TLS support for secure access to airtime-web in the python api client and in
   API responses used by silan.
 
-* [fix-media-monitor](https://github.com/radiorabe/centos/tree/feature/fix-media-monitor)
+* [fix-media-monitor](https://github.com/radiorabe/airtime/tree/feature/fix-media-monitor)
 
   Lots of small fixes vor various bugs that should have been fixed in upstream ages ago.
   Mostly small stuff like wrong syntax in master and changes to opinionated decisions
   by upstream that do do fly at rabe.
 
-* [remove-pref-cache](https://github.com/radiorabe/centos/tree/feature/remove-pref-cache)
+* [remove-pref-cache](https://github.com/radiorabe/airtime/tree/feature/remove-pref-cache)
 
   The cache was badly broken at some stage and most likely never had any significant
   impact on preformance.
 
-* [python-install](https://github.com/radiorabe/centos/tree/feature/python-install)
+* [python-install](https://github.com/radiorabe/airtime/tree/feature/python-install)
 
   We remove most of the install routine not strictly doiny pythony stuff. This makes
   the project more portable while shifting the onerous task of maintaining distro
   specifics closer to the distro maintainers. We do this because we support
   CentOS and do not need any upstart files or whatnot.
 
-* [ipa-support](https://github.com/radiorabe/centos/tree/feature/ipa-support)
+* [ipa-support](https://github.com/radiorabe/airtime/tree/feature/ipa-support)
 
   Hacky patchset to switch the auth layer over to a freeIPA instance via some
   apache config. Highly experimental.
 
-* [logging](https://github.com/radiorabe/centos/tree/feature/logging)
+* [logging](https://github.com/radiorabe/airtime/tree/feature/logging)
 
   Fixes and changes to logging. Highly experimental.
 
@@ -81,6 +81,6 @@ To help you get an overview the branches are listed below.
 We also keep upstream branches for posterity. The following links point to the
 interesting branches.
 
-* [upstream tracking `master`](https://github.com/radiorabe/centos/tree/master)
-* [upstream archival `saas`](https://github.com/radiorabe/centos/tree/saas)
+* [upstream tracking `master`](https://github.com/radiorabe/airtime/tree/master)
+* [upstream archival `saas`](https://github.com/radiorabe/airtime/tree/saas)
 
