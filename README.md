@@ -184,7 +184,8 @@ We are aware that the contents herein are structured in a rather difficult
 to grasp fashion using lots of branches. Please do not hesitate to create
 an issue or contact @hairmare if you need help with merging and/or rebasing.
 
-We are actively seeking a community managed upstream. Until then bear with us.
+We are actively seeking a community managed upstream. Feel free to open an
+issue with a proposals if you feel that you are the right fit for us.
 
 To help you get an overview the branches are listed below.
 
