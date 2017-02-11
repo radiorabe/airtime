@@ -35,13 +35,18 @@ yum install epel-release centos-release-scl
 
 yum install http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
 
-curl -o /etc/yum.repos.d/liquidsoap.repo \
+curl -o /etc/yum.repos.d/home:radiorabe:liquidsoap.repo \
      http://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/CentOS_7/home:radiorabe:liquidsoap.repo
 
 # install airtime repo
-curl -o /etc/yum.repos.d/airtime.repo \
+curl -o /etc/yum.repos.d/home:radiorabe:airtime.repo \
      http://download.opensuse.org/repositories/home:/radiorabe:/airtime/CentOS_7/home:radiorabe:airtime.repo
 ```
+
+You need to make sure that you are installing the updated versions of 
+python-kombu and python-amqp from the airtime repo and not their epel 
+equivalents that have stopped working against current versions of 
+rabbitmq.
 
 ### Database Setup
 
