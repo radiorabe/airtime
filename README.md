@@ -76,6 +76,11 @@ To help you get an overview the branches are listed below.
 
   Fixes and changes to logging. Highly experimental.
 
+* [playlist-api](https://github.com/radiorabe/airtime/tree/feature/playlist-api)
+
+  Simple playlist API that allows other consumers to access complete listings of
+  playlists created in airtime. Experimental.
+
 ### Upstream Branches
 
 We also keep upstream branches for posterity. The following links point to the

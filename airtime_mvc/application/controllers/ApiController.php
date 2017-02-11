@@ -1500,4 +1500,33 @@ class ApiController extends Zend_Controller_Action
 
     }
     
+    /**
+     * get tracklisting for a playlist
+     *
+     * @return json array
+     */
+    public function showPlaylistAction()
+    {
+        $objInfo = Application_Model_Library::getObjInfo('playlist');
+        $params = $this->getRequest()->getParams();
+        try {
+            $obj = new $objInfo['className']($params['id']);
+            $this->_helper->json(array(
+                "name"     => $obj->getName(),
+                "description" => $obj->getDescription(),
+                "creator" => $obj->getCreator(),
+                "modified" => $obj->getLastModified(),
+                "size" => $obj->getSize(),
+                "contents" => $obj->getContents()
+            ));
+        } catch (PlaylistNotFoundException $e) {
+            $this->_helper->json->sendJson(
+                array("error" => array("code" => 404, "message" => "playlist not found ".$params['id']))
+            );
+        } catch (Exception $e) {
+            $this->_helper->json->sendJson(
+                array("error" => array("code" => 500, "message" => "playlist not found ".$params['id']))
+            );
+        }
+    }
 }
