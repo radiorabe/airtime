@@ -21,9 +21,9 @@ an issue or contact @hairmare if you need help with merging and/or rebasing.
 * Make Airtime work out of the box on CentOS 7.3 and up
 * Add missing integration points for the needs of a local community radio station
 * Namely these focus on
-* * Integration with studio playout equipment
-* * Sending streams to an FM transmitter site and multiple DAB+ sites
-* * Integration with other systems like Calendaring for a program grid
+  * Integration with studio playout equipment
+  * Sending streams to an FM transmitter site and multiple DAB+ sites
+  * Integration with other systems like Calendaring for a program grid
 
 ## Repo Organization
 
