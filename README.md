@@ -274,6 +274,7 @@ The RaBe Airtime Fork is free software: you can redistribute it and/or modify it
 ## Copyright
 
 Copyright (c) 2011-2017 Sourcefabric z.ú.
-Copyright (c) 2017 Radio Bern RaBe
+
+Copyright (c) 2016-2017 Radio Bern RaBe
 
 Please refer to the original [README](README), [CREDITS](CREDITS) and [LICENSE_3RD_PARTY](LICENSE_3RD_PARTY) for more information.
