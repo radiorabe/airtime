@@ -57,6 +57,8 @@ To help you get an overview the branches are listed below.
 * [ipa-support](https://github.com/radiorabe/centos/tree/feature/ipa-support)
   Hacky patchset to switch the auth layer over to a freeIPA instance via some
   apache config. Highly experimental.
+* [logging](https://github.com/radiorabe/centos/tree/feature/logging)
+  Fixes and changes to logging. Highly experimental.
 
 ### Upstream Branches
 

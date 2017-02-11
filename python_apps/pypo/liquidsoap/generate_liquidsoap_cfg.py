@@ -25,7 +25,6 @@ def generate_liquidsoap_config(ss):
         fh.write(str_buffer.encode('utf-8'))
 
     auth_path = os.path.dirname(os.path.realpath(__file__))
-    fh.write('log_file = "/var/log/airtime/pypo-liquidsoap/<script>.log"\n')
     fh.write('auth_path = "%s/liquidsoap_auth.py"\n' % auth_path)
     fh.close()
     

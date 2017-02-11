@@ -1084,7 +1084,8 @@ SQL;
 
         // Ask Liquidsoap if file is playable
         /* CC-5990/5991 - Changed to point directly to liquidsoap, removed PATH export */
-        $command = sprintf('liquidsoap -v -c "output.dummy(audio_to_stereo(single(%s)))" 2>&1',
+        // RaBe: make it log through systemd (risking that the taglib error from above does not get caught at this stage anymore :/)
+        $command = sprintf('systemd-cat -t liquidsoap liquidsoap -v -c "output.dummy(audio_to_stereo(single(%s)))"',
             escapeshellarg($audio_file));
 
         exec($command, $output, $rv);
