@@ -37,9 +37,16 @@ class AirtimeNotifier(Loggable):
                     durable=True, auto_delete=True)
             schedule_queue = Queue("media-monitor", exchange=schedule_exchange,
                     key="filesystem")
-            self.connection = BrokerConnection(self.cfg["rabbitmq"]["host"],
-                    self.cfg["rabbitmq"]["user"], self.cfg["rabbitmq"]["password"],
-                    self.cfg["rabbitmq"]["vhost"])
+            self.connection = BrokerConnection(''.join((
+                'amqp://',
+                self.cfg["rabbitmq"]["user"],
+                ':',
+                self.cfg["rabbitmq"]["password"],
+                '@',
+                self.cfg["rabbitmq"]["host"],
+                '/',
+                self.cfg["rabbitmq"]["vhost"]
+            )))
             channel  = self.connection.channel()
 
             self.simple_queue = SimpleQueue(channel, schedule_queue)
