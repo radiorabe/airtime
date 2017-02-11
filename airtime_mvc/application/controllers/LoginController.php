@@ -20,6 +20,42 @@ class LoginController extends Zend_Controller_Action
         if ($auth->hasIdentity()) {
             $this->_redirect('Showbuilder');
         }
+        $ipaUser = false;
+        $remoteUser = NULL;
+        $ipaDummyPass = NULL;
+        if (array_key_exists('REMOTE_USER', $_SERVER)) {
+            $remoteUser = $_SERVER['REMOTE_USER'];
+            if ($remoteUser !== 'admin') {
+                $ipaUser = true;
+
+                // figure out if user already exists in database
+                $remoteUsers = CcSubjsQuery::create()->findByDbLogin($remoteUser);
+                $remoteUserId = null;
+                foreach ($remoteUsers as $remoteUserObj) {
+                    $remoteUserId = $remoteUserObj->getDBId();
+                }
+                $ipaDummyPass = bin2hex(openssl_random_pseudo_bytes(10));
+                // create a new user or grab an existing one
+                if ($remoteUserId) {
+                    $user = new Application_Model_User($remoteUserId);
+                } else {
+                    $user = new Application_Model_User('');
+                }
+                // Add info from IPA to user
+                $user->setLogin($remoteUser);
+                // very simple hack to enable some kind of auth until i figure out how best to get group info into _SERVER
+                $user->setType(preg_match("/^ad[a-z]{4}@.*/", $remoteUser) ? 'A' : 'H');
+                // Use a random password for IPA users, reset on each login... I may change this to get set to the IPA pass but hate that it is being stored as md5 behind the scenes
+                $user->setPassword($ipaDummyPass);
+                //$user->setFirstName('Airtime');
+                //$user->setLastName('User');
+                //$user->setEmail('test@int.rabe.ch');
+                //$user->setCellPhone('');
+                //$user->setSkype('');
+                //$user->setJabber('');
+                $user->save();
+            }
+        }
 
         //uses separate layout without a navigation.
         $this->_helper->layout->setLayout('login');
@@ -40,12 +76,16 @@ class LoginController extends Zend_Controller_Action
             if (array_key_exists('recaptcha_response_field', $request->getPost())) {
                 $form->addRecaptcha();
             }
-            if ($form->isValid($request->getPost())) {
+            if ($form->isValid($request->getPost()) || $ipaUser) {
                 //get the username and password from the form
                 $username = $form->getValue('username');
                 $password = $form->getValue('password');
                 $locale = $form->getValue('locale');
-                if (Application_Model_Subjects::getLoginAttempts($username) >= 3 && $form->getElement('captcha') == NULL) {
+                if ($ipaUser) {
+                    $username = $remoteUser;
+                    $password = $ipaDummyPass;
+                }
+                if (!$ipaUser || Application_Model_Subjects::getLoginAttempts($username) >= 3 && $form->getElement('captcha') == NULL) {
                     $form->addRecaptcha();
                 } else {
                     $authAdapter = Application_Model_Auth::getAuthAdapter();
@@ -55,7 +95,7 @@ class LoginController extends Zend_Controller_Action
                                 ->setCredential($password);
                     
                     $result = $auth->authenticate($authAdapter);
-                    if ($result->isValid()) {
+                    if ($ipaUser || $result->isValid()) {
                         //  Regenerate session id on login to prevent session fixation.
                         Zend_Session::regenerateId();
                         //all info about this user from the login table omit only the password

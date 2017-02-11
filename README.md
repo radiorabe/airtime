@@ -54,6 +54,9 @@ To help you get an overview the branches are listed below.
   the project more portable while shifting the onerous task of maintaining distro
   specifics closer to the distro maintainers. We do this because we support
   CentOS and do not need any upstart files or whatnot.
+* [ipa-support](https://github.com/radiorabe/centos/tree/feature/ipa-support)
+  Hacky patchset to switch the auth layer over to a freeIPA instance via some
+  apache config. Highly experimental.
 
 ### Upstream Branches
 
