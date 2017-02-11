@@ -1,7 +1,7 @@
 # RaBe Airtime Fork
 
 Welcome to the RaBe Airtime fork. This fork contains fixes to get Airtime
-up and running for use at Radio Bern RaBe (http://rabe.ch) on CentOS 7.
+up and running for use at [Radio Bern RaBe](http://rabe.ch) on CentOS 7.
 
 It aims at being organized in a fashion so that the changes done to Airtime
 are kept as atomic as possible while still offering a way to build and 
@@ -184,8 +184,8 @@ We are aware that the contents herein are structured in a rather difficult
 to grasp fashion using lots of branches. Please do not hesitate to create
 an issue or contact @hairmare if you need help with merging and/or rebasing.
 
-We are actively seeking a community managed upstream. Feel free to open an
-issue with a proposals if you feel that you are the right fit for us.
+We are actively seeking a community managed upstream. Please open an
+issue with a proposal if you feel that you are the right fit for us.
 
 To help you get an overview the branches are listed below.
 
@@ -262,7 +262,18 @@ been properly released.
 ## Releasing
 
 1. Bump the version in the Specfile and add a new commit to master with the version bump
-2. Use `<airtime-ver>.<next-rabe-ver>` as the version number in the a commit message similiar to existing versions
-3. Tag this commit with the exact version
+2. Use `<airtime-ver>.<next-rabe-ver>` as the version number in a commit message similiar to existing versions
+3. Tag the commit with the exact version
 4. Push rabe and the tag to github
 5. The openSUSE Build Service should get triggered and build a new package automagically
+
+## License
+
+This template collection is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3 of the License.
+
+## Copyright
+
+Copyright (c) 2011-2017 Sourcefabric z.ú.
+Copyright (c) 2017 Radio Bern RaBe
+
+Please refer to the original [README](README), [CREDITS](CREDITS) and [LICENSE_3RD_PARTY](LICENSE_3RD_PARTY) for more information.
