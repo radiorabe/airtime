@@ -46,6 +46,9 @@ To help you get an overview the branches are listed below.
 
 * [tls-support](https://github.com/radiorabe/centos/tree/feature/tls-support)
 * [fix-media-monitor](https://github.com/radiorabe/centos/tree/feature/fix-media-monitor)
+* [remove-pref-cache](https://github.com/radiorabe/centos/tree/feature/remove-pref-cache)
+  The cache was badly broken at some stage and most likely never had any significant
+  impact on preformance.
 
 ### Upstream Branches
 
