@@ -76,7 +76,7 @@ class Organizer(ReportHandler,Loggable):
             # detect it from the file
             user().owner.add_file_owner(new_path, owner_id )
 
-            self.logger.info('Organized: "%s" into "%s"' %
+            self.logger.info('Organized: \'%s\' into \'%s\'' %
                     (event.path, new_path))
         except BadSongFile as e:
             self.report_problem_file(event=event, exception=e)

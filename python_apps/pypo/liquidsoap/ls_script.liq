@@ -1,6 +1,7 @@
 %include "/etc/airtime/liquidsoap.cfg"
 
-set("log.file.path", log_file)
+set("log.file", false)
+set("log.stdout", true)
 set("server.telnet", true)
 set("server.telnet.port", 1234)
 # set("init.daemon.pidfile.path", "/var/run/airtime/airtime-liquidsoap.pid")
