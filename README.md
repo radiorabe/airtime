@@ -5,7 +5,7 @@ up and running for use at [Radio Bern RaBe](http://rabe.ch) on CentOS 7.
 
 It aims at being organized in a fashion so that the changes done to Airtime
 are kept as atomic as possible while still offering a way to build and 
-deploy proper, working, Airtime RPMs.
+deploy proper, working RPMs.
 
 We provide prebuilt binary packages part of the [home:radiorabe:airtime project](https://build.opensuse.org/project/show/home:radiorabe:airtime)
 on the [openSUSE Build Service](https://build.opensuse.org/).
@@ -186,7 +186,7 @@ onto upstream and other interested parties to integrate our work into their
 own fork with ease.
 
 We are aware that the contents herein are structured in a rather difficult
-to grasp fashion using lots of branches. Please do not hesitate to create
+to manage fashion using lots of branches. Please do not hesitate to create
 an issue or contact @hairmare if you need help with merging and/or rebasing.
 
 We are actively seeking a community managed upstream. Please open an
@@ -214,7 +214,7 @@ To help you get an overview the branches are listed below.
 * [remove-pref-cache](https://github.com/radiorabe/airtime/tree/feature/remove-pref-cache)
 
   The cache was badly broken at some stage and most likely never had any significant
-  impact on preformance.
+  impact on performance.
 
 * [python-install](https://github.com/radiorabe/airtime/tree/feature/python-install)
 
@@ -267,7 +267,8 @@ been properly released.
 ## Releasing
 
 1. Bump the version in the Specfile and add a new commit to rabe with the version bump
-2. Use `<airtime-ver>.<next-rabe-ver>` as the version number in a commit message similiar to existing versions
+   * Use `<airtime-ver>.<next-rabe-ver>` as the version number
+   * write a commit message similiar to existing version commits
 3. Tag the commit with the exact version
 4. Push rabe and the tag to github
 5. The openSUSE Build Service should get triggered and build a new package automagically
