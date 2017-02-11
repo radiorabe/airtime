@@ -51,6 +51,10 @@ To help you get an overview the branches are listed below.
 
 * [fix-media-monitor](https://github.com/radiorabe/centos/tree/feature/fix-media-monitor)
 
+  Lots of small fixes vor various bugs that should have been fixed in upstream ages ago.
+  Mostly small stuff like wrong syntax in master and changes to opinionated decisions
+  by upstream that do do fly at rabe.
+
 * [remove-pref-cache](https://github.com/radiorabe/centos/tree/feature/remove-pref-cache)
 
   The cache was badly broken at some stage and most likely never had any significant
