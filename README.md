@@ -81,6 +81,11 @@ To help you get an overview the branches are listed below.
   Simple playlist API that allows other consumers to access complete listings of
   playlists created in airtime. Experimental.
 
+* [systemd-files](https://github.com/radiorabe/airtime/tree/feature/systemd-files)
+
+  SystemD units for running airtime components. All files are under `contrib/systemd`
+  where packagers may or may not choose to install them from.
+
 ### Upstream Branches
 
 We also keep upstream branches for posterity. The following links point to the
