@@ -208,7 +208,7 @@ To help you get an overview the branches are listed below.
 * [fix-media-monitor](https://github.com/radiorabe/airtime/tree/feature/fix-media-monitor)
 
   Lots of small fixes vor various bugs that should have been fixed in upstream ages ago.
-  Mostly small stuff like wrong syntax in master and changes to opinionated decisions
+  Mostly small stuff like wrong syntax in 2.5.x and changes to opinionated decisions
   by upstream that do not fly at rabe.
 
 * [remove-pref-cache](https://github.com/radiorabe/airtime/tree/feature/remove-pref-cache)
@@ -251,14 +251,14 @@ To help you get an overview the branches are listed below.
 We also keep upstream branches for posterity. The following links point to the
 interesting branches.
 
-* [upstream tracking `master`](https://github.com/radiorabe/airtime/tree/master)
+* [upstream tracking `2.5.x`](https://github.com/radiorabe/airtime/tree/2.5.x)
 * [upstream archival `saas`](https://github.com/radiorabe/airtime/tree/saas)
 
 ## Developing
 
 Please direct your Pull Requests to the existing feature branches if applicable.
 
-To create a new feature branch you base it on the `master` branch. We will then
+To create a new feature branch you base it on the `2.5.x` branch. We will then
 merge it into the `rabe` branch and add it to the README in the merge commit.
 
 Any changes on the rabe branch get packaged by the [home:radiorabe:airtime obs project](https://build.opensuse.org/project/show/home:radiorabe:airtime) as soon as they have
@@ -266,7 +266,7 @@ been properly released.
 
 ## Releasing
 
-1. Bump the version in the Specfile and add a new commit to master with the version bump
+1. Bump the version in the Specfile and add a new commit to rabe with the version bump
 2. Use `<airtime-ver>.<next-rabe-ver>` as the version number in a commit message similiar to existing versions
 3. Tag the commit with the exact version
 4. Push rabe and the tag to github
