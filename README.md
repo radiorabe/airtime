@@ -45,19 +45,31 @@ To help you get an overview the branches are listed below.
 ### Feature Branches
 
 * [tls-support](https://github.com/radiorabe/centos/tree/feature/tls-support)
+
+  TLS support for secure access to airtime-web in the python api client and in
+  API responses used by silan.
+
 * [fix-media-monitor](https://github.com/radiorabe/centos/tree/feature/fix-media-monitor)
+
 * [remove-pref-cache](https://github.com/radiorabe/centos/tree/feature/remove-pref-cache)
+
   The cache was badly broken at some stage and most likely never had any significant
   impact on preformance.
+
 * [python-install](https://github.com/radiorabe/centos/tree/feature/python-install)
+
   We remove most of the install routine not strictly doiny pythony stuff. This makes
   the project more portable while shifting the onerous task of maintaining distro
   specifics closer to the distro maintainers. We do this because we support
   CentOS and do not need any upstart files or whatnot.
+
 * [ipa-support](https://github.com/radiorabe/centos/tree/feature/ipa-support)
+
   Hacky patchset to switch the auth layer over to a freeIPA instance via some
   apache config. Highly experimental.
+
 * [logging](https://github.com/radiorabe/centos/tree/feature/logging)
+
   Fixes and changes to logging. Highly experimental.
 
 ### Upstream Branches
