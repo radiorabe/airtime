@@ -23,7 +23,7 @@
 #
 
 Name:           airtime
-Version:        2.5.x.0.1.0
+Version:        2.5.x.0.2.0
 Release:        0
 Summary:        radio rabe airtime installation
 
