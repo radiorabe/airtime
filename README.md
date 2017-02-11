@@ -104,5 +104,5 @@ Any changes on the rabe branch get packaged into the [home:radiorabe:airtime obs
 2. Use `<airtime-ver>.<next-rabe-ver>` as the version number in a description similiar to existing version commits.
 3. Tag this commit with the exact version
 4. Push rabe and the tag to github
-5. Update [airtime.spec](https://github.com/radiorabe/centos-rpm-airtime/blob/master/airtime.spec) with the version and reset the release number in the file.
+5. Update [airtime.spec](https://github.com/radiorabe/centos-rpm-airtime/blob/master/airtime.spec) with the version.
 6. The openSUSE Build Service will get triggered when [centos-rpm-airtime](https://github.com/radiorabe/centos-rpm-airtime) is tagged
