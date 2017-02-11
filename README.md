@@ -1,7 +1,7 @@
 # RaBe Airtime Fork
 
 Welcome to the RaBe Airtime fork. This fork contains fixes to get Airtime
-up and running for use at rabe.ch on CentOS 7.
+up and running for use at Radio Bern RaBe (http://rabe.ch) on CentOS 7.
 
 It aims at being organized in a fashion so that the changes done to Airtime
 are kept as atomic as possible while still offering a way to build and 
@@ -184,6 +184,8 @@ We are aware that the contents herein are structured in a rather difficult
 to grasp fashion using lots of branches. Please do not hesitate to create
 an issue or contact @hairmare if you need help with merging and/or rebasing.
 
+We are actively seeking a community managed upstream. Until then bear with us.
+
 To help you get an overview the branches are listed below.
 
 ## Branch Overview
@@ -248,12 +250,13 @@ interesting branches.
 
 ## Developing
 
-Please direct your Pull Requests to the existing branches if applicable.
+Please direct your Pull Requests to the existing feature branches if applicable.
 
 To create a new feature branch you base it on the `master` branch. We will then
 merge it into the `rabe` branch and add it to the README in the merge commit.
 
-Any changes on the rabe branch get packaged into the [home:radiorabe:airtime obs project](https://build.opensuse.org/project/show/home:radiorabe:airtime) by the [airtime packaging repo](https://github.com/radiorabe/centos-rpm-airtime).
+Any changes on the rabe branch get packaged by the [home:radiorabe:airtime obs project](https://build.opensuse.org/project/show/home:radiorabe:airtime) as soon as they have
+been properly released.
 
 ## Releasing
 
