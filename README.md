@@ -49,6 +49,11 @@ To help you get an overview the branches are listed below.
 * [remove-pref-cache](https://github.com/radiorabe/centos/tree/feature/remove-pref-cache)
   The cache was badly broken at some stage and most likely never had any significant
   impact on preformance.
+* [python-install](https://github.com/radiorabe/centos/tree/feature/python-install)
+  We remove most of the install routine not strictly doiny pythony stuff. This makes
+  the project more portable while shifting the onerous task of maintaining distro
+  specifics closer to the distro maintainers. We do this because we support
+  CentOS and do not need any upstart files or whatnot.
 
 ### Upstream Branches
 
