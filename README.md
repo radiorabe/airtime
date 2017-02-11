@@ -53,7 +53,7 @@ To help you get an overview the branches are listed below.
 
   Lots of small fixes vor various bugs that should have been fixed in upstream ages ago.
   Mostly small stuff like wrong syntax in master and changes to opinionated decisions
-  by upstream that do do fly at rabe.
+  by upstream that do not fly at rabe.
 
 * [remove-pref-cache](https://github.com/radiorabe/airtime/tree/feature/remove-pref-cache)
 
