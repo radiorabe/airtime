@@ -40,7 +40,7 @@ To help you get an overview the branches are listed below.
 
 ## Branch Overview
 
-* [main `rabe` branch](https://github.com/radiorabe/airtime/tree/master)
+* [main `rabe` branch](https://github.com/radiorabe/airtime/tree/rabe) (you are here)
 
 ### Feature Branches
 
