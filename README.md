@@ -86,6 +86,10 @@ To help you get an overview the branches are listed below.
   SystemD units for running airtime components. All files are under `contrib/systemd`
   where packagers may or may not choose to install them from.
 
+* [rpm-specfile](https://github.com/radiorabe/airtime/tree/feature/rpm-specfile)
+
+  Contains airtime.spec used to build packages on openSUSE Build Service.
+
 ### Upstream Branches
 
 We also keep upstream branches for posterity. The following links point to the
