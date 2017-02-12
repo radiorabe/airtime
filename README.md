@@ -246,9 +246,9 @@ To help you get an overview the branches are listed below.
 
   Contains airtime.spec used to build packages on openSUSE Build Service.
 
-* [fork-info](https://github.com/radiorabe/airtime/tree/feature/fork-info)
+* [fork-info](https://github.com/radiorabe/airtime/tree/feature/fork-info) ([sourcefabric/airtime#136](https://github.com/sourcefabric/airtime/pull/136))
 
-  Output fork information on /dashboard/about with minimal changes to upstream.
+  Output fork information on /dashboard/about with minimal changes to upstream. See [README.forking.md](docs/README.forking.md) for more information.
 
 ### Upstream Branches
 
