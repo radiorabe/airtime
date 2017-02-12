@@ -270,11 +270,14 @@ been properly released.
 
 ## Releasing
 
-1. Bump the version in the Specfile and add a new commit to rabe with the version bump
+1. Bump the version in the [specfile](airtime.spec) and in [constants.fork.php](airtime_mvc/application/configs/constants.fork.php)
    * Use `<airtime-ver>.<next-rabe-ver>` as the version number
+   * Use `<next-rabe-ver>` in the `AIRTIME_FORK_VERSION` in the constants file
+2. Add a commit with version bump related changes to rabe
    * write a commit message similiar to existing version commits
 3. Tag the commit with the exact version
 4. Push rabe and the tag to github
+   * the tag and the branch need to stay in sync until a package is built
 5. The openSUSE Build Service should get triggered and build a new package automagically
 
 ## License
