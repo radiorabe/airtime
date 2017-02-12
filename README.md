@@ -218,7 +218,7 @@ To help you get an overview the branches are listed below.
 
 * [python-install](https://github.com/radiorabe/airtime/tree/feature/python-install)
 
-  We remove most of the install routine not strictly doiny pythony stuff. This makes
+  We remove most of the install routine not strictly doing pythony stuff. This makes
   the project more portable while shifting the onerous task of maintaining distro
   specifics closer to the distro maintainers. We do this because we support
   CentOS and do not need any upstart files or whatnot.
@@ -245,6 +245,10 @@ To help you get an overview the branches are listed below.
 * [rpm-specfile](https://github.com/radiorabe/airtime/tree/feature/rpm-specfile)
 
   Contains airtime.spec used to build packages on openSUSE Build Service.
+
+* [fork-info](https://github.com/radiorabe/airtime/tree/feature/fork-info)
+
+  Output fork information on /dashboard/about with minimal changes to upstream.
 
 ### Upstream Branches
 
