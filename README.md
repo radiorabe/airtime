@@ -1,5 +1,9 @@
 # RaBe Airtime Fork
 
+***Breaking news:*** We have forked AirTime to [LibreTime](https://github.com/LibreTime/libretime). 
+This repo will stay in use until we have switched our local install to
+the new fork after pushing and/or finalizing the feature branches here.
+
 Welcome to the RaBe Airtime fork. This fork contains fixes to get Airtime
 up and running for use at [Radio Bern RaBe](http://rabe.ch) on CentOS 7.
 
