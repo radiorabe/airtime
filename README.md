@@ -215,7 +215,7 @@ To help you get an overview the branches are listed below.
   Mostly small stuff like wrong syntax in 2.5.x and changes to opinionated decisions
   by upstream that do not fly at rabe.
 
-* [remove-pref-cache](https://github.com/radiorabe/airtime/tree/feature/remove-pref-cache)
+* [remove-pref-cache](https://github.com/radiorabe/airtime/tree/feature/remove-pref-cache) ([LibreTime/libretime#45](https://github.com/LibreTime/libretime/pull/45))
 
   The cache was badly broken at some stage and most likely never had any significant
   impact on performance.
