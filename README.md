@@ -204,12 +204,12 @@ To help you get an overview the branches are listed below.
 
 ### Feature Branches
 
-* [tls-support](https://github.com/radiorabe/airtime/tree/feature/tls-support)
+* [tls-support](https://github.com/radiorabe/airtime/tree/feature/tls-support) ([LibreTime/libretime#98](https://github.com/LibreTime/libretime/pull/98))
 
   TLS support for secure access to airtime-web in the python api client and in
   API responses used by silan.
 
-* [fix-media-monitor](https://github.com/radiorabe/airtime/tree/feature/fix-media-monitor)
+* [fix-media-monitor](https://github.com/radiorabe/airtime/tree/feature/fix-media-monitor) (no plans to pr)
 
   Lots of small fixes vor various bugs that should have been fixed in upstream ages ago.
   Mostly small stuff like wrong syntax in 2.5.x and changes to opinionated decisions
@@ -220,7 +220,7 @@ To help you get an overview the branches are listed below.
   The cache was badly broken at some stage and most likely never had any significant
   impact on performance.
 
-* [python-install](https://github.com/radiorabe/airtime/tree/feature/python-install)
+* [python-install](https://github.com/radiorabe/airtime/tree/feature/python-install) (fixed by saas-dev)
 
   We remove most of the install routine not strictly doing pythony stuff. This makes
   the project more portable while shifting the onerous task of maintaining distro
@@ -241,7 +241,7 @@ To help you get an overview the branches are listed below.
   Simple playlist API that allows other consumers to access complete listings of
   playlists created in airtime. Experimental.
 
-* [systemd-files](https://github.com/radiorabe/airtime/tree/feature/systemd-files)
+* [systemd-files](https://github.com/radiorabe/airtime/tree/feature/systemd-files) ([LibreTime/libretime#64](https://github.com/LibreTime/libretime/pull/64) among others)
 
   SystemD units for running airtime components. All files are under `contrib/systemd`
   where packagers may or may not choose to install them from.
