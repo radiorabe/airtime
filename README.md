@@ -227,7 +227,7 @@ To help you get an overview the branches are listed below.
   specifics closer to the distro maintainers. We do this because we support
   CentOS and do not need any upstart files or whatnot.
 
-* [ipa-support](https://github.com/radiorabe/airtime/tree/feature/ipa-support)
+* [ipa-support](https://github.com/radiorabe/airtime/tree/feature/ipa-support) ([LibreTime/libretime#136](https://github.com/LibreTime/libretime/pull/136))
 
   Hacky patchset to switch the auth layer over to a freeIPA instance via some
   apache config. Highly experimental.
